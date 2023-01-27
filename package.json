@@ -1,5 +1,5 @@
 {
-  "name": "tiny-home-service-layer",
+  "name": "headless-commerce",
   "version": "1.0.0",
   "engines": {
     "node": "12.x"
@@ -17,5 +17,11 @@
     "pg": "^8.7.1",
     "randomstring": "^1.2.1",
     "uuid": "^8.3.2"
-  }
+  },
+  "scripts": {
+    "build": "npm install --prefix ./client && npm run-script build --prefix ./client",
+    "start": "node server.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
 }

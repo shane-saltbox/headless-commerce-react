@@ -1,6 +1,6 @@
 {
-  "name": "Tiny Home Service Layer",
-  "description": "Tiny Home's service layer to surface ERP data.",
+  "name": "Headless Commerce React",
+  "description": "Example app showing headless implementation of Salesforce B2B Commerce.",
   "repository": "",
   "environments": {
     "review": {
