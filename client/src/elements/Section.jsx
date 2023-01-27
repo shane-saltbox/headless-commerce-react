@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 
 import {
-  MySubscriptions
+  MySubscriptions,
+  MyProductService
 } from '../components';
 
 class Section extends React.Component {
@@ -37,6 +38,9 @@ class Section extends React.Component {
     switch (id) {
       case 'my-subscriptions':
         formBody = <MySubscriptions id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
+        break;
+      case 'my-products':
+        formBody = <MyProductService id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
         break;
       default:
         formBody = <div />;

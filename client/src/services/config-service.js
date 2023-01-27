@@ -43,18 +43,8 @@ class ConfigService {
             {
               description: config.profile_text__c,
               headline: config.profile_header__c,
-              id: 'my-profile',
+              id: 'my-products',
               order: 0,
-            }, {
-              description: config.interest_text__c,
-              headline: config.interest_header__c,
-              id: 'my-interests',
-              order: 1,
-            }, {
-              description: config.q_and_a_text__c,
-              headline: config.q_and_a_header__c,
-              id: 'q-and-a',
-              order: 2,
             }, {
               description: config.subscription_intro__c,
               headline: config.subscription_header__c,
