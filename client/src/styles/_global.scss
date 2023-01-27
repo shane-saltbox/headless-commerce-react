@@ -1,0 +1,26 @@
+html,
+body {
+  background-color: var(--background);
+  color: $color-text;
+}
+
+body {
+  @include font-primary();
+  @include font-smoothing;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+body a {
+  color: $color-anchor;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--brand-primary);
+  }
+
+  &.underline {
+    text-decoration: underline;
+  }
+}

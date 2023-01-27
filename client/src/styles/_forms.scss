@@ -1,0 +1,36 @@
+input[type='text'],
+input[type='phone'],
+input[type='email'],
+input[type='password'],
+input[type='tel'],
+textarea {
+  @include input-focus;
+
+  background: transparent;
+  border: 1px solid $color-gray-dark;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  padding: spacer(1.5) spacer(1);
+
+  &:disabled {
+    background-color: $form-disabled;
+  }
+
+  &.input-validation-error {
+    border-color: $color-error;
+    color: $color-error;
+  }
+}
+
+label {
+  margin-bottom: 0px;
+}
+
+.form-control {
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: spacer(2);
+}

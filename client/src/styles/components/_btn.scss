@@ -1,0 +1,101 @@
+.btn {
+  @include font-primary('bold');
+
+  border-radius: var(--border-radius);
+  color: var(--button-text);
+  font-size: 12px;
+  padding: $spacer-size * 1.5;
+  transition: filter 0.35s;
+
+  &:hover {
+    color: var(--button-text);
+  }
+}
+
+.btn-lg {
+  min-width: 140px;
+  padding: ($spacer-size * 2) ($spacer-size * 4);
+}
+
+.btn-light {
+  color: $color-black;
+
+  &:hover {
+    color: $color-black;
+  }
+}
+
+.btn-link {
+  color: var(--brand-tertiary);
+
+  &:hover {
+    color: var(--brand-tertiary);
+  }
+}
+
+.btn-primary {
+  background: var(--button-default);
+  border-color: var(--button-default);
+
+  &:active,
+  &:focus,
+  &:hover {
+    background: var(--button-hover);
+    border-color: var(--button-hover);
+    outline: none;
+  }
+
+  &:disabled {
+    background: $color-gray;
+    border-color: $color-gray;
+    cursor: default;
+  }
+
+  &:not(:disabled):not(.disabled).active,
+  &:not(:disabled):not(.disabled):active {
+    background: var(--button-hover);
+    border-color: var(--button-hover);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--brand-secondary);
+  border-color: var(--brand-secondary);
+  position: relative;
+
+  &:focus,
+  &:hover {
+    background-color: var(--brand-secondary-hover);
+    border-color: var(--brand-secondary-hover);
+  }
+}
+
+#btn-save {
+  border-radius: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+	transition: all $animation-duration;
+  width: 100%;
+  z-index: 100;
+
+  &:active {
+    background: var(--button-hover);
+    border-color: var(--button-hover);
+  }
+
+  &:focus,
+  &:hover {
+    background: var(--button-default);
+    border-color: var(--button-default);
+    box-shadow: none;
+    outline: none;
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+    border-radius: var(--border-radius);
+    position: relative;
+    width: auto;
+  }
+}

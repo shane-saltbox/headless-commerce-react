@@ -1,0 +1,115 @@
+.form-switch {
+  position: relative;
+}
+
+.form-switch-badge {
+  @include font-primary('regular');
+
+  border: 1px solid var(--form-switch-disabled);
+  font-size: 12px;
+  text-transform: uppercase;
+  vertical-align: text-bottom;
+
+  @media screen and (min-width: $screen-lg-min) {
+    font-size: 14px;
+  }
+}
+
+.form-switch-campaigns > *:first-child {
+  margin-top: 1rem;
+}
+
+.form-switch-description {
+  font-size: 12px;
+  line-height: 1.5em;
+  margin-bottom: 0px;
+
+  @media screen and (min-width: $screen-lg-min) {
+    font-size: 16px;
+  }
+}
+
+.form-switch-input {
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.form-switch-label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  position: relative;
+}
+
+.form-switch-label > * + * {
+  margin-left: spacer(1);
+
+  @media screen and (min-width: $screen-lg-min) {
+    margin-left: spacer(2);
+  }
+}
+
+.form-switch-text {
+  flex-grow: 1;
+}
+
+.form-switch-toggle {
+  background-color: var(--form-switch-default);
+  border-radius: 100px;
+  cursor: pointer;
+  display: inline-block;
+  flex: 0 1 0;
+  padding: 4px;
+  transition: all $animation-duration;
+  min-width: 60px;
+}
+
+.form-switch-toggle::after {
+  background-color: $color-white;
+  border-radius: 100%;
+  content: '';
+  display: block;
+  height: 26px;
+  transition: all $animation-duration;
+  width: 26px;
+}
+
+// State: isActive
+
+.form-switch.isActive .form-switch-toggle {
+  background-color: var(--form-switch-active);
+}
+
+.form-switch.isActive:hover .form-switch-toggle {
+  background-color: var(--form-switch-hover);
+}
+
+.form-switch.isActive .form-switch-toggle::after {
+  margin-left: 26px;
+}
+
+// State: isDisabled
+
+.form-switch.isDisabled .form-switch-label {
+  cursor: not-allowed;
+}
+
+.form-switch.isDisabled .form-switch-toggle {
+  background-color: var(--form-switch-disabled);
+  cursor: not-allowed;
+}
+
+.form-switch.isDisabled:hover .form-switch-toggle {
+  background-color: var(--form-switch-disabled);
+}
+
+.form-switch.isActive.isDisabled .form-switch-toggle {
+  background-color: var(--form-switch-hover);
+  cursor: not-allowed;
+}

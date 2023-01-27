@@ -1,0 +1,58 @@
+.alert .bi.bi-alert-circle-fill {
+  color: $color-error;
+  height: 1.5em;
+  margin-right: 0.5em;
+  margin-top: -3px;
+  width: 1.5em;
+}
+
+.alert-global {
+  display: flex;
+  position: fixed;
+  margin-top: 1rem;
+  z-index: 1;
+  width: 100%;
+  max-width: 65%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.alert-global > button {
+  flex-grow: 0;
+}
+
+.alert-global > span {
+  flex-grow: 1;
+}
+
+.alert-light {
+  @include font-primary('medium');
+
+  border-color: $color-gray-extralight;
+}
+
+.alert-roadblock {
+  @include font-primary('medium');
+
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 24rem;
+  padding: 0 15%;
+  text-align: center;
+}
+
+.alert-roadblock svg {
+  display: block;
+  height: 24rem;
+  left: 50%;
+  margin: 0 auto;
+  margin-left: -12rem;
+  margin-top: -12rem;
+  opacity: 0.1;
+  position: absolute;
+  top: 50%;
+  width: 24rem;
+}

@@ -1,0 +1,27 @@
+.hero {
+  align-items: center;
+  background-color: var(--banner-background);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  margin: 0 -15px;
+  text-transform: capitalize;
+
+  @media screen and (min-width: $screen-lg-min) {
+    // margin-bottom: $spacer-size * 8;
+  }
+}
+
+.hero.fixedHeight {
+  height: 200px; 
+
+  @media screen and (min-width: $screen-lg-min) {
+    height: 300px;
+  }
+}
+
+.hero-heading {
+  color: var(--hero-text-color);
+  margin: 0.5em 0;
+  @include font-primary('regular');
+}

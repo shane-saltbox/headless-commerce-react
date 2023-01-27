@@ -1,0 +1,129 @@
+.form-check {
+  padding-left: 0px;
+}
+
+.form-check .form-check-input {
+  cursor: pointer;
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.form-check .form-check-label {
+  @include font-primary('medium');
+
+  cursor: pointer;
+  line-height: 20px;
+  transition: color $animation-duration;
+  width: 100%;
+}
+
+.form-check-toggle {
+  background-color: white;
+  box-shadow: 0 0 0 1px var(--form-check-default);
+  box-sizing: border-box;
+  display: inline-block;
+  height: 12px;
+  margin-right: 10px;
+  transition: all $animation-duration;
+  width: 12px;
+}
+
+.form-check-input[type='radio'] + .form-check-label > .form-check-toggle {
+  border-radius: 50%;
+}
+
+// State: hover
+
+.form-check:hover .form-check-toggle {
+  box-shadow: 0 0 0 1px var(--form-check-hover);
+}
+
+// State: isActive
+
+.form-check.isActive .form-check-toggle {
+  background-color: var(--form-check-active);
+  border: 1px solid var(--form-check-active);
+  box-shadow: 0 0 0 1px var(--form-check-active);
+}
+
+.form-check.isActive:hover .form-check-toggle {
+  background-color: var(--form-check-active-hover);
+  border: 1px solid var(--form-check-active-hover);
+  box-shadow: 0 0 0 1px var(--form-check-hover);
+}
+
+// State: isDisabled
+
+.form-check.isActive.isDisabled .form-check-toggle {
+  background-color: var(--form-check-active);
+  border: 1px solid var(--form-check-active);
+  box-shadow: 0 0 0 1px var(--form-check-active);
+}
+
+// Mixin: Card
+
+.form-check-card {
+  border: 1px solid var(--form-check-default);
+  transition: border $animation-duration;
+  width: 100%;
+}
+
+.form-check-card .form-check-description {
+  @include font-primary();
+
+  color: $color-text;
+  font-size: 14px;
+  margin-bottom: 0px;
+  margin-top: 1rem;
+  transition: color $animation-duration;
+}
+
+// State: hover
+
+.form-check-card:hover {
+  border: 1px solid var(--form-check-hover);
+}
+
+// State: isActive
+
+.form-check-card.isActive {
+  border: 1px solid var(--form-check-active);
+
+  &:hover{
+    border: 1px solid var(--form-check-hover);
+  }
+}
+
+.form-check-card.isActive .form-check-label {
+  color: var(--form-check-active);
+}
+
+.form-check-card.isActive .form-check-description {
+  color: $color-text;
+}
+
+.form-check-card.isActive .form-check-label {
+  color: var(--form-check-active);
+}
+
+.form-check-card.isActive:hover .form-check-label {
+  color: var(--form-check-active-hover);
+}
+
+// Statet: isDisabled
+
+.form-check-card.isDisabled .form-check-label {
+  cursor: default;
+}
+
+.form-check-card.isActive.isDisabled {
+  border: 1px solid var(--form-check-active);
+}
+
+.form-check-card.isActive.isDisabled:hover {
+  border: 1px solid var(--form-check-active);
+}

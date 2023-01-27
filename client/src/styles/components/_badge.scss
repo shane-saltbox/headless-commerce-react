@@ -1,0 +1,27 @@
+.badge-campaign {
+  @include font-primary('medium');
+
+  background-color: $color-white;
+  border: 1px solid var(--form-switch-default);
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0px spacer(0.5) spacer(0.5) 0px;
+  padding-right: calc(18px + 0.5em);
+  position: relative;
+  text-transform: capitalize;
+}
+
+.badge-icon {
+  color: var(--form-switch-default);
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color $animation-duration;
+
+  &:hover {
+    color: var(--brand-primary);
+  }
+}

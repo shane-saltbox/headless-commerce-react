@@ -1,0 +1,11 @@
+{
+  "name": "Tiny Home Service Layer",
+  "description": "Tiny Home's service layer to surface ERP data.",
+  "repository": "",
+  "environments": {
+    "review": {
+      "addons": []
+    },
+    "test": {}
+  }
+}

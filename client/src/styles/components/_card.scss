@@ -1,0 +1,33 @@
+.card {}
+
+// 
+// MIXINS
+// 
+
+// CHECKBOX
+
+.card.mix_checkbox {
+  background-color: transparent;
+  border: none;
+  border-radius: 0px;
+  display: block;
+  text-align: center;
+  transition: border-color $animation-duration;
+
+  @media screen and (min-width: $screen-lg-min) {
+    margin-top: 0px;
+  }
+}
+
+.card.mix_checkbox .card-body {
+  padding: spacer(2);
+  text-align: left;
+}
+
+.card.mix_checkbox .card-img-top {
+  height: auto;
+  margin: 0 auto;
+  margin-top: -3rem;
+  max-width: 170px;
+  padding: 0 spacer(2);
+}

@@ -1,0 +1,17 @@
+section {
+  border-bottom: 1px solid $color-gray-line;
+  margin-bottom: $spacer-size * 4;
+  padding-bottom: $spacer-size * 3;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.section-description {
+
+  @media screen and (min-width: $screen-lg-min) {
+    font-size: 20px;
+    line-height: 36px;
+  }
+}

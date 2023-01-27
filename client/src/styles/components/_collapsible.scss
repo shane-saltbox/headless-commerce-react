@@ -1,0 +1,60 @@
+.collapsible {
+  border: 1px solid lightgray;
+  margin-bottom: 1rem;
+  padding: spacer(2);
+  position: relative;
+}
+
+.collapsible-bar {
+  align-items: center;
+  display: flex;
+}
+
+.collapsible-bar .form-check {
+  display: inline-block;
+}
+
+.collapsible-headline {
+  cursor: pointer;
+  flex-grow: 1;
+  font-size: 24px;
+  margin-bottom: 0px;
+  padding-right: 1.5em;
+  position: relative;
+}
+
+.collapsible-headline .bi {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: top center;
+  transition: transform $animation-duration;
+}
+
+.collapsible-icon {
+  height: 24px;
+  margin: 0 0.5em 0 0.25em;
+  width: auto;
+}
+
+.collapsible-tile {
+  background-color: $color-white;
+  box-shadow: 0 0 30px 0 $form-switch-shadow;
+  margin: spacer(2) 0;
+  padding: spacer(1.5) spacer(1.25) spacer(1.25) spacer(1.25);
+
+  &:last-of-type {
+    margin-bottom: 0px;
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+    padding: spacer(2.5);
+  }
+}
+
+// State: isActive
+
+.collapsible.isActive .collapsible-headline .bi {
+  transform: rotateX(180deg) translateY(-50%);
+}

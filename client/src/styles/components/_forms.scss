@@ -1,0 +1,8 @@
+input[type='text']:not(.searchBox), 
+input[type='phone'], 
+input[type='email'], 
+input[type='password'], 
+input[type='tel'], 
+textarea {
+  border-radius: var(--border-radius);
+}

@@ -1,0 +1,76 @@
+// BOOTSTRAP OVERRIDES
+$grid-gutter-width: 32px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// COLORS
+// Bootstrap
+$primary:                 var(--brand-primary);
+$primary-active:          #146BCF;
+$secondary:               var(--brand-secondary);
+$tertiary:                var(--brand-tertiary);
+
+// Brand
+$color-anchor:            #000000;
+$color-anchor-active:     #2275D3;
+$color-bg:                #F9F7F6;
+$color-black:             #000000;
+$color-brand-primary:     #FF0000;
+$color-brand-secondary:   #000000;
+$color-brand-tertiary:    #000000;
+$color-link:              #000000;
+$color-error:             #DA3931;
+$color-text:              #000000;
+$color-white:             #FFFFFF;
+$color-skeleton:          #EEEEEE;
+
+// Background
+$color-background-light:  #FFFFFF;
+$color-background-dark:   #000000;
+
+// Global
+$border-radius:           8px;
+
+$color-gray-extralight:   #EFEFEF;
+$color-gray-lighter:      #979797;
+$color-gray:              #545454;
+$color-gray-dark:         #333333;
+$color-gray-line:         rgba(186, 186, 186, 0.5);
+
+$cta-light:               #595959;
+$cta-light-bg:            $color-bg;
+
+$divider:                 #D8D8D8;
+
+$form-disabled:           #E9ECEF;
+$form-multiselect-checkbox-border: #AEAEAE;
+$form-multiselect-color:   #495057;
+
+$form-switch-shadow:      rgba(151, 151, 151, 0.2);
+
+$header-shadow:           rgba(151, 151, 151, 0.2);
+
+// DECORATIONS
+// Box Shadows
+$box-shadow-1: 0 0 30px 0 rgba(151,151,151,0.2);
+// the below emulates being tucked under another element
+$box-shadow-1-alt: 0 10px 30px 0 rgba(151, 151, 151, 0.1), inset 0 10px 30px -10px rgba(151, 151, 151, 0.2);
+$box-shadow-2: 0 0 0 rgba(0,0,0,0);
+$box-shadow-3: 0 0 0 rgba(0,0,0,0);
+
+// UTILITIES
+// Functional
+$animation-duration: 0.15s;
+$spacer-size: 8px;
+
+// Responsive
+$screen-sm-min: map-get($grid-breakpoints, sm); // 576px
+$screen-md-min: map-get($grid-breakpoints, md); // 768px
+$screen-lg-min: map-get($grid-breakpoints, lg); // 992px
+$screen-xl-min: map-get($grid-breakpoints, xl); // 1200px

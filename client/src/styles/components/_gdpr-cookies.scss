@@ -1,0 +1,26 @@
+.gdpr-cookies {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(92,100,106,0.85);
+  border-top: 2px solid $color-white;
+  bottom: 52px;
+  color: $color-white;
+  left: 0px;
+  padding: spacer(2) spacer(6);
+  position: fixed;
+  width: 100%;
+
+  @media screen and (min-width: $screen-lg-min) {
+    bottom: 0px;
+  }
+}
+
+.gdpr-cookies a {
+  color: $color-white;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.gdpr-cookies .btn-primary {
+  min-width: 200px;
+}

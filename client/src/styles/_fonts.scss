@@ -1,0 +1,166 @@
+// Font Multiplier
+// Due to a difference in the fonts.com version of Bauer Bodoni
+// and the version used in Sketch, the font size needs to be increased
+// by 7% to match the designs, despite having the same computed value
+$font-multiplier: 1.07;
+
+@function font-adjust($size) {
+  @return $size * $font-multiplier;
+}
+
+//
+// Font Families
+//
+// font-family: "Helvetica Neue LT W05_77 Bd Cn";
+// font-family: "Helvetica Neue LT W05_45 Light";
+// font-family: "Helvetica Neue LT W05_46 Lt It";
+// font-family: "Helvetica Neue LT W05_55 Roman";
+// font-family: "Helvetica Neue LT W05_56 Italic";
+// font-family: "Helvetica Neue LT W05_65 Medium";
+// font-family: "Helvetica Neue LT W05_66 Md It";
+// font-family: "Helvetica Neue LT W05_75 Bold";
+
+@mixin font-primary($var: '') {
+  font-family: var(--font-family), 'Helvetica Neue LT W05_45 Light', Helvetica, sans-serif;
+
+  @if $var == 'regular' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_55 Roman', Helvetica, sans-serif;
+  }
+
+  @if $var == 'medium' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_65 Medium', Helvetica, sans-serif;
+  }
+
+  @if $var == 'bold' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_75 Bold', Helvetica, sans-serif;
+  }
+
+  @if $var == 'italic' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_56 Italic', Helvetica, sans-serif;
+  }
+
+  @if $var == 'condensed' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_77 Bd Cn', Helvetica, sans-serif;
+  }
+
+  @if $var == 'medium italic' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_66 Md It', Helvetica, sans-serif;
+  }
+
+  @if $var == 'bold italic' {
+    font-family: var(--font-family), 'Helvetica Neue LT W05_76 Bd It', Helvetica, sans-serif;
+  }
+}
+
+@mixin h1($variation: '') {
+  @include font-display;
+
+  color: $color-gray-dark;
+  font-size: font-adjust(28px);
+  line-height: 34px;
+  margin-bottom: spacer(6);
+
+  @media screen and (min-width: $screen-md-min) {
+    font-size: font-adjust(50px);
+    line-height: 58px;
+  }
+}
+
+h1, .h1 {
+  @include h1();
+}
+
+@mixin h2($variation: '') {
+  @include font-display;
+
+  color: $color-gray-dark;
+  font-size: font-adjust(26px);
+  line-height: 32px;
+  margin-bottom: spacer(4);
+  text-align: left;
+
+  @media screen and (min-width: $screen-md-min) {
+    font-size: font-adjust(36px);
+    line-height: 44px;
+  }
+}
+
+h2, .h2 {
+  @include h2();
+}
+
+@mixin h3() {
+  @include font-display;
+
+  font-size: font-adjust(24px);
+  line-height: 30px;
+  margin-bottom: spacer(4);
+  
+  @media screen and (min-width: $screen-md-min) {
+    font-size: font-adjust(32px);
+    line-height: 40px;
+  }
+}
+
+h3, .h3 {
+  @include h3();
+}
+
+@mixin h4() {
+  @include font-display;
+
+  color: $color-gray-dark;
+  font-size: font-adjust(22px);
+  line-height: 28px;
+
+  @media screen and (min-width: $screen-md-min) {
+    font-size: font-adjust(28px);
+    line-height: 34px;
+  }
+}
+
+h4, .h4 {
+  @include h4();
+}
+
+@mixin h5($variation: '') {
+  @include font-display;
+
+  color: $color-gray-dark;
+  font-size: font-adjust(20px);
+  line-height: 26px;
+
+  @media screen and (min-width: $screen-md-min) {
+    font-size: font-adjust(22px);
+    line-height: 28px;
+  }
+
+  @media screen and (min-width: $screen-lg-min) {
+    font-size: font-adjust(20px);
+    line-height: 26px;
+  }
+
+  @media screen and (min-width: $screen-xl-min) {
+    font-size: font-adjust(24px);
+    line-height: 30px;
+  }
+}
+
+h5, .h5 {
+  @include h5();
+}
+
+@mixin section-label() {
+  @include font-primary('condensed');
+  @include ls(0.78);
+
+  color: #333333;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  @media screen and (min-width: $screen-xl-min) {
+    @include ls(1);
+
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,15 @@
+main {
+  margin-top: 84px;
+}
+
+main.full-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // 100% viewport height - <main/>'s top margin - <footer/>'s top margin - <footer/>'s height
+  min-height: calc(100vh - 84px - 0px - 197px);
+
+  @media screen and (min-width: $screen-lg-min) {
+    min-height: calc(100vh - 84px - 64px - 172px);
+  }
+}

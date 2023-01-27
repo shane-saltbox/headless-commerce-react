@@ -1,0 +1,46 @@
+.sidebar {
+  margin: 0 -15px $spacer-size * 4 -15px;
+
+  @media screen and (min-width: $screen-lg-min) {
+    margin: 0 15px;
+    position: sticky;
+    top: 112px;
+  }
+}
+
+.sidebar-links {
+  align-items: center;
+  background-color: $color-white;
+  display: flex;
+  font-size: 16px;
+
+  @media screen and (min-width: $screen-lg-min) {
+    background-color: transparent;
+    display: block;
+  }
+}
+
+.sidebar-links > * {
+  @include font-primary('medium');
+
+  flex: 1 1 0;
+  line-height: 20px;
+  padding: ($spacer-size * 2) $spacer-size;
+  text-align: center;
+
+  @media screen and (min-width: $screen-lg-min) {
+    @include font-primary();
+    
+    margin-bottom: $spacer-size * 2;
+    padding: 0px;
+    text-align: left;
+  }
+}
+
+.sidebar-links > * + * {
+  border-left: 2px solid $color-bg;
+
+  @media screen and (min-width: $screen-lg-min) {
+    border-left: 0px;
+  }
+}
