@@ -15,10 +15,10 @@ module.exports = function(app, debugLogger) {
     const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    //try {
+    try {
         const { sku,effectiveAccountId } = req.query;
 
-        if (!sku && effectiveAccountId) {
+        if (!sku && !effectiveAccountId) {
             const error = new Error();
             error.message = 'Required fields not found.';
             error.status = 206;
@@ -28,27 +28,15 @@ module.exports = function(app, debugLogger) {
 
         var conn = new jsforce.Connection({
             oauth2 : {
-            // you can change loginUrl to connect to sandbox or prerelease env.
-            // loginUrl : 'https://test.salesforce.com',
-            clientId : SF_CLIENT_ID,
-            clientSecret : SF_CLIENT_SECRET,
-            redirectUri : 'https://headless-commerce.herokuapp.com/callback'
+                clientId : SF_CLIENT_ID,
+                clientSecret : SF_CLIENT_SECRET,
+                redirectUri : 'https://headless-commerce.herokuapp.com/callback'
             }
         });
-        console.log('##DEBUG SF_USERNAME: '+JSON.stringify(SF_USERNAME));
-        console.log('##DEBUG SF_PASSWORD: '+JSON.stringify(SF_PASSWORD));
+
         await conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
             if (err) { return console.error(err); }
-            // Now you can get the access token and instance URL information.
-            // Save them to establish connection next time.
-            console.log('##DEBUG: '+JSON.stringify(conn.accessToken));
-            console.log('##DEBUG: '+JSON.stringify(conn.instanceUrl));
-            // logged in user property
-            console.log("##DEBUG User ID: " + userInfo.id);
-            console.log("##DEBUG Org ID: " + userInfo.organizationId);
-            // ...
         });
-
 
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/products';
           
@@ -58,8 +46,8 @@ module.exports = function(app, debugLogger) {
                 'Authorization': 'Bearer '+conn.accessToken
             },
             params: {
-                effectiveAccountId: '0015e00000MMkzQAAT',
-                skus: '800984'
+                effectiveAccountId: effectiveAccountId,
+                skus: sku
             },
           }
 
@@ -82,7 +70,7 @@ module.exports = function(app, debugLogger) {
 
         res.status(200).send(response);
 
-    /* } catch (error) {
+    } catch (error) {
       const { id } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -93,7 +81,7 @@ module.exports = function(app, debugLogger) {
       if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    } */
+    }
   });
 
 };
