@@ -65,7 +65,7 @@ module.exports = function(app, debugLogger) {
 
         console.log('##DEBUG config: '+JSON.stringify(config));
         const productsRes = await axios.get(url, config);
-        console.log('##DEBUG productsRes: '+JSON.parse(productsRes));
+        console.log('##DEBUG productsRes: '+productsRes);
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
 
@@ -77,7 +77,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        response.data = productsRes;
+        response.data = productsRes.data;
         response.success = true;
 
         res.status(200).send(response);
