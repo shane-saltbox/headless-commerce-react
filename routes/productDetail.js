@@ -44,8 +44,8 @@ module.exports = function(app, debugLogger) {
             console.log('##DEBUG: '+JSON.stringify(conn.accessToken));
             console.log('##DEBUG: '+JSON.stringify(conn.instanceUrl));
             // logged in user property
-            console.log("User ID: " + userInfo.id);
-            console.log("Org ID: " + userInfo.organizationId);
+            console.log("##DEBUG User ID: " + userInfo.id);
+            console.log("##DEBUG Org ID: " + userInfo.organizationId);
             // ...
         });
 
@@ -53,14 +53,17 @@ module.exports = function(app, debugLogger) {
             effectiveAccountId: '0015e00000MMkzQAAT',
             skus: '800984'
           };
+
+        const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/products';
           
-        console.log('##DEBUG SF_LOGIN_URL: '+SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products');
-        const productsRes = await axios.get(SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products', { params }, {
-            headers: {
-                'content-type': 'text/json',
-                'Authorization': 'Bearer '+conn.accessToken
-            }
-        });
+        const headers = {
+            'Content-Type' : 'application/json',
+            'Authorization': 'Bearer '+conn.accessToken
+        };
+
+        console.log('##DEBUG URL: '+url);
+        console.log('##DEBUG headers: '+headers);
+        const productsRes = await axios.get(url, { params }, { headers });
         console.log('##DEBUG SF_LOGIN_URL: '+JSON.stringify(productsRes));
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
