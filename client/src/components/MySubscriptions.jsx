@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 import AppContext from '../AppContext';
-import { Switch } from '../elements';
 import MySubscriptionsService from '../services/mysubscriptions-service';
 
 class MySubscriptions extends React.Component {
