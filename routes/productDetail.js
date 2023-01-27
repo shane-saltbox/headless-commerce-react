@@ -49,21 +49,22 @@ module.exports = function(app, debugLogger) {
             // ...
         });
 
-        const params = {
-            effectiveAccountId: '0015e00000MMkzQAAT',
-            skus: '800984'
-          };
 
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/products';
           
-        const headers = {
-            'Content-Type' : 'application/json',
-            'Authorization': 'Bearer '+conn.accessToken
-        };
+        let config = {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': 'Bearer '+conn.accessToken
+            },
+            params: {
+                effectiveAccountId: '0015e00000MMkzQAAT',
+                skus: '800984'
+            },
+          }
 
-        console.log('##DEBUG URL: '+url);
-        console.log('##DEBUG headers: '+headers);
-        const productsRes = await axios.get(url, { params }, { headers });
+        console.log('##DEBUG config: '+JSON.stringify(config));
+        const productsRes = await axios.get(url, config);
         console.log('##DEBUG SF_LOGIN_URL: '+JSON.stringify(productsRes));
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
