@@ -10,7 +10,7 @@ import { Route } from 'react-router-dom';
 import AppContext from '../AppContext';
 import MyProductService from '../services/product-service';
 
-class MyProductService extends React.Component {
+class MyProduct extends React.Component {
     constructor(props) {
         super(props);
     
@@ -28,7 +28,7 @@ class MyProductService extends React.Component {
         this.sku = this.urlParams.get('sku');
         this.effectiveAccountId = this.urlParams.get('effectiveAccountId');
     
-        this.wsEndpoint = new MySubscriptionsService(this.sku, this.effectiveAccountId, '/api',);
+        this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
     
         /*
          * EVENT HANDLERS
@@ -62,10 +62,10 @@ class MyProductService extends React.Component {
       }
 }
 
-MyProductService.contextType = AppContext;
+MyProduct.contextType = AppContext;
 
-MyProductService.propTypes = {
+MyProduct.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default MyProductService;
+export default MyProduct;

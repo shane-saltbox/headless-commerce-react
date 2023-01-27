@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import {
   MySubscriptions,
-  MyProductService
+  MyProducts
 } from '../components';
 
 class Section extends React.Component {
@@ -40,7 +40,7 @@ class Section extends React.Component {
         formBody = <MySubscriptions id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
         break;
       case 'my-products':
-        formBody = <MyProductService id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
+        formBody = <MyProducts id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
         break;
       default:
         formBody = <div />;
