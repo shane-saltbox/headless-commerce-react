@@ -56,21 +56,21 @@ module.exports = function(app, debugLogger, config) {
             skus: '800984'
           };
           
-        const res = await axios.get(config.SF_LOGIN_URL+'/commerce/webstores/webstoreId/products', { params });
+        const productsRes = await axios.get(config.SF_LOGIN_URL+'/commerce/webstores/webstoreId/products', { params });
 
 
-        if (DEBUG === 'true') debugLogger.info('/api/checkInventory', 'GET', id, 'Inventory Level query.', query_inventory);
+        if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
 
 
-        if (!response_inventory || !response_inventory.rows.length) {
+        if (!productsRes || !productsRes.rows.length) {
             const error = new Error();
-            error.message = 'Inventory not found.';
+            error.message = 'Product not found.';
             error.status = 404;
 
             throw(error);
         }
 
-        response.data = response_inventory.rows;
+        response.data = productsRes.rows;
         response.success = true;
 
         res.status(200).send(response);
@@ -83,7 +83,7 @@ module.exports = function(app, debugLogger, config) {
       response.error.status = error.status || 500;
       response.success = false;
 
-      if (DEBUG === 'true') debugLogger.info('/api/checkInventory', 'GET', id, 'Exception', response);
+      if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Exception', response);
 
       res.status(error.status || 500).send(response);
     } */
