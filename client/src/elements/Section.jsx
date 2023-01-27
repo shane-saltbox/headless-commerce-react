@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 
 import {
-  MyInterests,
-  MySubscriptions,
-  MyProfile,
-  QandA,
+  MySubscriptions
 } from '../components';
 
 class Section extends React.Component {
@@ -38,17 +35,8 @@ class Section extends React.Component {
     let formBody;
 
     switch (id) {
-      case 'my-interests':
-        formBody = <MyInterests id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
-        break;
       case 'my-subscriptions':
         formBody = <MySubscriptions id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
-        break;
-      case 'my-profile':
-        formBody = <MyProfile id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
-        break;
-      case 'q-and-a':
-        formBody = <QandA id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />;
         break;
       default:
         formBody = <div />;
