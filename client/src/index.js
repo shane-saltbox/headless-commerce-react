@@ -92,7 +92,46 @@ class Index extends React.Component {
 
   render() {
     const { settings, strings, theme } = this.state;
-
+    return (
+      <>
+        <AppContext.Provider value={{ value: this.state, setValue: this.setSharedContext }}>
+          <Helmet>
+            <title>{strings.pageTitle}</title>
+            <link rel="icon" href={settings.favIcon} />
+            <style>
+              {`
+              :root {
+                --background: ${theme.colors.background};
+                --banner-background: ${theme.colors.bannerBackground};
+                --border-radius: ${theme.borderRadius};
+                --brand-primary: ${theme.colors.brandPrimary};
+                --brand-secondary: ${theme.colors.brandSecondary};
+                --brand-secondary-hover: ${theme.colors.brandSecondaryHover};
+                --brand-tertiary: ${theme.colors.brandTertiary};
+                --button-default: ${theme.colors.buttonDefault};
+                --button-hover: ${theme.colors.buttonHover};
+                --button-text: ${theme.colors.buttonText};
+                --font-family: ${theme.fontFamily};
+                --form-check-active: ${theme.colors.formCheckActive};
+                --form-check-active-hover: ${theme.colors.formCheckActiveHover};
+                --form-check-default: ${theme.colors.formCheckDefault};
+                --form-check-hover: ${theme.colors.formCheckHover};
+                --form-switch-active: ${theme.colors.formSwitchActive};
+                --form-switch-default: ${theme.colors.formSwitchDefault};
+                --form-switch-disabled: ${theme.colors.formSwitchDisabled};
+                --form-switch-hover: ${theme.colors.formSwitchHover};
+                --hero-text-color:  ${theme.colors.heroText};
+              }
+              `}
+            </style>
+            <style>
+              {theme.customCss}
+            </style>
+          </Helmet>
+          <App />
+        </AppContext.Provider>
+      </>
+    );
   }
 }
 
