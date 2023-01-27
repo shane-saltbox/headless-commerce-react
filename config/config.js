@@ -5,8 +5,6 @@ require('dotenv').config();
 const requiredEnvVars = [
     'SF_CLIENT_ID',
     'SF_CLIENT_SECRET',
-    'HEROKU_URL',
-    'PRIVATE_KEY',
     'SF_LOGIN_URL',
     'SF_USERNAME'
 ];
