@@ -69,7 +69,7 @@ module.exports = function(app, debugLogger) {
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
 
-        if (!productsRes || !productsRes.products) {
+        if (!productsRes) {
             const error = new Error();
             error.message = 'Product not found.';
             error.status = 404;
@@ -77,7 +77,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        response.data = productsRes.products;
+        response.data = productsRes;
         response.success = true;
 
         res.status(200).send(response);
