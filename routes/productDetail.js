@@ -37,7 +37,7 @@ module.exports = function(app, debugLogger) {
         });
         console.log('##DEBUG SF_USERNAME: '+JSON.stringify(SF_USERNAME));
         console.log('##DEBUG SF_PASSWORD: '+JSON.stringify(SF_PASSWORD));
-        conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
+        await conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
             if (err) { return console.error(err); }
             // Now you can get the access token and instance URL information.
             // Save them to establish connection next time.
@@ -55,8 +55,13 @@ module.exports = function(app, debugLogger) {
           };
           
         console.log('##DEBUG SF_LOGIN_URL: '+SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products');
-        const productsRes = await axios.get(SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products', { params });
-
+        const productsRes = await axios.get(SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products', { params }, {
+            headers: {
+                'content-type': 'text/json',
+                'Authorization': 'Bearer '+conn.accessToken
+            }
+        });
+        console.log('##DEBUG SF_LOGIN_URL: '+JSON.stringify(productsRes));
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
 
