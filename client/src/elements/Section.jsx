@@ -53,6 +53,7 @@ class Section extends React.Component {
         <h2>{headline || <Skeleton />}</h2>
         {headline ? <div className="section-description" dangerouslySetInnerHTML={this.renderDescription()} /> : <Skeleton count={3} />}
         {formBody}
+        <MySubscriptions id={id} sectionRef={this.ref} sidebarRef={sidebarRef} />
       </section>
     );
   }
