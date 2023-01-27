@@ -47,7 +47,7 @@ class MySubscriptions extends React.Component {
           if (response.success) {
             $save.attr('disabled', false);
           } else {
-            $('#exceptionModal').modal();
+            
           }
         });
     };
@@ -72,7 +72,7 @@ class MySubscriptions extends React.Component {
 
           this.setState({ fieldGroups: newFieldGroups });
         } else {
-          $('#exceptionModal').modal();
+          
         }
       });
     };
@@ -199,7 +199,7 @@ class MySubscriptions extends React.Component {
           this.wsEndpoint.patchSubscription(subscription.availableSubId, true)
             .then((response) => {
               if (response.success === 'fail') {
-                $('#exceptionModal').modal();
+                
               } else {
                 subscription.checked = true;
 
