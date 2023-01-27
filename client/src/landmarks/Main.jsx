@@ -7,7 +7,6 @@ import AppContext from '../AppContext';
 
 import { Modal } from '../components';
 import { Section } from '../elements';
-import Sidebar from './Sidebar';
 
 class Main extends React.Component {
   constructor(props) {
@@ -63,7 +62,7 @@ class Main extends React.Component {
             <div className="row">
               <Route exact path="/">
                 <div className="col-lg-3">
-                  <Sidebar refs={this.sidebarRefs} sections={sections} />
+                  
                 </div>
               </Route>
               <div className={this.pathname.length ? 'col-12' : 'col-lg-9'}>
