@@ -9,6 +9,7 @@ const path = require('path');
 const debugLogger = require('./debugLogger').init();
 
 const CONSTANTS = require('./constants');
+const config = require('./config/config');
 
 const { ENV_URL, NODE_ENV } = process.env;
 
@@ -55,6 +56,7 @@ require('./routes/inventory')(app, debugLogger);
 require('./routes/order')(app, debugLogger);
 require('./routes/checkoutDiscount')(app, debugLogger);
 require('./routes/sso')(app, debugLogger);
+require('./routes/productDetial')(app, debugLogger, config);
 
 // Catch landing page so it isn't served as a static file.
 app.get('/', (req, res) => {
