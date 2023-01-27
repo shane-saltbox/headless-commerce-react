@@ -8,10 +8,8 @@ import { GlobalAlert } from './components';
 
 import ConfigService from './services/config-service';
 import {
-  Footer,
   Header,
-  Main,
-  Roadblock,
+  Main
 } from './landmarks';
 
 class App extends React.Component {
@@ -112,7 +110,7 @@ class App extends React.Component {
     let content = null;
 
     if (value.roadblocked) {
-      content = <Roadblock />;
+      content = '';
     } else {
       content = <Route path="/" render={(props) => <Main heroImg={managedContent.images.hero} heroHeadline={value.strings.hero_headline} location={props.location} sections={managedContent.sections} />} />;
     }
@@ -131,9 +129,6 @@ class App extends React.Component {
           <Header languages={managedContent.languages} logo={managedContent.images.logo} />
         </Route>
         {this.renderMain()}
-        <Route exact path="/">
-          <Footer allRightsReserved={value.strings.footer_allRightsReserved} companyName={value.strings.footer_companyName} links={managedContent.links.footer} />
-        </Route>
       </Router>
     );
   }
