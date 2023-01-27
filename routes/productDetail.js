@@ -14,7 +14,7 @@ module.exports = function(app, debugLogger, config) {
     const { DEBUG, SCHEMA } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    try {
+    //try {
       const { id } = req.query;
 
       if (!id) {
@@ -34,12 +34,13 @@ module.exports = function(app, debugLogger, config) {
           redirectUri : 'https://headless-commerce.herokuapp.com/callback'
         }
       });
+      console.log('##DEBUG: '+conn);
       conn.login(config.SF_USERNAME, config.SF_PASSWORD, function(err, userInfo) {
         if (err) { return console.error(err); }
         // Now you can get the access token and instance URL information.
         // Save them to establish connection next time.
-        console.log(conn.accessToken);
-        console.log(conn.instanceUrl);
+        console.log('##DEBUG: '+conn.accessToken);
+        console.log('##DEBUG: '+conn.instanceUrl);
         // logged in user property
         console.log("User ID: " + userInfo.id);
         console.log("Org ID: " + userInfo.organizationId);
@@ -72,7 +73,7 @@ module.exports = function(app, debugLogger, config) {
 
       res.status(200).send(response);
 
-    } catch (error) {
+    /* } catch (error) {
       const { id } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -83,7 +84,7 @@ module.exports = function(app, debugLogger, config) {
       if (DEBUG === 'true') debugLogger.info('/api/checkInventory', 'GET', id, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    }
+    } */
   });
 
 };
