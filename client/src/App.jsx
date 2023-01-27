@@ -4,7 +4,6 @@ import { isEqual, merge } from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppContext from './AppContext';
-import { GlobalAlert } from './components';
 
 import ConfigService from './services/config-service';
 import {
@@ -125,7 +124,6 @@ class App extends React.Component {
     return (
       <Router>
         <Route exact path="/">
-          <GlobalAlert />
           <Header languages={managedContent.languages} logo={managedContent.images.logo} />
         </Route>
         {this.renderMain()}
