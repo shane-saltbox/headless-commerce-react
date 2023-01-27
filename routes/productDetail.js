@@ -31,10 +31,10 @@ module.exports = function(app, debugLogger, config) {
           // loginUrl : 'https://test.salesforce.com',
           clientId : config.SF_CLIENT_ID,
           clientSecret : config.SF_CLIENT_SECRET,
-          redirectUri : '<callback URI is here>'
+          redirectUri : 'https://headless-commerce.herokuapp.com/callback'
         }
       });
-      conn.login(username, password, function(err, userInfo) {
+      conn.login(config.SF_USERNAME, config.SF_PASSWORD, function(err, userInfo) {
         if (err) { return console.error(err); }
         // Now you can get the access token and instance URL information.
         // Save them to establish connection next time.
