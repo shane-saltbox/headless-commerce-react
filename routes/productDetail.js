@@ -65,7 +65,7 @@ module.exports = function(app, debugLogger) {
 
         console.log('##DEBUG config: '+JSON.stringify(config));
         const productsRes = await axios.get(url, config);
-        console.log('##DEBUG SF_LOGIN_URL: '+JSON.stringify(productsRes));
+        console.log('##DEBUG productsRes: '+productsRes);
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
 
