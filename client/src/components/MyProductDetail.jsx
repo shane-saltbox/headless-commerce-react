@@ -54,7 +54,7 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                {sku}
+                <p>SKU#: {sku}</p>
               </div>
             </div>
           </>
