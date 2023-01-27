@@ -12,7 +12,7 @@ module.exports = function(app, debugLogger) {
    * GET (Read)
    */
   app.get('/api/productDetail', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL } = process.env;
+    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     //try {
@@ -54,7 +54,8 @@ module.exports = function(app, debugLogger) {
             skus: '800984'
           };
           
-        const productsRes = await axios.get(SF_LOGIN_URL+'/commerce/webstores/webstoreId/products', { params });
+        console.log('##DEBUG SF_LOGIN_URL: '+SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products');
+        const productsRes = await axios.get(SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/webstoreId/products', { params });
 
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);
