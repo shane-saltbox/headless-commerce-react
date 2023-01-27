@@ -20,7 +20,6 @@ var app = express();
 
 app.enable('trust proxy');
 app.set('view engine', 'ejs');
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-cache');
