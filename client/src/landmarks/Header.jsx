@@ -23,17 +23,6 @@ class Header extends React.Component {
 
       event.preventDefault();
 
-      // Send GTM custom event.
-      window.dataLayer.push({
-        data: language.label,
-        event: 'Language/Business Unit Menu Item Click',
-        'gtm.element': event.target,
-        'gtm.elementClasses': event.target.className || '',
-        'gtm.elementId': event.target.id || '',
-        'gtm.elementTarget': event.target.target || '',
-        'gtm.elementUrl': event.target.href || event.target.action || '',
-        'gtm.originalEvent': event,
-      });
 
       setValue(
         { ...value.globalAlert },

@@ -77,8 +77,6 @@ class ConfigService {
           badge_sms: config.sms_channel_text__c,
           button_submit: config.save_button_text__c,
           button_unsubscribeAll: config.unsubscribe_all_button_text__c,
-          cookies_button: config.cookies_button_text__c,
-          cookies_text: config.cookies_text__c,
           footer_allRightsReserved: config.footer_all_rights_text__c,
           footer_companyName: config.company_name__c,
           forgetMe_button_primary: config.forget_me_button_text__c,

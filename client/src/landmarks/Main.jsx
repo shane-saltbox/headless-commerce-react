@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 
 import AppContext from '../AppContext';
 
-import { Cookies, Modal } from '../components';
+import { Modal } from '../components';
 import { Section } from '../elements';
 import Sidebar from './Sidebar';
 
@@ -72,9 +72,6 @@ class Main extends React.Component {
             </div>
           </div>
         </form>
-        <Route exact path="/">
-          <Cookies />
-        </Route>
         <Modal body={value.strings.wsPatchError_body} id="exceptionModal" primaryButton={value.strings.wsPatchError_button} title={value.strings.wsPatchError_title} />
       </main>
     );
