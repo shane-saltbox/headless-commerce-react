@@ -17,9 +17,9 @@ module.exports = function(app, debugLogger, config) {
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     //try {
-        const { id } = req.query;
+        const { sku,effectiveAccountId } = req.query;
 
-        if (!id) {
+        if (!sku && effectiveAccountId) {
             const error = new Error();
             error.message = 'Required fields not found.';
             error.status = 206;
@@ -36,7 +36,6 @@ module.exports = function(app, debugLogger, config) {
             redirectUri : 'https://headless-commerce.herokuapp.com/callback'
             }
         });
-        console.log('##DEBUG: '+JSON.stringify(conn));
         console.log('##DEBUG SF_USERNAME: '+JSON.stringify(config.SF_USERNAME));
         console.log('##DEBUG SF_PASSWORD: '+JSON.stringify(config.SF_PASSWORD));
         conn.login(config.SF_USERNAME, config.SF_PASSWORD, function(err, userInfo) {
