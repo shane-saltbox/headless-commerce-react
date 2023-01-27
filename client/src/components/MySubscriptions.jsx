@@ -8,10 +8,7 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 import AppContext from '../AppContext';
-import Collapsible from './Collapsible';
 import { Switch } from '../elements';
-import ForgetMe from './ForgetMe';
-import Modal from './Modal';
 import MySubscriptionsService from '../services/mysubscriptions-service';
 
 class MySubscriptions extends React.Component {
@@ -246,7 +243,7 @@ class MySubscriptions extends React.Component {
           </div>
         ));
 
-        category = <Collapsible id={fieldGroup.catid} key={fieldGroup.catid} label={fieldGroup.catlabel} openOnLaunch={openOnLaunch} tiles={collapsibleTiles} />;
+        //category = <Collapsible id={fieldGroup.catid} key={fieldGroup.catid} label={fieldGroup.catlabel} openOnLaunch={openOnLaunch} tiles={collapsibleTiles} />;
       }
 
       return category;
@@ -269,10 +266,10 @@ class MySubscriptions extends React.Component {
               </button>
             </Route>
             <button className="btn btn-large btn-secondary float-right" data-toggle="modal" data-target="#unsubscribeAll" type="button">{value.strings.button_unsubscribeAll}</button>
-            {(value.settings.forgetMeEnabled ? <ForgetMe className="float-right mr-2" /> : null)}
+            
           </div>
         </div>
-        <Modal body={value.strings.unsubscribeAll_modal_body} id="unsubscribeAll" primaryButton={value.strings.unsubscribeAll_modal_primaryButton} primaryButtonCallback={this.callback_unsubscribeAll} secondaryButton={value.strings.unsubscribeAll_modal_secondaryButton} title={value.strings.unsubscribeAll_modal_title} />
+        
       </>
     );
   }
