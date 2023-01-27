@@ -238,7 +238,6 @@ class MySubscriptions extends React.Component {
       if (fieldGroup.subscriptions.length) {
         const collapsibleTiles = fieldGroup.subscriptions.map((subscription) => (
           <div className="collapsible-tile" key={subscription.availableSubId}>
-            <Switch availableSubId={subscription.availableSubId} callback={this.onClickSwitch} callbackBadge={this.onClickBadge} campaigns={subscription.campaigns} channel={subscription.channel} checked={subscription.checked} description={subscription.description} disabled={subscription.disabled} id={subscription.id} label={subscription.label} userSubId={subscription.userSubId} />
           </div>
         ));
 
