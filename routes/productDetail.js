@@ -5,15 +5,14 @@ var jsforce = require('jsforce');
 const axios = require('axios');
 
 const CONSTANTS = require('../constants');
-const { config } = require('dotenv');
 
-module.exports = function(app, debugLogger, config) {
+module.exports = function(app, debugLogger) {
 
   /*
    * GET (Read)
    */
   app.get('/api/productDetail', async function(req, res, next) {
-    const { DEBUG, SCHEMA } = process.env;
+    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     //try {
@@ -31,14 +30,14 @@ module.exports = function(app, debugLogger, config) {
             oauth2 : {
             // you can change loginUrl to connect to sandbox or prerelease env.
             // loginUrl : 'https://test.salesforce.com',
-            clientId : config.SF_CLIENT_ID,
-            clientSecret : config.SF_CLIENT_SECRET,
+            clientId : SF_CLIENT_ID,
+            clientSecret : SF_CLIENT_SECRET,
             redirectUri : 'https://headless-commerce.herokuapp.com/callback'
             }
         });
-        console.log('##DEBUG SF_USERNAME: '+JSON.stringify(config.SF_USERNAME));
-        console.log('##DEBUG SF_PASSWORD: '+JSON.stringify(config.SF_PASSWORD));
-        conn.login(config.SF_USERNAME, config.SF_PASSWORD, function(err, userInfo) {
+        console.log('##DEBUG SF_USERNAME: '+JSON.stringify(SF_USERNAME));
+        console.log('##DEBUG SF_PASSWORD: '+JSON.stringify(SF_PASSWORD));
+        conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
             if (err) { return console.error(err); }
             // Now you can get the access token and instance URL information.
             // Save them to establish connection next time.
@@ -55,7 +54,7 @@ module.exports = function(app, debugLogger, config) {
             skus: '800984'
           };
           
-        const productsRes = await axios.get(config.SF_LOGIN_URL+'/commerce/webstores/webstoreId/products', { params });
+        const productsRes = await axios.get(SF_LOGIN_URL+'/commerce/webstores/webstoreId/products', { params });
 
 
         if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Get product details.', productsRes);

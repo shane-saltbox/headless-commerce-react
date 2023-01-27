@@ -56,7 +56,7 @@ require('./routes/inventory')(app, debugLogger);
 require('./routes/order')(app, debugLogger);
 require('./routes/checkoutDiscount')(app, debugLogger);
 require('./routes/sso')(app, debugLogger);
-require('./routes/productDetail')(app, debugLogger, config);
+require('./routes/productDetail')(app, debugLogger);
 
 // Catch landing page so it isn't served as a static file.
 app.get('/', (req, res) => {
