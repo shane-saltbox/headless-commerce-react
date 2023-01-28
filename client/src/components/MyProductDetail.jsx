@@ -56,8 +56,8 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#: {value}</p>
-                <p>wsEndpoint#: {value}</p>
+                <p>SKU#: </p>
+                <p>wsEndpoint#: </p>
               </div>
             </div>
           </>

@@ -14,6 +14,7 @@ class MyProductService {
    */
   async get() {
     const wsUri = `${this.wsBaseUrl}/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
+    console.log('##DEBUG wsUri: '+wsUri);
 
     const options = {
       headers: {
@@ -33,6 +34,7 @@ class MyProductService {
 
         //   this.logger.post(endpoint, message, status, payload);
         // }
+        console.log(response);
 
         return response;
       })
