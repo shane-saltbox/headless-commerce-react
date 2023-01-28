@@ -31,7 +31,6 @@ class MyProduct extends React.Component {
         console.log('##DEBUG effectiveAccountId: '+this.effectiveAccountId);
     
         this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
-        console.log('##DEBUG wsEndpoint: '+this.wsEndpoint);
     
         /*
          * EVENT HANDLERS
@@ -45,7 +44,7 @@ class MyProduct extends React.Component {
     componentDidMount() {
         const { value } = this.context;
 
-        this.setState({ locale: { ...value.locale } });
+        this.setState({ locale: { ...value.sku } });
     }
 
     render() {
@@ -57,8 +56,8 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#: {this.sku}</p>
-                <p>wsEndpoint#: {this.wsEndpoint}</p>
+                <p>SKU#: {value}</p>
+                <p>wsEndpoint#: {value}</p>
               </div>
             </div>
           </>
