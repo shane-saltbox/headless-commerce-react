@@ -60,27 +60,27 @@ class MyProduct extends React.Component {
         const { value } = this.context;
 
         this.setState({ productContext: { ...value.sku } });
-
-        this.wsEndpoint.get()
-        .then((response) => {
-            const { data, success } = response;
-            console.log('##DEBUG fetch data: '+data);
-
-            if (!success) throw new Error();
-
-            this.setState({ productFields: data });
-            console.log('##DEBUG fetch productFields: '+JSON.stringify(this.state.productFields));
-        })
-        .catch(() => {
-            this.setState({ wsException: true, productFields: [] });
-        });
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
 
-    
+        if (!isEqual(prevState.productContext, productContext)) {
+            this.wsEndpoint.get()
+            .then((response) => {
+                const { data, success } = response;
+                console.log('##DEBUG fetch data: '+data);
+
+                if (!success) throw new Error();
+
+                this.setState({ productFields: data });
+                console.log('##DEBUG fetch productFields: '+JSON.stringify(this.state.productFields));
+            })
+            .catch(() => {
+                this.setState({ wsException: true, productFields: [] });
+            });
+        }
         /* if (this.context && value && !isEqual(value.productContext, productContext)) {
           this.setState({ productContext: { ...value.productContext } });
         }
@@ -101,6 +101,12 @@ class MyProduct extends React.Component {
         console.log('##DEBUG render value: '+JSON.stringify(value));
         console.log('##DEBUG render sku: '+JSON.stringify(sku));
         console.log('##DEBUG render productFields: '+JSON.stringify(productFields));
+
+        let fieldDisplay = null;
+
+        if(productFields.products.length){
+            fieldDisplay = 'NAME: '+productFields.products.Name;
+        }
 
         /* const mappedFieldGroups = productContext.map((product, index) => {
             console.log('in first map');
@@ -124,8 +130,7 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#:</p>
-                <p>wsEndpoint#: </p>
+                <p>Name#: {fieldDisplay}</p>
               </div>
             </div>
           </>
