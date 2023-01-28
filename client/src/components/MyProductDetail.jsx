@@ -89,7 +89,6 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <h1>{productFields.products.id}</h1>
                 <p>SKU#: {productFields.products.sku}</p>
               </div>
             </div>
