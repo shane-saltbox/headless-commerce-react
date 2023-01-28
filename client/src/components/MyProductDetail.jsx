@@ -69,8 +69,8 @@ class MyProduct extends React.Component {
           this.setState({ productContext: { ...value.productContext } });
         }
     
-        if (!isEqual(prevState.effectiveAccountId, effectiveAccountId)) {
-          this.wsEndpoint.id = value.id;
+        if (!isEqual(prevState.productContext, productContext)) {
+          this.wsEndpoint.sku = value.sku;
           this.wsEndpoint.sku = value.productContext.sku;
           this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
     
