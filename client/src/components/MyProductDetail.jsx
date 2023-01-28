@@ -31,6 +31,7 @@ class MyProduct extends React.Component {
         console.log('##DEBUG effectiveAccountId: '+this.effectiveAccountId);
     
         this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
+        console.log('##DEBUG wsEndpoint: '+JSON.stringify(this.wsEndpoint));
     
         /*
          * EVENT HANDLERS

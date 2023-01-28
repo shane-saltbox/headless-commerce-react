@@ -34,7 +34,6 @@ class MyProductService {
 
         //   this.logger.post(endpoint, message, status, payload);
         // }
-        console.log(response);
 
         return response;
       })
