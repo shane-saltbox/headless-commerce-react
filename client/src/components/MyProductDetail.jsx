@@ -27,8 +27,11 @@ class MyProduct extends React.Component {
         this.urlParams = new URLSearchParams(window.location.search);
         this.sku = this.urlParams.get('sku');
         this.effectiveAccountId = this.urlParams.get('effectiveAccountId');
+        console.log('##DEBUG sku: '+this.sku);
+        console.log('##DEBUG effectiveAccountId: '+this.effectiveAccountId);
     
         this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
+        console.log('##DEBUG wsEndpoint: '+this.wsEndpoint);
     
         /*
          * EVENT HANDLERS
@@ -54,7 +57,8 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#: {sku}</p>
+                <p>SKU#: {this.sku}</p>
+                <p>wsEndpoint#: {this.wsEndpoint}</p>
               </div>
             </div>
           </>
