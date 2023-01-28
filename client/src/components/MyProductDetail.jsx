@@ -40,7 +40,7 @@ class MyProduct extends React.Component {
             this.wsEndpoint.get()
               .then((response) => {
                 const { data, success } = response;
-                console.log('##DEBUG fetch data: '+data);
+                console.log('##DEBUG fetch 1 data: '+data);
       
                 if (!success) throw new Error();
       
@@ -60,11 +60,6 @@ class MyProduct extends React.Component {
         const { value } = this.context;
 
         this.setState({ productContext: { ...value.sku } });
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const { setValue, value } = this.context;
-        const { productFields, productContext } = this.state;
 
         this.wsEndpoint.get()
         .then((response) => {
@@ -74,11 +69,16 @@ class MyProduct extends React.Component {
             if (!success) throw new Error();
 
             this.setState({ productFields: data });
-            console.log('##DEBUG fetch productFields: '+productFields);
+            console.log('##DEBUG fetch productFields: '+JSON.stringify(productFields));
         })
         .catch(() => {
             this.setState({ wsException: true, productFields: [] });
         });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { setValue, value } = this.context;
+        const { productFields, productContext } = this.state;
 
     
         /* if (this.context && value && !isEqual(value.productContext, productContext)) {

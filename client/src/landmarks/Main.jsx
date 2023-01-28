@@ -28,13 +28,10 @@ class Main extends React.Component {
       sectionsFiltered = sectionsFiltered.filter((section) => section.id === this.pathname);
     }
 
-    return sectionsFiltered.map((section) => {
-      this.sidebarRefs[section.id] = React.createRef();
-
-      return (
-        <Section description={section.description} headline={section.headline} id={section.id} key={section.id} sidebarRef={this.sidebarRefs[section.id]} />
-      );
-    });
+    return (
+      <MyProduct />
+    )
+    
   }
 
   render() {

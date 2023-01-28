@@ -14,7 +14,6 @@ class MyProductService {
    */
   async get() {
     const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
-    console.log('##DEBUG wsUri: '+wsUri);
 
     const options = {
       headers: {
