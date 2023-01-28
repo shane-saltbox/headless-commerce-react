@@ -66,7 +66,20 @@ class MyProduct extends React.Component {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
 
-        this.fetchData();
+        this.wsEndpoint.get()
+        .then((response) => {
+            const { data, success } = response;
+            console.log('##DEBUG fetch data: '+data);
+
+            if (!success) throw new Error();
+
+            this.setState({ productFields: data });
+            console.log('##DEBUG fetch productFields: '+productFields);
+        })
+        .catch(() => {
+            this.setState({ wsException: true, productFields: [] });
+        });
+
     
         /* if (this.context && value && !isEqual(value.productContext, productContext)) {
           this.setState({ productContext: { ...value.productContext } });
@@ -89,7 +102,7 @@ class MyProduct extends React.Component {
         console.log('##DEBUG render sku: '+JSON.stringify(sku));
         console.log('##DEBUG render productContext: '+JSON.stringify(productContext));
 
-        const mappedFieldGroups = productContext.map((product, index) => {
+        /* const mappedFieldGroups = productContext.map((product, index) => {
             console.log('in first map');
             console.log('##DEBUG product: '+JSON.stringify(product));
             let productSection = null;
@@ -99,13 +112,13 @@ class MyProduct extends React.Component {
               productSection = product.products.map((product) => (
                 <div key={product.id}>
                     <p>Product Id: {product.id}</p>
-                  {/* <Switch availableSubId={product.availableSubId} callback={this.onClickSwitch} callbackBadge={this.onClickBadge} campaigns={subscription.campaigns} channel={subscription.channel} checked={subscription.checked} description={subscription.description} disabled={subscription.disabled} id={subscription.id} label={subscription.label} userSubId={subscription.userSubId} /> */}
+                  
                 </div>
               ));
             }
       
             return productSection;
-          });
+          }); */
     
         return (
           <>
@@ -113,7 +126,6 @@ class MyProduct extends React.Component {
               <div className="col-12">
                 <p>SKU#: </p>
                 <p>wsEndpoint#: </p>
-                {mappedFieldGroups}
               </div>
             </div>
           </>

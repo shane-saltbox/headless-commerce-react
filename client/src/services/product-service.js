@@ -13,7 +13,7 @@ class MyProductService {
    * URI: https://headless-commerce.herokuapp.com/api/productDetail?sku={{SKU}}&effectiveAccountId={{EFFECTIVEACCOUNTID}}
    */
   async get() {
-    const wsUri = `${this.wsBaseUrl}/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
+    const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
     console.log('##DEBUG wsUri: '+wsUri);
 
     const options = {
