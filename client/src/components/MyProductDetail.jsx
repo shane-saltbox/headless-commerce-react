@@ -65,8 +65,10 @@ class MyProduct extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
+
+        this.fetchData();
     
-        if (this.context && value && !isEqual(value.productContext, productContext)) {
+        /* if (this.context && value && !isEqual(value.productContext, productContext)) {
           this.setState({ productContext: { ...value.productContext } });
         }
     
@@ -76,7 +78,7 @@ class MyProduct extends React.Component {
           this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
     
           this.fetchData();
-        }
+        } */
       }
 
     render() {
@@ -88,10 +90,12 @@ class MyProduct extends React.Component {
         console.log('##DEBUG render productContext: '+JSON.stringify(productContext));
 
         const mappedFieldGroups = productContext.map((product, index) => {
+            console.log('in first map');
             console.log('##DEBUG product: '+JSON.stringify(product));
             let productSection = null;
       
             if (product.products.length) {
+                console.log('in second map');
               productSection = product.products.map((product) => (
                 <div key={product.id}>
                     <p>Product Id: {product.id}</p>
