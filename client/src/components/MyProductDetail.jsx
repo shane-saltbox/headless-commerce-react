@@ -70,7 +70,6 @@ class MyProduct extends React.Component {
             this.wsEndpoint.get()
             .then((response) => {
                 const { data, success } = response;
-                console.log('##DEBUG fetch data: '+data);
 
                 if (!success) throw new Error();
 
