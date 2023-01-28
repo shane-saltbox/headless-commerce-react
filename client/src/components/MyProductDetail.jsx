@@ -124,7 +124,7 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#: {productFields.products.sku}</p>
+                <p>SKU#:</p>
                 <p>wsEndpoint#: </p>
               </div>
             </div>
