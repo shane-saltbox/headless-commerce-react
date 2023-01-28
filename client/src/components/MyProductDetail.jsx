@@ -96,36 +96,16 @@ class MyProduct extends React.Component {
 
     render() {
         const { value } = this.context;
-        const { sku } = this.props;
-        const { productContext, wsException } = this.state;
-        console.log('##DEBUG render value: '+JSON.stringify(value));
-        console.log('##DEBUG render sku: '+JSON.stringify(sku));
-        console.log('##DEBUG render productContext: '+JSON.stringify(productContext));
+        const { productFields, wsException } = this.state;
+        console.log('##DEBUG render productFields: '+JSON.stringify(productFields));
 
-        /* const mappedFieldGroups = productContext.map((product, index) => {
-            console.log('in first map');
-            console.log('##DEBUG product: '+JSON.stringify(product));
-            let productSection = null;
-      
-            if (product.products.length) {
-                console.log('in second map');
-              productSection = product.products.map((product) => (
-                <div key={product.id}>
-                    <p>Product Id: {product.id}</p>
-                  
-                </div>
-              ));
-            }
-      
-            return productSection;
-          }); */
     
         return (
           <>
             <div className="row">
               <div className="col-12">
-                <p>SKU#: </p>
-                <p>wsEndpoint#: </p>
+                <h1>{productFields.products.fields.Name}</h1>
+                <p>SKU#: {productFields.products.sku}</p>
               </div>
             </div>
           </>
