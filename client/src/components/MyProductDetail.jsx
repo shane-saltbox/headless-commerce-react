@@ -69,7 +69,7 @@ class MyProduct extends React.Component {
             if (!success) throw new Error();
 
             this.setState({ productFields: data });
-            console.log('##DEBUG fetch productFields: '+JSON.stringify(productFields));
+            console.log('##DEBUG fetch productFields: '+JSON.stringify(this.state.productFields));
         })
         .catch(() => {
             this.setState({ wsException: true, productFields: [] });

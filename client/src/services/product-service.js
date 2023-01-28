@@ -33,6 +33,7 @@ class MyProductService {
 
         //   this.logger.post(endpoint, message, status, payload);
         // }
+        console.log('##DEBUG service; '+JSON.stringify(response));
 
         return response;
       })
