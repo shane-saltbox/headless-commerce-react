@@ -15,10 +15,10 @@ class MyProduct extends React.Component {
         super(props);
     
         this.state = {
-          fieldGroups: [],
-          locale: {
-            businessUnit: null,
-            language: null,
+          productFields: [],
+          productContext: {
+            sku: null,
+            effectiveAccountId: null,
           },
           wsException: false,
         };
@@ -36,6 +36,19 @@ class MyProduct extends React.Component {
         /*
          * EVENT HANDLERS
          */
+        this.fetchData = () => {
+            this.wsEndpoint.get()
+              .then((response) => {
+                const { data, success } = response;
+      
+                if (!success) throw new Error();
+      
+                this.setState({ productFields: data });
+              })
+              .catch(() => {
+                this.setState({ wsException: true, productFields: [] });
+              });
+          };
     }
 
     /*
@@ -45,13 +58,46 @@ class MyProduct extends React.Component {
     componentDidMount() {
         const { value } = this.context;
 
-        this.setState({ locale: { ...value.sku } });
+        this.setState({ productContext: { ...value.sku } });
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { setValue, value } = this.context;
+        const { productFields, productContext } = this.state;
+    
+        if (this.context && value && !isEqual(value.productContext, productContext)) {
+          this.setState({ productContext: { ...value.productContext } });
+        }
+    
+        if (!isEqual(prevState.effectiveAccountId, effectiveAccountId)) {
+          this.wsEndpoint.id = value.id;
+          this.wsEndpoint.sku = value.productContext.sku;
+          this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
+    
+          this.fetchData();
+        }
+      }
 
     render() {
         const { value } = this.context;
         const { sku } = this.props;
-        const { wsException } = this.state;
+        const { productContext, wsException } = this.state;
+
+        const mappedFieldGroups = productContext.map((product, index) => {
+            console.log('##DEBUG product: '+JSON.stringify(product));
+            let productSection = null;
+      
+            if (product.products.length) {
+              productSection = product.products.map((product) => (
+                <div key={product.id}>
+                    <p>Product Id: {product.id}</p>
+                  {/* <Switch availableSubId={product.availableSubId} callback={this.onClickSwitch} callbackBadge={this.onClickBadge} campaigns={subscription.campaigns} channel={subscription.channel} checked={subscription.checked} description={subscription.description} disabled={subscription.disabled} id={subscription.id} label={subscription.label} userSubId={subscription.userSubId} /> */}
+                </div>
+              ));
+            }
+      
+            return productSection;
+          });
     
         return (
           <>
@@ -59,6 +105,7 @@ class MyProduct extends React.Component {
               <div className="col-12">
                 <p>SKU#: </p>
                 <p>wsEndpoint#: </p>
+                {mappedFieldGroups}
               </div>
             </div>
           </>
