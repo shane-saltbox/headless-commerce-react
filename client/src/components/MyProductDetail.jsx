@@ -104,7 +104,7 @@ class MyProduct extends React.Component {
 
         let fieldDisplay = null;
 
-        if(productFields.products.length){
+        if(productFields.length){
             fieldDisplay = 'NAME: '+productFields.products.Name;
         }
 
