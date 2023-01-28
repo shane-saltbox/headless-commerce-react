@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import AppContext from '../AppContext';
 
 import { Section } from '../elements';
+import { MyProduct } from '../components';
 
 class Main extends React.Component {
   constructor(props) {
