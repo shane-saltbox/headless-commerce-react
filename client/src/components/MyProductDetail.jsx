@@ -82,6 +82,9 @@ class MyProduct extends React.Component {
         const { value } = this.context;
         const { sku } = this.props;
         const { productContext, wsException } = this.state;
+        console.log('##DEBUG render value: '+JSON.stringify(value));
+        console.log('##DEBUG render sku: '+JSON.stringify(sku));
+        console.log('##DEBUG render productContext: '+JSON.stringify(productContext));
 
         const mappedFieldGroups = productContext.map((product, index) => {
             console.log('##DEBUG product: '+JSON.stringify(product));
