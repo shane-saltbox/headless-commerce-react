@@ -76,6 +76,13 @@ class MyProduct extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { setValue, value } = this.context;
+        const { productFields, productContext } = this.state;
+    
+        this.fetchData();
+    }
+
     render() {
         const { value } = this.context;
         const { sku } = this.props;
