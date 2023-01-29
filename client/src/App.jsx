@@ -10,6 +10,7 @@ import {
   Header,
   Main
 } from './landmarks';
+import { MyProduct } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -77,10 +78,13 @@ class App extends React.Component {
 
   render() {
     const { value } = this.context;
-    const { managedContent } = this.state;
+    const { productFields } = this.state;
 
     return (
       <Router>
+        <Route exact path="/">
+          <MyProduct productData={productFields.products} />
+        </Route>
         {this.renderMain()}
       </Router>
     );

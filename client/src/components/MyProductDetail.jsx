@@ -93,10 +93,11 @@ class MyProduct extends React.Component {
 
     render() {
         const { value } = this.context;
-        const { sku } = this.props;
+        //const { sku } = this.props;
+        const { productData } = this.props
         const { productFields, wsException } = this.state;
         console.log('##DEBUG render value: '+JSON.stringify(value));
-        console.log('##DEBUG render sku: '+JSON.stringify(sku));
+        console.log('##DEBUG render productData: '+JSON.stringify(productData));
 
         let productFieldsArray = [];
         productFieldsArray.push(productFields);
