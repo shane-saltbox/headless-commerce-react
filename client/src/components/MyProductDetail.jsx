@@ -103,7 +103,7 @@ class MyProduct extends React.Component {
         let fieldDisplay = null;
 
         const result = productFields.map((entry, index) => {
-            fieldDisplay = 'NAME: '+entry;
+            return fieldDisplay = 'NAME: '+entry;
         })
 
         /* if(productFields.length){
@@ -133,7 +133,7 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>Name#: {fieldDisplay}</p>
+                <p>Name#: {result}</p>
               </div>
             </div>
           </>
