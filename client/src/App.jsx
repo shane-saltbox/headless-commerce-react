@@ -27,6 +27,11 @@ class App extends React.Component {
         },
     };
 
+    this.pathname = window.location.pathname.replace(/\//gi, '');
+    this.urlParams = new URLSearchParams(window.location.search);
+    this.sku = this.urlParams.get('sku');
+    this.effectiveAccountId = this.urlParams.get('effectiveAccountId');
+
   }
 
 
@@ -34,7 +39,7 @@ class App extends React.Component {
    * LIFECYCLE METHODS
    */
     componentDidMount() {
-        const url = "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT";
+        const url = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
 
         const fetchData = async () => {
         try {
