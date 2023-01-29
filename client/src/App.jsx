@@ -17,7 +17,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-        actualData: null,
+        items: [],
+        DataisLoaded: false,
         productFields: [],
         productContext: {
             sku: null,
@@ -33,6 +34,17 @@ class App extends React.Component {
   /*
    * LIFECYCLE METHODS
    */
+  componentDidMount() {
+    fetch(
+    "https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((json) => {
+            this.setState({
+                items: json,
+                DataisLoaded: true
+            });
+        })
+    }
 
   componentDidUpdate(prevProps, prevState) {
     const { value } = this.context;
@@ -48,58 +60,27 @@ class App extends React.Component {
 
       //this.fetchData();
     }
-    const getData = async () => {
-        try {
-          const response = await fetch(
-            `https://jsonplaceholder.typicode.com/posts?_limit=8`
-          );
-          if (!response.ok) {
-            throw new Error(
-              `This is an HTTP error: The status is ${response.status}`
-            );
-          }
-          let actualData = await response.json();
-          this.setData(actualData);
-          this.setError(null);
-        } catch(err) {
-          this.setError(err.message);
-          this.setData(null);
-        }
-    }
-
-    getData()
   }
 
-  renderMain() {
-    const { value } = this.context;
-    const { productFields } = this.state;
-
-    let content = null;
-
-    if (value.roadblocked) {
-      content = '';
-    } else {
-      content = productFields.products;
-    }
-
-    return content;
-  }
 
   render() {
-    const { data } = this.state;
-
-    return (
-        <div className="App">
-            <ul>
-                {data &&
-                data.map(({ id, title }) => (
-                    <li key={id}>
-                    <h3>{title}</h3>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    const { DataisLoaded, items } = this.state;
+        if (!DataisLoaded) return <div>
+            <h1> Pleses wait some time.... </h1> </div> ;
+   
+        return (
+            <div className = "App">
+                <h1> Fetch data from an api in react </h1>  {
+                    items.map((item) => ( 
+                    <ol key = { item.id } >
+                        User_Name: { item.username }, 
+                        Full_Name: { item.name }, 
+                        User_Email: { item.email } 
+                        </ol>
+                    ))
+                }
+            </div>
+        );
   }
 }
 
