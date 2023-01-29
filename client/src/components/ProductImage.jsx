@@ -9,7 +9,7 @@ import { WS_STATUS } from '../Constants';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
-class ProductFields extends React.Component {
+class ProductImage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,30 +27,30 @@ class ProductFields extends React.Component {
   render() {
     const { value: contextValue } = this.context;
     const {
-      productSku,
-      productName,
-      productDesc,
+      productImage,
     } = this.props;
 
     return (
-      <div className="row">
-          <div className="col-12">
-            <h1>{productName}</h1>
-            <p>SKU: {productSku}</p>
-            <p>{productDesc}</p>
-          </div>
+      <div className="product-large-image-wrapper">
+          {productImage ? (
+          <img
+            src={productImage}
+            alt=""
+            className="img-fluid"
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 }
 
-ProductFields.contextType = AppContext;
+ProductImage.contextType = AppContext;
 
 
-ProductFields.propTypes = {
-  productSku: PropTypes.string.isRequired,
-  productName: PropTypes.string.isRequired,
-  productDesc: PropTypes.string.isRequired,
+ProductImage.propTypes = {
+  productImage: PropTypes.string.isRequired,
 };
 
-export default ProductFields;
+export default ProductImage;

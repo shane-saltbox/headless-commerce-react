@@ -11,7 +11,7 @@ import {
   Header,
   Main
 } from './landmarks';
-import { ProductFields } from './components';
+import { ProductFields, ProductImage } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -85,7 +85,18 @@ class App extends React.Component {
                 <Route exact path="/">
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
-            <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1>  
+            <div className="container-lg pt-5">
+                    <div className="row">
+                    <Route exact path="/">
+                        <div className="col-lg-3">
+                            <Skeleton />
+                        </div>
+                    </Route>
+                        <div className="col-lg-9">
+                            <Skeleton />
+                        </div>
+                    </div>
+                </div> 
             </Router>
             );
    
@@ -94,12 +105,18 @@ class App extends React.Component {
                 <Route exact path="/">
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
-                
-                <div className = "App">
-                    <h1> Fetch data from an api in react </h1>  
-                    {productFields}
+                <div className="container-lg pt-5">
+                    <div className="row">
+                    <Route exact path="/">
+                        <div className="col-lg-3">
+                        <ProductImage  />
+                        </div>
+                    </Route>
+                        <div className="col-lg-9">
+                            {productFields}
+                        </div>
+                    </div>
                 </div>
-                
             </Router>
         );
   }
