@@ -54,13 +54,15 @@ class App extends React.Component {
 
   render() {
     const { DataisLoaded, items } = this.state;
+    let itemsArray = [];
+    itemsArray.push(items);
         if (!DataisLoaded) return <div>
             <h1> Pleses wait some time.... </h1> </div> ;
    
         return (
             <div className = "App">
                 <h1> Fetch data from an api in react </h1>  {
-                    items.map((item) => ( 
+                    itemsArray.map((item) => ( 
                     <ol >
                         User_Name: { item.data.products[0].sku }
                         </ol>
