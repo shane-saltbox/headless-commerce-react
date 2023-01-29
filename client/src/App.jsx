@@ -68,14 +68,12 @@ class App extends React.Component {
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
 
-            let productDetail = null;
+            let productDetail = [];
             console.log('##DEBUG item: '+item);
 
-            const productSku = item.data.products[0].sku;
-            const productName = item.data.products[0].fields.Name;
-            const productDesc = item.data.products[0].fields.Description;
-            productDetail = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
-        
+            productDetail['fields'] = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
+            productDetail['image'] = <ProductImage productImage={item.data.products[0].defaultImage.url} />
+
             return productDetail;
         });
     }
@@ -85,18 +83,20 @@ class App extends React.Component {
                 <Route exact path="/">
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
-            <div className="container-lg pt-5">
-                    <div className="row" style="padding-top:100px">
-                    <Route exact path="/">
-                        <div className="col-lg-4">
-                            <Skeleton />
+                <main>
+                <div className="container-lg pt-5">
+                        <div className="row topRow" style="padding-top:100px">
+                        <Route exact path="/">
+                            <div className="col-lg-4">
+                                <Skeleton />
+                            </div>
+                        </Route>
+                            <div className="col-lg-8">
+                                <Skeleton />
+                            </div>
                         </div>
-                    </Route>
-                        <div className="col-lg-8">
-                            <Skeleton />
-                        </div>
-                    </div>
-                </div> 
+                    </div>  
+                </main>
             </Router>
             );
    
@@ -105,18 +105,20 @@ class App extends React.Component {
                 <Route exact path="/">
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
-                <div className="container-lg pt-5">
-                    <div className="row" style="padding-top:100px">
-                    <Route exact path="/">
-                        <div className="col-lg-4">
-                        <ProductImage  />
+                <main>
+                    <div className="container-lg pt-5">
+                        <div className="row topRow">
+                        <Route exact path="/">
+                            <div className="col-lg-4">
+                                {productFields.image}
+                            </div>
+                        </Route>
+                            <div className="col-lg-8">
+                                {productFields.fields}
+                            </div>
                         </div>
-                    </Route>
-                        <div className="col-lg-8">
-                            {productFields}
-                        </div>
-                    </div>
-                </div>
+                    </div>  
+                </main>
             </Router>
         );
   }
