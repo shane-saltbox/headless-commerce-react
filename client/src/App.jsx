@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { isEqual, merge } from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -27,9 +27,13 @@ class App extends React.Component {
         },
     };
 
-    this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
+  }
 
-    useEffect(() => {
+
+  /*
+   * LIFECYCLE METHODS
+   */
+    componentDidMount() {
         const url = "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT";
 
         const fetchData = async () => {
@@ -47,16 +51,6 @@ class App extends React.Component {
         };
 
         fetchData();
-    }, []);
-
-  }
-
-
-  /*
-   * LIFECYCLE METHODS
-   */
-    componentDidMount() {
-       
     }
     
 
