@@ -100,11 +100,13 @@ class MyProduct extends React.Component {
         console.log('##DEBUG render value: '+JSON.stringify(value));
         console.log('##DEBUG render sku: '+JSON.stringify(sku));
         console.log('##DEBUG render productFields: '+JSON.stringify(productFields));
+        let productFieldsProducts = productFields.products
 
         let fieldDisplay = null;
 
-        console.log('##DEBUG render productFields products: '+JSON.stringify(productFields.products));
-        console.log('##DEBUG render productFields sku: '+JSON.stringify(productFields.products[0].sku));
+        const result = productFieldsProducts.map((entry, index) => {
+            fieldDisplay = 'NAME: '+entry;
+        })
 
         /* if(productFields.length){
             console.log('inside of length if statement');
