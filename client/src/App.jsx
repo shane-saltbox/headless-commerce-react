@@ -27,22 +27,6 @@ class App extends React.Component {
     };
 
     this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
-    
-    /*
-        * EVENT HANDLERS
-        */
-    this.fetchData = () => {
-        fetch(
-        "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(JSON.stringify(json));
-                this.setState({
-                    items: json,
-                    DataisLoaded: true
-                });
-            })
-    };
 
     
   }
@@ -57,7 +41,16 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.fetchData();
+        fetch(
+            "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(JSON.stringify(json));
+                    this.setState({
+                        items: json,
+                        DataisLoaded: true
+                    });
+                })
     }
 
 
