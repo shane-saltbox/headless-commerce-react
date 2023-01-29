@@ -66,7 +66,7 @@ class MyProduct extends React.Component {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
 
-        if (!isEqual(prevState.productContext, productContext)) {
+        //if (!isEqual(prevState.productContext, productContext)) {
             this.wsEndpoint.get()
             .then((response) => {
                 const { data, success } = response;
@@ -79,7 +79,7 @@ class MyProduct extends React.Component {
             .catch(() => {
                 this.setState({ wsException: true, productFields: [] });
             });
-        }
+        //}
 
         if (!isEqual(prevState.productContext, productContext)) {
             console.log('inside fetch data');
