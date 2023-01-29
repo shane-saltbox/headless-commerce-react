@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isEqual, merge } from 'lodash';
+import { cloneDeep, isEqual, sortBy } from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppContext from './AppContext';
@@ -39,7 +39,6 @@ class App extends React.Component {
 
     this.onClickButton = (event, switchProps, switchState) => {
         console.log('add to cart clicked');
-        this.setState({ cartItems: newFieldGroups });
 
         const newCartItems = cloneDeep(cartItems);
         this.setState({ cartItems: newCartItems });
