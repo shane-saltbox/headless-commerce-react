@@ -9,9 +9,16 @@ import { WS_STATUS } from '../Constants';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+let nextId = 0;
+
 class AddToCart extends React.Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
+
+    this.state = {
+        cart: null,
+        cartItems: [],
+    };
 
     /*
      * EVENT HANDLERS
@@ -45,9 +52,12 @@ class AddToCart extends React.Component {
 
     return (
       <div className="">
-        <form>
-            <button type="button" className='btn btn-large' productSku={productSku} productAmount={productAmount} onClick={this.handleClick} >Add To Cart</button>
-        </form>
+            <button onClick={() => {
+                cartItems([
+                ...cart,
+                { id: nextId++, name: {productSku} }
+                ]);
+            }}>Add</button>
       </div>
     );
   }
