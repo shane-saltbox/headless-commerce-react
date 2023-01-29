@@ -47,19 +47,7 @@ class App extends React.Component {
     }
 
   componentDidUpdate(prevProps, prevState) {
-    const { value } = this.context;
-    const { productContext } = this.state;
-
-    if (!isEqual(value.productContext, productContext)) {
-      this.setState({ productContext: { ...value.productContext } });
-    }
-
-    if (!isEqual(prevState.productContext, productContext)) {
-      this.wsEndpoint.sku = value.productContext.sku;
-      this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
-
-      //this.fetchData();
-    }
+    
   }
 
 
