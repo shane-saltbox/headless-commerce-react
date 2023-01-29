@@ -69,7 +69,7 @@ class App extends React.Component {
 
 
   render() {
-    const { DataisLoaded, items } = this.state;
+    const { DataisLoaded, items, cartItems } = this.state;
     let itemsArray = [];
     itemsArray.push(items);
     console.log('##DEBUG itemsArray: '+itemsArray);

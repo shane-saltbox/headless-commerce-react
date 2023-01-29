@@ -59,11 +59,14 @@ class Header extends React.Component {
             {logo ? <img className="header-logo" src={logo} alt="" /> : <Skeleton height={52} width={75} />}
           </a>
           <div className="dropdown  header-locale">
-            {cartItems ? (
-              <>
-                <p>Cart ({cartItems})</p>
-              </>
-            ) : <Skeleton height={45} width={75} />}
+            <i className="pe-7s-shopbag" />
+            <span className="count-style">
+              {cartItems ? (
+                <>
+                  <p>Cart ({cartItems})</p>
+                </>
+              ) : <Skeleton height={45} width={75} />}
+            </span>
           </div>
         </div>
       </header>
