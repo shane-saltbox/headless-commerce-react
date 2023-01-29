@@ -103,15 +103,13 @@ class MyProduct extends React.Component {
 
         let fieldDisplay = null;
 
+        console.log('##DEBUG render productFields products: '+JSON.stringify(productFields.products));
+        console.log('##DEBUG render productFields sku: '+JSON.stringify(productFields.products[0].sku));
+
         /* if(productFields.length){
             console.log('inside of length if statement');
             fieldDisplay = 'NAME: '+productFields.products.Name;
         } */
-
-        const result = productFields.map((field, index) => {
-            console.log('inside of length if statement');
-            fieldDisplay = 'NAME: '+field;
-        })
 
         /* const mappedFieldGroups = productContext.map((product, index) => {
             console.log('in first map');
