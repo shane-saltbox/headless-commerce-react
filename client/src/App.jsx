@@ -37,10 +37,6 @@ class App extends React.Component {
    * LIFECYCLE METHODS
    */
     componentDidMount() {
-        
-    }
-
-    componentDidUpdate(prevProps, prevState) {
         fetch(
             "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
                 .then((res) => res.json())
@@ -51,6 +47,9 @@ class App extends React.Component {
                         DataisLoaded: true
                     });
                 })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
     }
 
 
