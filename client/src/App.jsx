@@ -37,13 +37,6 @@ class App extends React.Component {
      * EVENT HANDLERS
      */
 
-    this.onClickButton = (event, switchProps, switchState) => {
-        console.log('add to cart clicked');
-
-        const newCartItems = cloneDeep(cartItems);
-        this.setState({ cartItems: newCartItems });
-      };
-
   }
 
 
@@ -101,7 +94,7 @@ class App extends React.Component {
 
         productAddToCart = itemsArray.map((item) => {
             let productAddToCart = [];
-            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" callback={this.onClickButton} />
+            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" />
 
             return productAddToCart;
         });
