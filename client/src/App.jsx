@@ -68,12 +68,16 @@ class App extends React.Component {
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
 
-            let productDetail = {};
+            let productDetail = {
+                fields: null,
+                image: null
+            };
             console.log('##DEBUG item: '+item);
 
             productDetail.fields = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
             productDetail.image = <ProductImage productImage={item.data.products[0].defaultImage.url} />
 
+            console.log('##DEBUG productDetail: '+productDetail);
             return productDetail;
         });
     }
