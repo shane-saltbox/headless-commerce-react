@@ -35,7 +35,7 @@ class App extends React.Component {
         this.wsEndpoint.get()
             .then((response) => {
             const { data, success } = response;
-            console.log('##DEBUG fetch 1 data: '+data);
+            console.log('##DEBUG fetch 1 data: '+response);
     
             if (!success) throw new Error();
     
@@ -58,12 +58,12 @@ class App extends React.Component {
    * LIFECYCLE METHODS
    */
     componentDidMount() {
-        this.fetchData();
+        
     }
 
-  componentDidUpdate(prevProps, prevState) {
-    
-  }
+    componentDidUpdate(prevProps, prevState) {
+        this.fetchData();
+    }
 
 
   render() {
