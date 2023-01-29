@@ -71,7 +71,7 @@ class App extends React.Component {
 
             let productDetail = [];
 
-            productDetail.fields = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
+            productDetail = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
             
             return productDetail;
         });
