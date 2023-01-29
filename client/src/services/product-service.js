@@ -13,7 +13,8 @@ class MyProductService {
    * URI: https://headless-commerce.herokuapp.com/api/productDetail?sku={{SKU}}&effectiveAccountId={{EFFECTIVEACCOUNTID}}
    */
   async get() {
-    const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
+    //const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
+    const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT`;
 
     const options = {
       headers: {
@@ -33,7 +34,7 @@ class MyProductService {
 
         //   this.logger.post(endpoint, message, status, payload);
         // }
-        console.log('##DEBUG service; '+JSON.stringify(response.data));
+        console.log('##DEBUG service: '+JSON.stringify(response.data));
 
         return response.data;
       })
