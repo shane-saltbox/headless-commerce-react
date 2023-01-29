@@ -65,7 +65,7 @@ class App extends React.Component {
     console.log('##DEBUG itemsArray: '+itemsArray);
     
     let productFields;
-    if(itemsArray.length > 1){
+    if(!DataisLoaded){
         productFields = itemsArray.map((item) => {
 
             let productDetail = null;
@@ -80,8 +80,14 @@ class App extends React.Component {
         });
     }
     
-        if (!DataisLoaded) return <div>
-            <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1> </div> ;
+        if (!DataisLoaded) return (
+            <Router>
+                <Route exact path="/">
+                    <Header logo="/tinyHomesLogo.png" />
+                </Route>
+            <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1>  
+            </Router>
+            );
    
         return (
             <Router>
