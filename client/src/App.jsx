@@ -58,10 +58,12 @@ class App extends React.Component {
     const { DataisLoaded, items } = this.state;
     let itemsArray = [];
     itemsArray.push(items);
+    console.log('##DEBUG itemsArray: '+itemsArray);
     
         const productFields = itemsArray.map((item) => {
 
             let productDetail = null;
+            console.log('##DEBUG item: '+item);
 
             const productSku = item.data.products[0].sku;
             const productName = item.data.products[0].fields.Name;
