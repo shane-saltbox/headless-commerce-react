@@ -11,7 +11,7 @@ import {
   Header,
   Main
 } from './landmarks';
-import { ProductFields, ProductImage } from './components';
+import { ProductFields, ProductImage, AddToCart } from './components';
 
 class App extends React.Component {
   constructor(props) {
@@ -66,6 +66,7 @@ class App extends React.Component {
     
     let productFields;
     let productImage;
+    let productAddToCart;
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
             let productDetail = [];
