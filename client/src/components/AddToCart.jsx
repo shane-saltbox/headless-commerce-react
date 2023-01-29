@@ -18,23 +18,10 @@ class AddToCart extends React.Component {
      */
 
     this.handleClick = (event) => {
-        const {
-          availableSubId,
-          callback,
-          disabled,
-          label,
-        } = this.props;
-        const { checked } = this.state;
+        console.log('handleClick: '+event);
+        const { productSku, productAmount } = event.target;
   
-        this.setState({ checked: !checked }, () => {
-          if (!checked) {
-            $(`#collapse_${availableSubId}`).collapse('show');
-          } else {
-            $(`#collapse_${availableSubId}`).collapse('hide');
-          }
-  
-          callback(event, this.props, this.state);
-        });
+        this.setState({ cart: productSku })
       };
 
   }
@@ -58,7 +45,7 @@ class AddToCart extends React.Component {
     return (
       <div className="">
         <form>
-          <button className='btn btn-large' type="button" onClick={this.handleClick}>Add To Cart</button>
+            <input type="button" value="Add To Cart" className='btn btn-large' productSku={productSku} productAmount={productAmount} onClick={this.handleClick} />
         </form>
       </div>
     );
