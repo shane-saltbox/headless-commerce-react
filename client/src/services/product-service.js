@@ -33,9 +33,9 @@ class MyProductService {
 
         //   this.logger.post(endpoint, message, status, payload);
         // }
-        console.log('##DEBUG service; '+JSON.stringify(response));
+        console.log('##DEBUG service; '+JSON.stringify(response.data));
 
-        return response;
+        return response.data;
       })
       .catch((error) => {
         // this.logger.post(wsUri, error, '500');
