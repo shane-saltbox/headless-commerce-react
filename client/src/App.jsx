@@ -29,26 +29,32 @@ class App extends React.Component {
 
     this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
 
-    
+    async function fetchData() {
+        const data = await fetch(
+            "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
+                
+        data.json();
+
+        this.setState({
+            items: data,
+            DataisLoaded: true
+        });
+        return data.data;
+    }
+
+    useEffect(() => {
+        fetchData();
+      },[])
   }
 
-  
 
   /*
    * LIFECYCLE METHODS
    */
     componentDidMount() {
-        fetch(
-            "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
-                .then((res) => res.json())
-                .then((json) => {
-                    console.log(JSON.stringify(json));
-                    this.setState({
-                        items: json,
-                        DataisLoaded: true
-                    });
-                })
+        
     }
+    
 
     componentDidUpdate(prevProps, prevState) {
     }
@@ -60,6 +66,7 @@ class App extends React.Component {
     itemsArray.push(items);
     console.log('##DEBUG itemsArray: '+itemsArray);
     
+        
         const productFields = itemsArray.map((item) => {
 
             let productDetail = null;
