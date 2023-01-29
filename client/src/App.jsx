@@ -65,7 +65,7 @@ class App extends React.Component {
     console.log('##DEBUG itemsArray: '+itemsArray);
     
     let productFields;
-    if(itemsArray.length){
+    if(itemsArray.length > 1){
         productFields = itemsArray.map((item) => {
 
             let productDetail = null;
