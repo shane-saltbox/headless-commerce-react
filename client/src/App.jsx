@@ -17,7 +17,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-        actualData,
+        actualData: null,
         productFields: [],
         productContext: {
             sku: null,
@@ -59,11 +59,11 @@ class App extends React.Component {
             );
           }
           let actualData = await response.json();
-          setData(actualData);
-          setError(null);
+          this.setData(actualData);
+          this.setError(null);
         } catch(err) {
-          setError(err.message);
-          setData(null);
+          this.setError(err.message);
+          this.setData(null);
         }
     }
 
