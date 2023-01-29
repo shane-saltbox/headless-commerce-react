@@ -4,6 +4,7 @@ import { isEqual, merge } from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppContext from './AppContext';
+import Skeleton from 'react-loading-skeleton';
 
 import MyProductService from './services/product-service';
 import {
@@ -58,13 +59,14 @@ class App extends React.Component {
     let itemsArray = [];
     itemsArray.push(items);
         if (!DataisLoaded) return <div>
-            <h1> Pleses wait some time.... </h1> </div> ;
+            <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1> </div> ;
    
         return (
             <Router>
                 <Route exact path="/">
-                    <Header languages={managedContent.languages} logo="/tinyHomesLogo.png" />
+                    <Header logo="/tinyHomesLogo.png" />
                 </Route>
+                
                 <div className = "App">
                     <h1> Fetch data from an api in react </h1>  {
                         itemsArray.map((item) => ( 
