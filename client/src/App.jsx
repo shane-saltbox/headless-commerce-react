@@ -64,7 +64,8 @@ class App extends React.Component {
                 <h1> Fetch data from an api in react </h1>  {
                     itemsArray.map((item) => ( 
                     <ol >
-                        User_Name: { item.data.products[0].sku }
+                        User_Name: { item.data.products[0].sku },
+                        Name: {item.data.products[0].fields.Name} 
                         </ol>
                     ))
                 }
