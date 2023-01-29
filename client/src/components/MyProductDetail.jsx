@@ -136,7 +136,7 @@ class MyProduct extends React.Component {
           <>
             <div className="row">
               <div className="col-12">
-                <p>Name#: {result}</p>
+                <p>Name#: {fieldDisplay}</p>
               </div>
             </div>
           </>
