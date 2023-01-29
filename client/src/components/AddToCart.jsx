@@ -57,7 +57,9 @@ class AddToCart extends React.Component {
 
     return (
       <div className="">
+        <form>
           <button className='btn btn-large' type="button" onClick={this.handleClick}>Add To Cart</button>
+        </form>
       </div>
     );
   }
