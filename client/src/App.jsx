@@ -71,8 +71,8 @@ class App extends React.Component {
             let productDetail = [];
             console.log('##DEBUG item: '+item);
 
-            productDetail['fields'] = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
-            productDetail['image'] = <ProductImage productImage={item.data.products[0].defaultImage.url} />
+            productDetail.fields = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
+            productDetail.image = <ProductImage productImage={item.data.products[0].defaultImage.url} />
 
             return productDetail;
         });
@@ -88,11 +88,11 @@ class App extends React.Component {
                         <div className="row topRow">
                         <Route exact path="/">
                             <div className="col-lg-4">
-                                <Skeleton />
+                                <Skeleton height={45} />
                             </div>
                         </Route>
                             <div className="col-lg-8">
-                                <Skeleton />
+                                <Skeleton height={45} />
                             </div>
                         </div>
                     </div>  
