@@ -32,21 +32,16 @@ class App extends React.Component {
         * EVENT HANDLERS
         */
     this.fetchData = () => {
-        this.wsEndpoint.get()
-            .then((response) => {
-            const { data, success } = response;
-            console.log('##DEBUG fetch 1 data: '+response);
-    
-            if (!success) throw new Error();
-    
-            this.setState({
-                items: response,
-                DataisLoaded: true
-            });
+        fetch(
+        "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(JSON.stringify(json));
+                this.setState({
+                    items: json,
+                    DataisLoaded: true
+                });
             })
-            .catch(() => {
-            this.setState({ wsException: true, productFields: [] });
-        });
     };
 
     
