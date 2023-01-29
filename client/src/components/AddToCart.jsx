@@ -17,7 +17,8 @@ class AddToCart extends React.Component {
      * EVENT HANDLERS
      */
 
-    this.handleClick = (event) => {
+    handleClick = (event) => {
+        e.preventDefault();
         console.log('handleClick: '+event);
         const { productSku, productAmount } = event.target;
   
@@ -45,7 +46,7 @@ class AddToCart extends React.Component {
     return (
       <div className="">
         <form>
-            <input type="button" value="Add To Cart" className='btn btn-large' productSku={productSku} productAmount={productAmount} onClick={this.handleClick} />
+            <button type="button" className='btn btn-large' productSku={productSku} productAmount={productAmount} onClick={this.handleClick} >Add To Cart</button>
         </form>
       </div>
     );
