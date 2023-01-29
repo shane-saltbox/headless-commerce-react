@@ -117,12 +117,11 @@ class MyProduct extends React.Component {
         const { productFields, wsException } = this.state;
         console.log('##DEBUG render value: '+JSON.stringify(value));
         console.log('##DEBUG render sku: '+JSON.stringify(sku));
-        console.log('##DEBUG render productFields: '+JSON.stringify(productFields.data));
-        let productFieldsProducts = productFields.data.products
+        console.log('##DEBUG render productFields: '+productFields);
 
         let fieldDisplay = null;
 
-        const result = productFieldsProducts.map((entry, index) => {
+        const result = productFields.map((entry, index) => {
             fieldDisplay = 'NAME: '+entry;
         })
 
