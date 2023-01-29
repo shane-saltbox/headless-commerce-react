@@ -59,28 +59,10 @@ class MyProduct extends React.Component {
     componentDidMount() {
         const { value } = this.context;
 
-        const wsUri = `https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}`;
-        console.log(wsUri);
-
-        const options = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method: 'GET',
-        };
-
-        fetch(wsUri, options)
-        .then((result) => result.json())
-        .then((result) => {
-            this.setState({
-                productFields: result,
-            })
-        })
-
         this.setState({ productContext: { ...value.sku } });
     }
 
-    /* componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
 
@@ -97,7 +79,7 @@ class MyProduct extends React.Component {
             .catch(() => {
                 this.setState({ wsException: true, productFields: [] });
             });
-        } */
+        }
         /* if (this.context && value && !isEqual(value.productContext, productContext)) {
           this.setState({ productContext: { ...value.productContext } });
         }
@@ -108,8 +90,8 @@ class MyProduct extends React.Component {
           this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
     
           this.fetchData();
-        }
-      }*/
+        } */
+      }
 
     render() {
         const { value } = this.context;
@@ -117,11 +99,12 @@ class MyProduct extends React.Component {
         const { productFields, wsException } = this.state;
         console.log('##DEBUG render value: '+JSON.stringify(value));
         console.log('##DEBUG render sku: '+JSON.stringify(sku));
-        console.log('##DEBUG render productFields: '+productFields);
+        //console.log('##DEBUG render productFields: '+JSON.stringify(productFields));
+        //let productFieldsProducts = productFields.products
 
         let fieldDisplay = null;
 
-        const result = productFields.map((entry, index) => {
+        const result = productFieldsProducts.map((entry, index) => {
             fieldDisplay = 'NAME: '+entry;
         })
 
