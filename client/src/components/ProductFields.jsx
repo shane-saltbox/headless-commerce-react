@@ -31,7 +31,6 @@ class ProductFields extends React.Component {
       productName,
       productDesc,
     } = this.props;
-    const { checked } = this.state;
 
     return (
       <div>
