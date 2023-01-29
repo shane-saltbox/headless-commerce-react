@@ -85,7 +85,7 @@ class App extends React.Component {
                 </Route>
                 <main>
                 <div className="container-lg pt-5">
-                        <div className="row topRow" style="padding-top:100px">
+                        <div className="row topRow">
                         <Route exact path="/">
                             <div className="col-lg-4">
                                 <Skeleton />
