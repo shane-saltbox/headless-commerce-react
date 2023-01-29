@@ -11,7 +11,7 @@ import {
   Header,
   Main
 } from './landmarks';
-import { ProductFields } from './elements';
+import { ProductFields } from './components';
 
 class App extends React.Component {
   constructor(props) {
