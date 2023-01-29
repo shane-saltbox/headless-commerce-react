@@ -65,7 +65,7 @@ class App extends React.Component {
     console.log('##DEBUG itemsArray: '+itemsArray);
     
     let productFields;
-    if(!DataisLoaded){
+    if(DataisLoaded){
         productFields = itemsArray.map((item) => {
 
             let productDetail = null;
