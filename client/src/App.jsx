@@ -68,7 +68,7 @@ class App extends React.Component {
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
 
-            let productDetail = [];
+            let productDetail = {};
             console.log('##DEBUG item: '+item);
 
             productDetail.fields = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
