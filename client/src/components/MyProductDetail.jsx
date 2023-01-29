@@ -66,7 +66,7 @@ class MyProduct extends React.Component {
         const { setValue, value } = this.context;
         const { productFields, productContext } = this.state;
 
-        if (!isEqual(prevState.productContext, productContext)) {
+        /* if (!isEqual(prevState.productContext, productContext)) {
             this.wsEndpoint.get()
             .then((response) => {
                 const { data, success } = response;
@@ -79,18 +79,16 @@ class MyProduct extends React.Component {
             .catch(() => {
                 this.setState({ wsException: true, productFields: [] });
             });
-        }
-        /* if (this.context && value && !isEqual(value.productContext, productContext)) {
-          this.setState({ productContext: { ...value.productContext } });
-        }
-    
-        if (!isEqual(prevState.productContext, productContext)) {
-          this.wsEndpoint.sku = value.sku;
-          this.wsEndpoint.sku = value.productContext.sku;
-          this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
-    
-          this.fetchData();
         } */
+
+        if (!isEqual(prevState.productContext, productContext)) {
+            console.log('inside fetch data');
+            this.wsEndpoint.id = value.id;
+            this.wsEndpoint.bu = value.locale.businessUnit;
+            this.wsEndpoint.lang = value.locale.language;
+      
+            this.fetchData();
+        }
       }
 
     render() {
@@ -104,7 +102,7 @@ class MyProduct extends React.Component {
 
         let fieldDisplay = null;
 
-        const result = productFieldsProducts.map((entry, index) => {
+        const result = productFields.map((entry, index) => {
             fieldDisplay = 'NAME: '+entry;
         })
 
