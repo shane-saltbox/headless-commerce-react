@@ -46,10 +46,10 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { value } = this.context;
-    const { locale } = this.state;
+    const { productContext } = this.state;
 
-    if (!isEqual(value.locale, locale)) {
-      this.setState({ locale: { ...value.locale } });
+    if (!isEqual(value.productContext, productContext)) {
+      this.setState({ productContext: { ...value.productContext } });
     }
 
     if (!isEqual(prevState.productContext, productContext)) {
