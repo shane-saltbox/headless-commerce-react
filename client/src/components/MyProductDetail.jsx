@@ -36,7 +36,7 @@ class MyProduct extends React.Component {
         /*
          * EVENT HANDLERS
          */
-        this.fetchData = () => {
+        /* this.fetchData = () => {
             this.wsEndpoint.get()
               .then((response) => {
                 const { data, success } = response;
@@ -49,7 +49,7 @@ class MyProduct extends React.Component {
               .catch(() => {
                 this.setState({ wsException: true, productFields: [] });
               });
-          };
+          }; */
     }
 
     /*
@@ -67,7 +67,7 @@ class MyProduct extends React.Component {
         const { productFields, productContext } = this.state;
 
         //if (!isEqual(prevState.productContext, productContext)) {
-            this.wsEndpoint.get()
+            /* this.wsEndpoint.get()
             .then((response) => {
                 const { data, success } = response;
 
@@ -78,7 +78,7 @@ class MyProduct extends React.Component {
             })
             .catch(() => {
                 this.setState({ wsException: true, productFields: [] });
-            });
+            }); */
         //}
 
         if (!isEqual(prevState.productContext, productContext)) {
