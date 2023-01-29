@@ -11,7 +11,7 @@ import {
   Header,
   Main
 } from './landmarks';
-import { MyProduct } from './components';
+import { ProductFields } from './elements';
 
 class App extends React.Component {
   constructor(props) {
@@ -58,6 +58,19 @@ class App extends React.Component {
     const { DataisLoaded, items } = this.state;
     let itemsArray = [];
     itemsArray.push(items);
+    
+        const productFields = itemsArray.map((item) => {
+
+            let productDetail = null;
+
+            const productSku = item.data.products[0].sku;
+            const productName = item.data.products[0].fields.Name;
+            const productDesc = item.data.products[0].fields.Description;
+            productDetail = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
+        
+            return productDetail;
+        });
+    
         if (!DataisLoaded) return <div>
             <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1> </div> ;
    
@@ -68,15 +81,10 @@ class App extends React.Component {
                 </Route>
                 
                 <div className = "App">
-                    <h1> Fetch data from an api in react </h1>  {
-                        itemsArray.map((item) => ( 
-                        <ol >
-                            User_Name: { item.data.products[0].sku },
-                            Name: {item.data.products[0].fields.Name} 
-                            </ol>
-                        ))
-                    }
+                    <h1> Fetch data from an api in react </h1>  
+                    {productFields}
                 </div>
+                
             </Router>
         );
   }
