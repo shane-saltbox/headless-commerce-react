@@ -31,7 +31,6 @@ class MyProduct extends React.Component {
         console.log('##DEBUG effectiveAccountId: '+this.effectiveAccountId);
     
         this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
-        console.log('##DEBUG wsEndpoint: '+JSON.stringify(this.wsEndpoint));
     
         /*
          * EVENT HANDLERS
@@ -99,9 +98,6 @@ class MyProduct extends React.Component {
         console.log('##DEBUG render value: '+JSON.stringify(value));
         console.log('##DEBUG render productData: '+JSON.stringify(productData));
 
-        let productFieldsArray = [];
-        productFieldsArray.push(productFields);
-        console.log('##DEBUG render productFieldsArray: '+JSON.stringify(productFieldsArray));
         //let productFieldsProducts = productFields.products
 
         let fieldDisplay = null;

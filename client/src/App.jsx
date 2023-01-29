@@ -57,8 +57,9 @@ class App extends React.Component {
       this.wsEndpoint.sku = value.productContext.sku;
       this.wsEndpoint.effectiveAccountId = value.productContext.effectiveAccountId;
 
-      this.fetchData();
+      //this.fetchData();
     }
+    this.fetchData();
   }
 
   renderMain() {
