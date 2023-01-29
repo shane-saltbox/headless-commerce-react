@@ -16,23 +16,23 @@ class AddToCart extends React.Component {
     super(props);
 
     this.state = {
-        cart: null,
         cartItems: [],
     };
+
+  }
 
     /*
      * EVENT HANDLERS
      */
+    saveInput = (e) => {
+        this.setState({ input: e.target.value });
+    };
 
-    handleClick = (event) => {
-        e.preventDefault();
-        console.log('handleClick: '+event);
-        const { productSku, productAmount } = event.target;
-  
-        this.setState({ cart: productSku })
-      };
-
-  }
+    addNewItem = () => {
+        let { cartItems, input } = this.state;
+        cartItems.push(input);
+        // this.state.cart.push(this.state.input); // same as above, though bad practice 
+    };
 
   /*
    * LIFECYCLE METHODS
@@ -51,13 +51,12 @@ class AddToCart extends React.Component {
     } = this.props;
 
     return (
-      <div className="">
-            <button onClick={() => {
-                cartItems([
-                ...cart,
-                { id: nextId++, name: {productSku} }
-                ]);
-            }}>Add</button>
+      <div>
+            <input
+                type="text"
+                onChange={this.saveInput}
+            />
+            <button onClick={this.addNewItem}> Add Item </button>
       </div>
     );
   }
