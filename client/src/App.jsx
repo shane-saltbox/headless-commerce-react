@@ -17,6 +17,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+        actualData,
         productFields: [],
         productContext: {
             sku: null,
@@ -24,22 +25,10 @@ class App extends React.Component {
         },
     };
 
-    this.wsEndpoint = new MyProductService(null, null, '/api');
-
-    /*
-    * HELPER METHODS
-    */
-
-    this.fetchData = () => {
-      const { setValue, value } = this.context;
-
-      this.wsEndpoint.get().then((data) => {
-        setValue(
-            { productFields: data }
-        );
-      });
-    };
+    
   }
+
+  
 
   /*
    * LIFECYCLE METHODS
@@ -59,7 +48,26 @@ class App extends React.Component {
 
       //this.fetchData();
     }
-    this.fetchData();
+    const getData = async () => {
+        try {
+          const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts?_limit=8`
+          );
+          if (!response.ok) {
+            throw new Error(
+              `This is an HTTP error: The status is ${response.status}`
+            );
+          }
+          let actualData = await response.json();
+          setData(actualData);
+          setError(null);
+        } catch(err) {
+          setError(err.message);
+          setData(null);
+        }
+    }
+
+    getData()
   }
 
   renderMain() {
@@ -78,16 +86,19 @@ class App extends React.Component {
   }
 
   render() {
-    const { value } = this.context;
-    const { productFields } = this.state;
+    const { data } = this.state;
 
     return (
-      <Router>
-        <Route exact path="/">
-          <MyProduct productData={productFields.products} />
-        </Route>
-        {this.renderMain()}
-      </Router>
+        <div className="App">
+            <ul>
+                {data &&
+                data.map(({ id, title }) => (
+                    <li key={id}>
+                    <h3>{title}</h3>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
   }
 }
