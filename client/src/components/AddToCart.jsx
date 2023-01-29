@@ -28,8 +28,7 @@ class AddToCart extends React.Component {
     const { value: contextValue } = this.context;
     const {
       productSku,
-      productName,
-      productDesc,
+      productAmount,
     } = this.props;
 
     return (

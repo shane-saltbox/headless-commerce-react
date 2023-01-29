@@ -68,21 +68,24 @@ class App extends React.Component {
     let productImage;
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
-
             let productDetail = [];
-
             productDetail = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
             
             return productDetail;
         });
 
         productImage = itemsArray.map((item) => {
-
             let productImage = [];
-
             productImage = <ProductImage productImage={item.data.products[0].defaultImage.url} />
 
             return productImage;
+        });
+
+        productAddToCart = itemsArray.map((item) => {
+            let productAddToCart = [];
+            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" />
+
+            return productAddToCart;
         });
     }
     
@@ -123,6 +126,7 @@ class App extends React.Component {
                         </Route>
                             <div className="col-lg-8">
                                 {productFields}
+                                {productAddToCart}
                             </div>
                         </div>
                     </div>  

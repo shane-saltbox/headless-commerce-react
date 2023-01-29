@@ -46,8 +46,10 @@ class Header extends React.Component {
 
   render() {
     const { value } = this.context;
-    const { logo } = this.props;
-    const { cart } = this.state;
+    const {
+      logo,
+      cart
+    } = this.props;
 
 
     return (
