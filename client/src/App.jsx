@@ -61,16 +61,21 @@ class App extends React.Component {
             <h1> Pleses wait some time.... </h1> </div> ;
    
         return (
-            <div className = "App">
-                <h1> Fetch data from an api in react </h1>  {
-                    itemsArray.map((item) => ( 
-                    <ol >
-                        User_Name: { item.data.products[0].sku },
-                        Name: {item.data.products[0].fields.Name} 
-                        </ol>
-                    ))
-                }
-            </div>
+            <Router>
+                <Route exact path="/">
+                    <Header languages={managedContent.languages} logo="/tinyHomesLogo.png" />
+                </Route>
+                <div className = "App">
+                    <h1> Fetch data from an api in react </h1>  {
+                        itemsArray.map((item) => ( 
+                        <ol >
+                            User_Name: { item.data.products[0].sku },
+                            Name: {item.data.products[0].fields.Name} 
+                            </ol>
+                        ))
+                    }
+                </div>
+            </Router>
         );
   }
 }
