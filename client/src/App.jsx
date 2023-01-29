@@ -36,7 +36,7 @@ class App extends React.Component {
    */
   componentDidMount() {
     fetch(
-    "https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}")
+    "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
         .then((res) => res.json())
         .then((json) => {
             console.log(JSON.stringify(json));
@@ -61,10 +61,8 @@ class App extends React.Component {
             <div className = "App">
                 <h1> Fetch data from an api in react </h1>  {
                     items.map((item) => ( 
-                    <ol key = { item.id } >
-                        User_Name: { item.username }, 
-                        Full_Name: { item.name }, 
-                        User_Email: { item.email } 
+                    <ol >
+                        User_Name: { item.data.products[0].sku }
                         </ol>
                     ))
                 }
