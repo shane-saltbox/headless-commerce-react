@@ -13,6 +13,30 @@ class AddToCart extends React.Component {
   constructor(props) {
     super(props);
 
+    /*
+     * EVENT HANDLERS
+     */
+
+    this.handleClick = (event) => {
+        const {
+          availableSubId,
+          callback,
+          disabled,
+          label,
+        } = this.props;
+        const { checked } = this.state;
+  
+        this.setState({ checked: !checked }, () => {
+          if (!checked) {
+            $(`#collapse_${availableSubId}`).collapse('show');
+          } else {
+            $(`#collapse_${availableSubId}`).collapse('hide');
+          }
+  
+          callback(event, this.props, this.state);
+        });
+      };
+
   }
 
   /*
@@ -33,7 +57,7 @@ class AddToCart extends React.Component {
 
     return (
       <div className="">
-          <button>Add To Cart</button>
+          <button className='btn btn-large' type="button" onClick={this.handleClick}>Add To Cart</button>
       </div>
     );
   }

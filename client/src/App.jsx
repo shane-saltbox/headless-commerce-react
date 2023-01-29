@@ -21,6 +21,7 @@ class App extends React.Component {
         items: [],
         DataisLoaded: false,
         productFields: [],
+        cartItems: [],
         productContext: {
             sku: null,
             effectiveAccountId: null,
@@ -31,6 +32,18 @@ class App extends React.Component {
     this.urlParams = new URLSearchParams(window.location.search);
     this.sku = this.urlParams.get('sku');
     this.effectiveAccountId = this.urlParams.get('effectiveAccountId');
+
+    /*
+     * EVENT HANDLERS
+     */
+
+    this.onClickButton = (event, switchProps, switchState) => {
+        console.log('add to cart clicked');
+        this.setState({ cartItems: newFieldGroups });
+
+        const newCartItems = cloneDeep(cartItems);
+        this.setState({ cartItems: newCartItems });
+      };
 
   }
 
@@ -89,7 +102,7 @@ class App extends React.Component {
 
         productAddToCart = itemsArray.map((item) => {
             let productAddToCart = [];
-            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" />
+            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" callback={this.onClickButton} />
 
             return productAddToCart;
         });
