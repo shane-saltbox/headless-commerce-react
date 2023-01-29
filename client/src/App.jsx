@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { isEqual, merge } from 'lodash';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -29,22 +29,26 @@ class App extends React.Component {
 
     this.wsEndpoint = new MyProductService(this.sku, this.effectiveAccountId, '/api',);
 
-    async function fetchData() {
-        const data = await fetch(
-            "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT")
-                
-        data.json();
-
-        this.setState({
-            items: data,
-            DataisLoaded: true
-        });
-        return data.data;
-    }
-
     useEffect(() => {
+        const url = "https://headless-commerce.herokuapp.com/api/productDetail?sku=800984&effectiveAccountId=0015e00000MMkzQAAT";
+
+        const fetchData = async () => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            console.log(json);
+            this.setState({
+                items: json,
+                DataisLoaded: true
+            });
+        } catch (error) {
+            console.log("error", error);
+        }
+        };
+
         fetchData();
-      },[])
+    }, []);
+
   }
 
 
@@ -52,7 +56,7 @@ class App extends React.Component {
    * LIFECYCLE METHODS
    */
     componentDidMount() {
-        
+       
     }
     
 
@@ -66,8 +70,9 @@ class App extends React.Component {
     itemsArray.push(items);
     console.log('##DEBUG itemsArray: '+itemsArray);
     
-        
-        const productFields = itemsArray.map((item) => {
+    let productFields;
+    if(items){
+        productFields = itemsArray.map((item) => {
 
             let productDetail = null;
             console.log('##DEBUG item: '+item);
@@ -79,6 +84,7 @@ class App extends React.Component {
         
             return productDetail;
         });
+    }
     
         if (!DataisLoaded) return <div>
             <Skeleton height={52} width={75} /><h1> Pleses wait some time.... </h1> </div> ;
