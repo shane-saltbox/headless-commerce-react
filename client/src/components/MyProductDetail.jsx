@@ -105,9 +105,9 @@ class MyProduct extends React.Component {
 
         let fieldDisplay = null;
 
-        const result = productFieldsArray.map((productAttribute, index) => {
+        /* const result = productFieldsArray.map((productAttribute, index) => {
             return fieldDisplay = 'NAME: '+productAttribute.data.products[0].sku;
-        });
+        }); */
 
         /* if(productFields.length){
             console.log('inside of length if statement');
