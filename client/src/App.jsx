@@ -86,13 +86,13 @@ class App extends React.Component {
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
             <div className="container-lg pt-5">
-                    <div className="row">
+                    <div className="row" style="padding-top:100px">
                     <Route exact path="/">
-                        <div className="col-lg-3">
+                        <div className="col-lg-4">
                             <Skeleton />
                         </div>
                     </Route>
-                        <div className="col-lg-9">
+                        <div className="col-lg-8">
                             <Skeleton />
                         </div>
                     </div>
@@ -106,13 +106,13 @@ class App extends React.Component {
                     <Header logo="/tinyHomesLogo.png" />
                 </Route>
                 <div className="container-lg pt-5">
-                    <div className="row">
+                    <div className="row" style="padding-top:100px">
                     <Route exact path="/">
-                        <div className="col-lg-3">
+                        <div className="col-lg-4">
                         <ProductImage  />
                         </div>
                     </Route>
-                        <div className="col-lg-9">
+                        <div className="col-lg-8">
                             {productFields}
                         </div>
                     </div>
