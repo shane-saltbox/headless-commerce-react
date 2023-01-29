@@ -36,9 +36,10 @@ class App extends React.Component {
    */
   componentDidMount() {
     fetch(
-    "https://jsonplaceholder.typicode.com/users")
+    "https://headless-commerce.herokuapp.com/api/productDetail?sku=${this.sku}&effectiveAccountId=${this.effectiveAccountId}")
         .then((res) => res.json())
         .then((json) => {
+            console.log(JSON.stringify(json));
             this.setState({
                 items: json,
                 DataisLoaded: true
