@@ -65,20 +65,24 @@ class App extends React.Component {
     console.log('##DEBUG itemsArray: '+itemsArray);
     
     let productFields;
+    let productImage;
     if(DataisLoaded){
         productFields = itemsArray.map((item) => {
 
-            let productDetail = {
-                fields: null,
-                image: null
-            };
-            console.log('##DEBUG item: '+item);
+            let productDetail = [];
 
             productDetail.fields = <ProductFields productSku={item.data.products[0].sku} productName={item.data.products[0].fields.Name} productDesc={item.data.products[0].fields.Description} />
-            productDetail.image = <ProductImage productImage={item.data.products[0].defaultImage.url} />
-
-            console.log('##DEBUG productDetail: '+productDetail);
+            
             return productDetail;
+        });
+
+        productImage = itemsArray.map((item) => {
+
+            let productImage = [];
+
+            productImage = <ProductImage productImage={item.data.products[0].defaultImage.url} />
+
+            return productImage;
         });
     }
     
@@ -114,11 +118,11 @@ class App extends React.Component {
                         <div className="row topRow">
                         <Route exact path="/">
                             <div className="col-lg-4">
-                                {productFields.image}
+                                {productImage}
                             </div>
                         </Route>
                             <div className="col-lg-8">
-                                {productFields.fields}
+                                {productFields}
                             </div>
                         </div>
                     </div>  
