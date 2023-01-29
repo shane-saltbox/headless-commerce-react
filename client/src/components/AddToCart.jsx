@@ -54,15 +54,11 @@ class AddToCart extends React.Component {
     return (
       <div>
             <input
+                className="form-control"
                 type="text"
                 onChange={this.saveInput}
             />
-            <button className="btn btn-primary" onClick={this.addNewItem}> Add Item </button>
-            <ol>
-                {this.state.cartItems.map((subItems, sIndex) => {
-                    return <li key={sIndex}> {subItems}</li>
-                })}
-            </ol>
+            <button className="btn btn-lg btn-primary" onClick={this.addNewItem}> Add Item </button>
       </div>
     );
   }

@@ -125,7 +125,7 @@ class App extends React.Component {
         return (
             <Router>
                 <Route exact path="/">
-                    <Header logo="/tinyHomesLogo.png" />
+                    <Header logo="/tinyHomesLogo.png" cartItems={cartItems} />
                 </Route>
                 <main>
                     <div className="container-lg pt-5">

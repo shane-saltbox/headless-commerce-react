@@ -48,7 +48,7 @@ class Header extends React.Component {
     const { value } = this.context;
     const {
       logo,
-      cart
+      cartItems
     } = this.props;
 
 
@@ -59,9 +59,9 @@ class Header extends React.Component {
             {logo ? <img className="header-logo" src={logo} alt="" /> : <Skeleton height={52} width={75} />}
           </a>
           <div className="dropdown  header-locale">
-            {cart ? (
+            {cartItems ? (
               <>
-                <p>Cart</p>
+                <p>Cart ({cartItems})</p>
               </>
             ) : <Skeleton height={45} width={75} />}
           </div>
@@ -79,7 +79,7 @@ Header.defaultProps = {
 
 Header.propTypes = {
   logo: PropTypes.string.isRequired,
-  cart: PropTypes.string.isRequired,
+  cartItems: PropTypes.string.isRequired,
 };
 
 export default Header;
