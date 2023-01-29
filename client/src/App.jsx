@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AppContext from './AppContext';
 
-import ProductService from './services/product-service';
+import MyProductService from './services/product-service';
 import {
   Header,
   Main
@@ -24,7 +24,7 @@ class App extends React.Component {
         },
     };
 
-    this.wsEndpoint = new ProductService(null, null, '/api');
+    this.wsEndpoint = new MyProductService(null, null, '/api');
 
     /*
     * HELPER METHODS
