@@ -52,13 +52,17 @@ class AddToCart extends React.Component {
     } = this.props;
 
     return (
-      <div>
-            <input
-                className="form-control"
-                type="text"
-                onChange={this.saveInput}
-            />
-            <button className="btn btn-lg btn-primary" onClick={this.addNewItem}> Add Item </button>
+      <div className='row'>
+            <div className='col-lg-1'>
+                <input
+                    className="form-control"
+                    type="text"
+                    onChange={this.saveInput}
+                />
+            </div>
+            <div className='col-lg-1'>
+                <button className="btn btn-lg btn-primary" onClick={this.addNewItem}> Add Item </button>
+            </div>
       </div>
     );
   }

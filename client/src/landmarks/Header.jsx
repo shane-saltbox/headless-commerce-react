@@ -56,14 +56,14 @@ class Header extends React.Component {
       <header>
         <div className="container">
           <a aria-label="Home" rel="noopener noreferrer" role="button" target="_blank">
-            {logo ? <img className="header-logo" src={logo} alt="" /> : <Skeleton height={52} width={75} />}
+            {logo ? <img className="header-logo" src="https://headless-commerce.herokuapp.com/images/tinyHomesLogo.png" alt="" /> : <Skeleton height={52} width={75} />}
           </a>
           <div className="dropdown  header-locale">
-            <i className="pe-7s-shopbag" />
+          <i class="fa-light fa-bag-shopping"></i>
             <span className="count-style">
               {cartItems ? (
                 <>
-                  <p>Cart ({cartItems})</p>
+                  <p>({cartItems})</p>
                 </>
               ) : <Skeleton height={45} width={75} />}
             </span>
