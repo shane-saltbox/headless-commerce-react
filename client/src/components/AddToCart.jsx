@@ -53,11 +53,13 @@ class AddToCart extends React.Component {
 
     return (
       <div className='row'>
-            <div className='col-lg-1'>
+            <div className='col-lg-3'>
                 <input
                     className="form-control"
                     type="text"
                     onChange={this.saveInput}
+                    placeholder="Quantity"
+                    style={{height:52}}
                 />
             </div>
             <div className='col-lg-1'>
