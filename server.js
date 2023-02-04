@@ -52,11 +52,8 @@ app.use((error, req, res, next) => {
 /*
  * IMPORT ROUTES
  */
-require('./routes/inventory')(app, debugLogger);
-require('./routes/order')(app, debugLogger);
-require('./routes/checkoutDiscount')(app, debugLogger);
-require('./routes/sso')(app, debugLogger);
 require('./routes/productDetail')(app, debugLogger);
+require('./routes/cart')(app, debugLogger);
 
 // Catch landing page so it isn't served as a static file.
 app.get('/', (req, res) => {
