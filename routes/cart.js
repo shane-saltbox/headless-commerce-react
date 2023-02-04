@@ -13,12 +13,12 @@ module.exports = function(app, debugLogger) {
    * GET (Read)
    */
   app.get('/api/cart', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_SITE_URL, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    try {
+    //try {
         // Make SOAP auth call for accessToken
-        const soapAuthUrl = SF_LOGIN_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
             <SOAP-ENV:Header>
@@ -51,10 +51,6 @@ module.exports = function(app, debugLogger) {
                 'Content-Type' : 'application/json',
                 'Authorization': 'Bearer '+soapAuth.sessionId
             },
-            params: {
-                effectiveAccountId: effectiveAccountId,
-                skus: sku
-            },
           }
 
         console.log('##DEBUG config: '+JSON.stringify(config));
@@ -62,15 +58,11 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG cartRes: '+cartRes);
 
         // Get Cart Items
-        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartRes.data.cartId+'/cart-items';
         const cartItemConfig = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
-            },
-            params: {
-                effectiveAccountId: effectiveAccountId,
-                skus: sku
+                'Authorization': 'Bearer '+soapAuth.sessionId
             },
           }
 
@@ -93,7 +85,7 @@ module.exports = function(app, debugLogger) {
 
         res.status(200).send(response);
 
-    } catch (error) {
+    /* } catch (error) {
       const { id } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -104,7 +96,7 @@ module.exports = function(app, debugLogger) {
       if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    }
+    } */
   });
 
   /*
