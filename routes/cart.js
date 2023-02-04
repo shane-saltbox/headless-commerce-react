@@ -3,6 +3,7 @@ const randomstring = require('randomstring');
 const uuid = require('uuid');
 var jsforce = require('jsforce');
 const axios = require('axios');
+const parseString = require('xml2js');
 
 const CONSTANTS = require('../constants');
 
@@ -40,7 +41,8 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
-        console.log('##DEBUG soapAuth: '+JSON.stringify(soapAuth));
+        const auth = await parseString(soapAuth);
+        console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
         // Get Cart Id
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
