@@ -6,7 +6,8 @@ const requiredEnvVars = [
     'SF_CLIENT_ID',
     'SF_CLIENT_SECRET',
     'SF_LOGIN_URL',
-    'SF_USERNAME'
+    'SF_USERNAME',
+    'ORG_ID'
 ];
 requiredEnvVars.forEach((envVar) => {
     if (!process.env[envVar]) {
@@ -22,7 +23,8 @@ const salesforce = {
     clientSecret: process.env.SF_CLIENT_SECRET,
     loginUrl: process.env.SF_LOGIN_URL,
     username: process.env.SF_USERNAME,
-    apiVersion: process.env.SF_API_VERSION || defaultSalesforceApiVersion
+    apiVersion: process.env.SF_API_VERSION || defaultSalesforceApiVersion,
+    org_id: process.env.ORG_ID,
 };
 
 module.exports = {
