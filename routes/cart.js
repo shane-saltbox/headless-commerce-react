@@ -44,7 +44,7 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG soapAuth.data: '+soapAuth.data);
         const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
-        console.log('##DEBUG soapAuth sessionId: '+JSON.stringify(auth['soapenv:Envelope']['soapenv:Body']['loginResponse']['result']['sessionId']));
+        console.log('##DEBUG soapAuth sessionId: '+JSON.stringify(auth['soapenv:Envelope']['soapenv:Body'].loginResponse.result.sessionId));
 
         // Get Cart Id
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
@@ -269,25 +269,37 @@ module.exports = function(app, debugLogger) {
         }
 
         // get cart item from product id
+        // Get Cart Items
+        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartRes.data.cartId+'/cart-items';
+        const cartItemConfig = {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': 'Bearer '+soapAuth.sessionId
+            },
+          }
 
-        // Post Updated Items
-        const cartAddUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items';
+        console.log('##DEBUG config: '+JSON.stringify(config));
+        const cartItemRes = await axios.get(cartItemUrl, cartItemConfig);
+        console.log('##DEBUG cartItemRes: '+cartItemRes);
+
+        // get cartItemId from the cartItemRes
+
+        // Patch Updated Items
+        const cartUpdateItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items/'+cartItemId;
           
-        let cartAddConfig = {
+        let cartUpdateItemConfig = {
             headers: {
                 'Content-Type' : 'application/json',
                 'Authorization': 'Bearer '+conn.accessToken
             },
           }
 
-        const cartAddBody = {
-            productId: productId,
-            quantity: quantity,
-            type: 'Product'
+        const cartUpdateItemBody = {
+            quantity: quantity
         }
 
         console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
-        const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
+        const cartUpdateItemRes = await axios.get(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
         console.log('##DEBUG cartAddRes: '+cartAddRes);
 
         if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Insert new cart items', cartAddRes.data);
