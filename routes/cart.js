@@ -3,7 +3,7 @@ const randomstring = require('randomstring');
 const uuid = require('uuid');
 var jsforce = require('jsforce');
 const axios = require('axios');
-const parseString = require('xml2js');
+const parseString = require('xml-js');
 
 const CONSTANTS = require('../constants');
 
@@ -41,7 +41,7 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
-        const auth = await parseString(soapAuth);
+        const auth = parseString.xml2json(soapAuth, { compact: true, spaces: 4 });
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
         // Get Cart Id
