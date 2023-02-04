@@ -16,7 +16,7 @@ module.exports = function(app, debugLogger) {
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
-        // made soap call for accessToken
+        // Make SOAP auth call for accessToken
         const soapAuthUrl = SF_LOGIN_URL+'/services/Soap/u/'+SF_API_VERSION;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
@@ -40,14 +40,14 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
-        console.log('##DEBUG soapAuth: '+soapAuth);
+        console.log('##DEBUG soapAuth: '+JSON.stringify(soapAuth));
 
-
+        // Get Cart Id
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
-        let config = {
+        const config = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
+                'Authorization': 'Bearer '+soapAuth.sessionId
             },
             params: {
                 effectiveAccountId: effectiveAccountId,
@@ -59,9 +59,26 @@ module.exports = function(app, debugLogger) {
         const cartRes = await axios.get(url, config);
         console.log('##DEBUG cartRes: '+cartRes);
 
-        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Get cart details.', cartRes);
+        // Get Cart Items
+        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+        const cartItemConfig = {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': 'Bearer '+conn.accessToken
+            },
+            params: {
+                effectiveAccountId: effectiveAccountId,
+                skus: sku
+            },
+          }
 
-        if (!productsRes) {
+        console.log('##DEBUG config: '+JSON.stringify(config));
+        const cartItemRes = await axios.get(cartItemUrl, cartItemConfig);
+        console.log('##DEBUG cartItemRes: '+cartItemRes);
+
+        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Get cart items.', cartItemRes);
+
+        if (!cartItemRes) {
             const error = new Error();
             error.message = 'Product not found.';
             error.status = 404;
@@ -69,7 +86,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        response.data = productsRes.data;
+        response.data = cartItemRes.data;
         response.success = true;
 
         res.status(200).send(response);
@@ -92,7 +109,7 @@ module.exports = function(app, debugLogger) {
    * PUT (Upsert)
    */
   app.patch('/api/cart', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
