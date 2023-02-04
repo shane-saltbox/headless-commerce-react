@@ -42,7 +42,7 @@ module.exports = function(app, debugLogger) {
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
         console.log('##DEBUG soapAuth.data: '+soapAuth.data);
-        const auth = await parseString.parseStringPromise(xml, { mergeAttrs: true })
+        const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
         // Get Cart Id
