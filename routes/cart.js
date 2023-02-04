@@ -42,7 +42,7 @@ module.exports = function(app, debugLogger) {
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
         console.log('##DEBUG soapAuth.data: '+soapAuth.data);
-        const auth = parseString.xml2json(soapAuth, { compact: true, spaces: 4 });
+        const auth = parseString.xml2json(soapAuth.data, { compact: true, spaces: 4 });
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
         // Get Cart Id
@@ -101,16 +101,16 @@ module.exports = function(app, debugLogger) {
   });
 
   /*
-   * PUT (Upsert)
+   * POST (Insert)
    */
-  app.patch('/api/cart', async function(req, res, next) {
+  app.post('/api/cart', async function(req, res, next) {
     const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
-        const { sku,effectiveAccountId } = req.query;
+        const { cartId, productId, quantity } = req.query;
 
-        if (!sku && !effectiveAccountId) {
+        if (!productId && !quantity) {
             const error = new Error();
             error.message = 'Required fields not found.';
             error.status = 206;
@@ -118,46 +118,47 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        // make soap call
+        // add session call
 
-        const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+        if (!cartId) {
+            // Get CartId
+            const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
           
-        let config = {
-            headers: {
-                'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
-            },
-            params: {
-                effectiveAccountId: effectiveAccountId,
-                skus: sku
-            },
-          }
-
-        console.log('##DEBUG config: '+JSON.stringify(config));
-        const cart = await axios.get(url, config);
-        console.log('##DEBUG cart: '+cart);
-
-        if(cart){
-            const urlCartItems = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active/cart-items';
-          
-            let configCartItems = {
+            let config = {
                 headers: {
                     'Content-Type' : 'application/json',
                     'Authorization': 'Bearer '+conn.accessToken
                 },
-                params: {
-                    effectiveAccountId: effectiveAccountId,
-                    skus: sku
-                },
             }
-            const cart = await axios.get(url, config);
-            console.log('##DEBUG cart: '+cart);
+
+            console.log('##DEBUG config: '+JSON.stringify(config));
+            const cart = await axios.post(url, config);
+            cartId = cart.data.cartId;
         }
 
+        // Post Updated Items
+        const cartAddUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items';
+          
+        let cartAddConfig = {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': 'Bearer '+conn.accessToken
+            },
+          }
 
-        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Get product details.', productsRes);
+        const cartAddBody = {
+            productId: productId,
+            quantity: quantity,
+            type: 'Product'
+        }
 
-        if (!productsRes) {
+        console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
+        const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
+        console.log('##DEBUG cartAddRes: '+cartAddRes);
+
+        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Insert new cart items', cartAddRes.data);
+
+        if (!cartAddRes) {
             const error = new Error();
             error.message = 'Product not found.';
             error.status = 404;
@@ -165,7 +166,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        response.data = productsRes.data;
+        response.data = cartAddRes.data;
         response.success = true;
 
         res.status(200).send(response);
