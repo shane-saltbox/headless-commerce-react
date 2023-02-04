@@ -3,7 +3,7 @@ const randomstring = require('randomstring');
 const uuid = require('uuid');
 var jsforce = require('jsforce');
 const axios = require('axios');
-const parseString = require('xml-js');
+const parseString = require('xml2js');
 
 const CONSTANTS = require('../constants');
 
@@ -42,7 +42,7 @@ module.exports = function(app, debugLogger) {
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
         console.log('##DEBUG soapAuth.data: '+soapAuth.data);
-        const auth = parseString.xml2json(soapAuth.data, { compact: true, spaces: 4 });
+        const auth = await parseString.parseStringPromise(xml, { mergeAttrs: true })
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
         // Get Cart Id
@@ -118,7 +118,30 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        // add session call
+        // Make SOAP auth call for accessToken
+        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
+            <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
+            <SOAP-ENV:Header>
+                <ns1:LoginScopeHeader>
+                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                </ns1:LoginScopeHeader>
+            </SOAP-ENV:Header>
+            <SOAP-ENV:Body>
+                <ns1:login>
+                <ns1:username>`+SF_USERNAME+`</ns1:username>
+                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                </ns1:login>
+            </SOAP-ENV:Body>
+            </SOAP-ENV:Envelope>`;
+        const soapConfig = {
+            headers: {
+                'Content-Type' : 'text/xml',
+                'SOAPAction': 'login',
+                'charset': 'UTF-8'
+            }
+          }
+        const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
 
         if (!cartId) {
             // Get CartId
@@ -172,14 +195,14 @@ module.exports = function(app, debugLogger) {
         res.status(200).send(response);
 
     } catch (error) {
-      const { id } = req.query;
+      const { cartId, productId, quantity } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
       response.error.message = error.message || 'Internal Server Error';
       response.error.status = error.status || 500;
       response.success = false;
 
-      if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Exception', response);
+      if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', cartId, 'Exception', response);
 
       res.status(error.status || 500).send(response);
     }
