@@ -44,14 +44,15 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG soapAuth.data: '+soapAuth.data);
         const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
-        console.log('##DEBUG soapAuth sessionId: '+JSON.stringify(auth['soapenv:Envelope']['soapenv:Body'].loginResponse.result.sessionId));
+        console.log('##DEBUG soapAuth sessionId: '+JSON.stringify(auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0]));
+        const accessToken = auyh['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         // Get Cart Id
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
         const config = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+soapAuth.sessionId
+                'Authorization': 'Bearer '+accessToken
             },
           }
 
@@ -64,7 +65,7 @@ module.exports = function(app, debugLogger) {
         const cartItemConfig = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+soapAuth.sessionId
+                'Authorization': 'Bearer '+accessToken
             },
           }
 
