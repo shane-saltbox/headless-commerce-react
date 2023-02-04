@@ -41,6 +41,7 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
+        console.log('##DEBUG soapAuth.data: '+soapAuth.data);
         const auth = parseString.xml2json(soapAuth, { compact: true, spaces: 4 });
         console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
 
