@@ -12,7 +12,7 @@ module.exports = function(app, debugLogger) {
    * GET (Read)
    */
   app.get('/api/productDetail', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, ORG_ID, SF_SITE_URL, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
