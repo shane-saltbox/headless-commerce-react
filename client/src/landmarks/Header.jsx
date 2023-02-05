@@ -67,7 +67,6 @@ class Header extends React.Component {
             <span className="count-style">
               {cartItems ? (
                 <>
-                  <i className="pe-7s-shopbag" />
                   <button className="icon-cart" >
                     <i className="pe-7s-shopbag" />
                     <span className="count-style">
