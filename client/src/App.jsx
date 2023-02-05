@@ -61,6 +61,25 @@ class App extends React.Component {
         };
 
         fetchData();
+
+        // fetch cart data
+        const cartUrl = `https://headless-commerce.herokuapp.com/api/cart`;
+
+        const fetchCartData = async () => {
+        try {
+            const response = await fetch(cartUrl);
+            const json = await response.json();
+            console.log(json.data.cartItems);
+            this.setState({
+                cartItems: json.data.cartItems,
+                DataisLoaded: true
+            });
+        } catch (error) {
+            console.log("error cartItems", error);
+        }
+        };
+
+        fetchCartData();
     }
     
 
