@@ -25,6 +25,12 @@ class MenuCart extends React.Component {
   }  
 
   render() {
+    const { value } = this.context;
+    const {
+      logo,
+      cartItems
+    } = this.props;
+    
     return (
       <div className="shopping-cart-content">
         {cartItems && cartItems.length > 0 ? (
