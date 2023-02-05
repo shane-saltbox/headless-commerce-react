@@ -40,7 +40,7 @@ class MenuCart extends React.Component {
                 const discountedPrice = item.price;
                 const finalProductPrice = item.price;
                 const finalDiscountedPrice = discountedPrice;
-
+                console.log('ITEM: '+JSON.stringify(item));
 
                 return (
                   <li className="single-shopping-cart" key={item.cartItemId}>
