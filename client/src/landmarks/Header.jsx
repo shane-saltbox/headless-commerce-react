@@ -3,7 +3,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
-import MenuCart from "../components/MenuCart";
+import { MenuCart } from "./components";
 
 import AppContext from '../AppContext';
 
@@ -74,7 +74,7 @@ class Header extends React.Component {
                     </span>
                   </button>
                   {/* menu cart */}
-                  
+                  <MenuCart />
                 </>
               ) : <Skeleton height={45} width={75} />}
             </span>
