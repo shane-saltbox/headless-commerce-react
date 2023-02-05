@@ -99,7 +99,7 @@ class MenuCart extends React.Component {
               <h4>
                 Total :{" "}
                 <span className="shop-total">
-                  {'$' + cartTotalPrice.toFixed(2)}
+                  {/* {'$' + cartTotalPrice.toFixed(2)} */}
                 </span>
               </h4>
             </div>
