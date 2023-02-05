@@ -3,7 +3,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
-import MenuCart from "../componets/MenuCart";
+import MenuCart from "../components/MenuCart";
 
 import AppContext from '../AppContext';
 
