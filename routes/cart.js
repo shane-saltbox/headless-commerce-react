@@ -103,7 +103,7 @@ module.exports = function(app, debugLogger) {
     const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    try {
+    //try {
         const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
@@ -192,7 +192,7 @@ module.exports = function(app, debugLogger) {
 
         res.status(200).send(response);
 
-    } catch (error) {
+    /* } catch (error) {
       const { cartId, productId, quantity } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -203,7 +203,7 @@ module.exports = function(app, debugLogger) {
       if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', cartId, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    }
+    } */
   });
 
   /*
