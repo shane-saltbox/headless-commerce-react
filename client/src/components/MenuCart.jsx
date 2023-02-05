@@ -33,10 +33,10 @@ class MenuCart extends React.Component {
               {cartItems.map((item) => {
                 const discountedPrice = item.price;
                 const finalProductPrice = (
-                  item.price * currency.currencyRate
+                  item.price 
                 ).toFixed(2);
                 const finalDiscountedPrice = (
-                  discountedPrice * currency.currencyRate
+                  discountedPrice 
                 ).toFixed(2);
 
                 discountedPrice != null
@@ -66,8 +66,8 @@ class MenuCart extends React.Component {
                       <h6>Qty: {item.quantity}</h6>
                       <span>
                         {discountedPrice !== null
-                          ? currency.currencySymbol + finalDiscountedPrice
-                          : currency.currencySymbol + finalProductPrice}
+                          ? '$' + finalDiscountedPrice
+                          : '$' + finalProductPrice}
                       </span>
                       {item.selectedProductColor &&
                       item.selectedProductSize ? (
@@ -80,7 +80,7 @@ class MenuCart extends React.Component {
                       )}
                     </div>
                     <div className="shopping-cart-delete">
-                      <button onClick={() => dispatch(deleteFromCart(item.cartItemId))}>
+                      <button>
                         <i className="fa fa-times-circle" />
                       </button>
                     </div>
@@ -92,7 +92,7 @@ class MenuCart extends React.Component {
               <h4>
                 Total :{" "}
                 <span className="shop-total">
-                  {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                  {'$' + cartTotalPrice.toFixed(2)}
                 </span>
               </h4>
             </div>

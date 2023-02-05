@@ -74,7 +74,7 @@ class Header extends React.Component {
                     </span>
                   </button>
                   {/* menu cart */}
-                  <MenuCart />
+                  <MenuCart cartItems={cartItems} />
                 </>
               ) : <Skeleton height={45} width={75} />}
             </span>
