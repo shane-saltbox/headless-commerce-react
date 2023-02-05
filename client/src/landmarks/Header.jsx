@@ -3,6 +3,7 @@ import React from 'react';
 import { isEqual } from 'lodash';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import MenuCart from "../componets/MenuCart";
 
 import AppContext from '../AppContext';
 
@@ -18,7 +19,7 @@ class Header extends React.Component {
      * EVENT HANDLERS
      */
 
-    this.handleClick = (event, language) => {
+    /* this.handleClick = (event, language) => {
       const { setValue, value } = this.context;
 
       event.preventDefault();
@@ -33,7 +34,7 @@ class Header extends React.Component {
         { ...value.theme },
         value.wsStatus,
       );
-    };
+    }; */
   }
 
   /*
@@ -43,6 +44,10 @@ class Header extends React.Component {
   componentDidUpdate(prevProps) {
     
   }
+
+  handleClick = e => {
+    e.currentTarget.nextSibling.classList.toggle("active");
+  };
 
   render() {
     const { value } = this.context;
@@ -62,7 +67,15 @@ class Header extends React.Component {
             <span className="count-style">
               {cartItems ? (
                 <>
-                  <i className="pe-7s-shopbag" />({cartItems})
+                  <i className="pe-7s-shopbag" />
+                  <button className="icon-cart" onClick={e => handleClick(e)}>
+                    <i className="pe-7s-shopbag" />
+                    <span className="count-style">
+                      {cartItems && cartItems.length ? cartItems.length : 0}
+                    </span>
+                  </button>
+                  {/* menu cart */}
+                  <MenuCart />
                 </>
               ) : <Skeleton height={45} width={75} />}
             </span>

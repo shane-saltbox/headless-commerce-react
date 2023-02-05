@@ -104,6 +104,7 @@ module.exports = function(app, debugLogger) {
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     //try {
+        console.log(JSON.stringify(req.body));
         const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
