@@ -37,6 +37,7 @@ class MenuCart extends React.Component {
           <>
             <ul>
               {cartItems.map((item) => {
+                const cartTotalPrice = null;
                 const discountedPrice = item.price;
                 const finalProductPrice = (
                   item.price 
