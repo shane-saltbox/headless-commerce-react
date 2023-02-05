@@ -1,0 +1,42 @@
+.shopping-cart-content {
+    position: absolute;
+    z-index: 9999;
+    top: 190%;
+    right: 0;
+
+    visibility: hidden;
+
+    width: 340px;
+    padding: 10px 35px 10px;
+
+    transition: all 0.5s ease 0s;
+    transform: rotateX(90deg);
+    transform-origin: center top 0;
+
+    opacity: 0;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    background: #fff none repeat scroll 0 0;
+}
+.shopping-cart-img {
+    flex: 0 0 82px;
+
+    margin-right: 15px;
+  }
+.shopping-cart-title h4 {
+    font-size: 15px;
+    line-height: 16px;
+
+    margin: 0;
+    margin-right: 20px;
+}
+.shopping-cart-title h4 a {
+    line-height: 1.2;
+
+    color: #000;
+}
+.shopping-cart-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
