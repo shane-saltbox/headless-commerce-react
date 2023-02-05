@@ -37,18 +37,18 @@ class MenuCart extends React.Component {
           <>
             <ul>
               {cartItems.map((item) => {
-                const discountedPrice = item.price;
-                const finalProductPrice = item.price;
+                const discountedPrice = item.cartItem.salesPrice;
+                const finalProductPrice = item.cartItem.salesPrice;
                 const finalDiscountedPrice = discountedPrice;
                 console.log('ITEM: '+JSON.stringify(item));
 
                 return (
-                  <li className="single-shopping-cart" key={item.cartItemId}>
+                  <li className="single-shopping-cart" key={item.cartItem.cartItemId}>
                     <div className="shopping-cart-img">
-                      <Link to={process.env.PUBLIC_URL + "/product/" + item.id}>
+                      <Link to={process.env.PUBLIC_URL + "/product/" + item.cartItem.productDetails.productId}>
                         <img
                           alt=""
-                          src={item.productDetails.thumbnailImage.url}
+                          src={item.cartItem.productDetails.thumbnailImage.url}
                           className="img-fluid"
                         />
                       </Link>
@@ -56,13 +56,13 @@ class MenuCart extends React.Component {
                     <div className="shopping-cart-title">
                       <h4>
                         <Link
-                          to={process.env.PUBLIC_URL + "/product/" + item.id}
+                          to={process.env.PUBLIC_URL + "/product/" + item.cartItem.cartItemId}
                         >
                           {" "}
                           {item.name}{" "}
                         </Link>
                       </h4>
-                      <h6>Qty: {item.quantity}</h6>
+                      <h6>Qty: {item.cartItem.quantity}</h6>
                       <span>
                         {discountedPrice !== null
                           ? '$' + finalDiscountedPrice
