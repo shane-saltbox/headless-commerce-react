@@ -16,7 +16,7 @@ module.exports = function(app, debugLogger) {
     const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_SITE_URL, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    //try {
+    try {
         // Make SOAP auth call for accessToken
         const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
@@ -41,10 +41,7 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
-        console.log('##DEBUG soapAuth.data: '+soapAuth.data);
         const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
-        console.log('##DEBUG soapAuth: '+JSON.stringify(auth));
-        console.log('##DEBUG soapAuth sessionId: '+JSON.stringify(auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0]));
         const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         // Get Cart Id
@@ -88,7 +85,7 @@ module.exports = function(app, debugLogger) {
 
         res.status(200).send(response);
 
-    /* } catch (error) {
+    } catch (error) {
       const { id } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -96,10 +93,10 @@ module.exports = function(app, debugLogger) {
       response.error.status = error.status || 500;
       response.success = false;
 
-      if (DEBUG === 'true') debugLogger.info('/api/productDetail', 'GET', id, 'Exception', response);
+      if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    } */
+    }
   });
 
   /*
@@ -144,6 +141,8 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
+        const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
+        const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         if (!cartId) {
             // Get CartId
@@ -152,7 +151,7 @@ module.exports = function(app, debugLogger) {
             let config = {
                 headers: {
                     'Content-Type' : 'application/json',
-                    'Authorization': 'Bearer '+conn.accessToken
+                    'Authorization': 'Bearer '+accessToken
                 },
             }
 
@@ -181,7 +180,7 @@ module.exports = function(app, debugLogger) {
         const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
         console.log('##DEBUG cartAddRes: '+cartAddRes);
 
-        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Insert new cart items', cartAddRes.data);
+        if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', id, 'Insert new cart items', cartAddRes.data);
 
         if (!cartAddRes) {
             const error = new Error();
@@ -252,6 +251,8 @@ module.exports = function(app, debugLogger) {
             }
           }
         const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
+        const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
+        const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         if (!cartId) {
             // Get CartId
@@ -260,7 +261,7 @@ module.exports = function(app, debugLogger) {
             let config = {
                 headers: {
                     'Content-Type' : 'application/json',
-                    'Authorization': 'Bearer '+conn.accessToken
+                    'Authorization': 'Bearer '+accessToken
                 },
             }
 
@@ -269,7 +270,6 @@ module.exports = function(app, debugLogger) {
             cartId = cart.data.cartId;
         }
 
-        // get cart item from product id
         // Get Cart Items
         const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartRes.data.cartId+'/cart-items';
         const cartItemConfig = {
@@ -283,29 +283,43 @@ module.exports = function(app, debugLogger) {
         const cartItemRes = await axios.get(cartItemUrl, cartItemConfig);
         console.log('##DEBUG cartItemRes: '+cartItemRes);
 
-        // get cartItemId from the cartItemRes
-
-        // Patch Updated Items
-        const cartUpdateItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items/'+cartItemId;
-          
-        let cartUpdateItemConfig = {
-            headers: {
-                'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
-            },
+        // Find the cartItemId based on the product that is being requested to be updated
+        const cartItemId = null;
+        var items = cartItemRes.data.cartItems;
+        var found = items.find(e => e.cartItem.productId === productId);
+        // If a cartItemId was found then update the carItemId
+        if(found){
+            console.log('cartItemId: '+found.cartItem.cartItemId);
+            cartItemId = found.cartItem.cartItemId;
           }
 
-        const cartUpdateItemBody = {
-            quantity: quantity
+        const cartUpdateRes = null;
+
+        // Check to make sure we have the cart item id before trying to update
+        if(cartItemId){
+            // Patch Updated Items
+            const cartUpdateItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items/'+cartItemId;
+            
+            let cartUpdateItemConfig = {
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization': 'Bearer '+conn.accessToken
+                },
+            }
+
+            const cartUpdateItemBody = {
+                quantity: quantity
+            }
+
+            console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
+            const cartUpdateItemRes = await axios.get(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
+            console.log('##DEBUG cartAddRes: '+cartAddRes);
+            cartUpdateRes = true;
         }
 
-        console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
-        const cartUpdateItemRes = await axios.get(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
-        console.log('##DEBUG cartAddRes: '+cartAddRes);
+        if (DEBUG === 'true') debugLogger.info('/api/cart', 'PATCH', id, 'Update new cart items', cartUpdateRes);
 
-        if (DEBUG === 'true') debugLogger.info('/api/cart', 'GET', id, 'Insert new cart items', cartAddRes.data);
-
-        if (!cartAddRes) {
+        if (!cartUpdateRes) {
             const error = new Error();
             error.message = 'Product not found.';
             error.status = 404;
@@ -313,7 +327,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        response.data = cartAddRes.data;
+        response.data = cartUpdateRes;
         response.success = true;
 
         res.status(200).send(response);
@@ -326,7 +340,7 @@ module.exports = function(app, debugLogger) {
       response.error.status = error.status || 500;
       response.success = false;
 
-      if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', cartId, 'Exception', response);
+      if (DEBUG === 'true') debugLogger.info('/api/cart', 'PATCH', cartId, 'Exception', response);
 
       res.status(error.status || 500).send(response);
     }

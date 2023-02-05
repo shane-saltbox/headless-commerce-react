@@ -26,7 +26,7 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        var conn = new jsforce.Connection({
+        /* var conn = new jsforce.Connection({
             oauth2 : {
                 clientId : SF_CLIENT_ID,
                 clientSecret : SF_CLIENT_SECRET,
@@ -36,14 +36,41 @@ module.exports = function(app, debugLogger) {
 
         await conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
             if (err) { return console.error(err); }
-        });
+        }); */
+
+        // Make SOAP auth call for accessToken
+        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
+            <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
+            <SOAP-ENV:Header>
+                <ns1:LoginScopeHeader>
+                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                </ns1:LoginScopeHeader>
+            </SOAP-ENV:Header>
+            <SOAP-ENV:Body>
+                <ns1:login>
+                <ns1:username>`+SF_USERNAME+`</ns1:username>
+                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                </ns1:login>
+            </SOAP-ENV:Body>
+            </SOAP-ENV:Envelope>`;
+        const soapConfig = {
+            headers: {
+                'Content-Type' : 'text/xml',
+                'SOAPAction': 'login',
+                'charset': 'UTF-8'
+            }
+          }
+        const soapAuth = await axios.post(soapAuthUrl, soapAuthBody, soapConfig);
+        const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
+        const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/products';
           
         let config = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
+                'Authorization': 'Bearer '+accessToken
             },
             params: {
                 effectiveAccountId: effectiveAccountId,
