@@ -37,14 +37,10 @@ class MenuCart extends React.Component {
           <>
             <ul>
               {cartItems.map((item) => {
-                const cartTotalPrice = 0;
                 const discountedPrice = item.price;
                 const finalProductPrice = item.price;
                 const finalDiscountedPrice = discountedPrice;
 
-                discountedPrice != null
-                  ? (cartTotalPrice += finalDiscountedPrice * item.quantity)
-                  : (cartTotalPrice += finalProductPrice * item.quantity);
 
                 return (
                   <li className="single-shopping-cart" key={item.cartItemId}>
