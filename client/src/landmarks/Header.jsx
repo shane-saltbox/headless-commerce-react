@@ -68,7 +68,7 @@ class Header extends React.Component {
               {cartItems ? (
                 <>
                   <i className="pe-7s-shopbag" />
-                  <button className="icon-cart" onClick={e => handleClick(e)}>
+                  <button className="icon-cart" >
                     <i className="pe-7s-shopbag" />
                     <span className="count-style">
                       {cartItems && cartItems.length ? cartItems.length : 0}
