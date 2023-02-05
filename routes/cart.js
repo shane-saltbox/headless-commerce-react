@@ -104,7 +104,7 @@ module.exports = function(app, debugLogger) {
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
-        const { cartId, productId, quantity } = req.query;
+        const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
             const error = new Error();
@@ -214,7 +214,7 @@ module.exports = function(app, debugLogger) {
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
-        const { cartId, productId, quantity } = req.query;
+        const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
             const error = new Error();
