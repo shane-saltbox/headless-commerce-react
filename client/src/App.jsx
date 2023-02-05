@@ -71,8 +71,7 @@ class App extends React.Component {
             const json = await response.json();
             console.log(json.data.cartItems);
             this.setState({
-                cartItems: json.data.cartItems,
-                DataisLoaded: true
+                cartItems: json.data.cartItems
             });
         } catch (error) {
             console.log("error cartItems", error);
