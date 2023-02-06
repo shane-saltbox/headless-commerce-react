@@ -132,6 +132,7 @@ a.default-btn {
     line-height: 1;
     padding: 19px 50px 21px;
     text-transform: uppercase;
+    width: 100%;
 }
 .btn-hover a:hover, .btn-hover button:hover {
     border: 1px solid #37945d;

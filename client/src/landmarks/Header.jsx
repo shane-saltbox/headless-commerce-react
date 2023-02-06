@@ -19,22 +19,6 @@ class Header extends React.Component {
      * EVENT HANDLERS
      */
 
-    /* this.handleClick = (event, language) => {
-      const { setValue, value } = this.context;
-
-      event.preventDefault();
-
-
-      setValue(
-        { ...value.globalAlert },
-        { businessUnit: language.bu, language: language.lang },
-        value.roadblocked,
-        { ...value.settings },
-        { ...value.strings },
-        { ...value.theme },
-        value.wsStatus,
-      );
-    }; */
     this.handleClick = e => {
       e.currentTarget.nextSibling.classList.toggle("active");
     };
@@ -59,24 +43,36 @@ class Header extends React.Component {
     return (
       <header>
         <div className="container">
-          <a aria-label="Home" rel="noopener noreferrer" role="button" target="_blank">
-            {logo ? <img className="header-logo" src="https://headless-commerce.herokuapp.com/images/tinyHomesLogo.png" alt="" /> : <Skeleton height={52} width={75} />}
-          </a>
-          <div className="dropdown  header-locale">
-            <span className="count-style">
-              {cartItems ? (
-                <>
-                  <button className="icon-cart" onClick={e => this.handleClick(e)}>
-                    <i className="pe-7s-shopbag" />
-                    <span className="count-style">
-                      {cartItems && cartItems.length ? cartItems.length : 0}
-                    </span>
-                  </button>
-                  {/* menu cart */}
-                  <MenuCart cartItems={cartItems} />
-                </>
-              ) : <Skeleton height={45} width={75} />}
-            </span>
+          <div className="row">
+            <div className="col-xl-2 col-lg-2 col-md-6 col-4">
+              {/* header logo */}
+              <a aria-label="Home" rel="noopener noreferrer" role="button" target="_blank">
+                {logo ? <img className="header-logo" src="https://headless-commerce.herokuapp.com/images/tinyHomesLogo.png" alt="" /> : <Skeleton height={52} width={75} />}
+              </a>
+            </div>
+            <div className="col-xl-8 col-lg-8 d-none d-lg-block">
+              {/* Nav menu */}
+              <NavMenu />
+            </div>
+            <div className="col-xl-2 col-lg-2 col-md-6 col-8">
+              {/* Cart Icon */}
+              <div className="dropdown  header-locale">
+                <span className="count-style">
+                  {cartItems ? (
+                    <>
+                      <button className="icon-cart" onClick={e => this.handleClick(e)}>
+                        <i className="pe-7s-shopbag" />
+                        <span className="count-style">
+                          {cartItems && cartItems.length ? cartItems.length : 0}
+                        </span>
+                      </button>
+                      {/* menu cart */}
+                      <MenuCart cartItems={cartItems} />
+                    </>
+                  ) : <Skeleton height={45} width={75} />}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </header>
