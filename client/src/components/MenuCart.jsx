@@ -95,17 +95,14 @@ class MenuCart extends React.Component {
                 </span>
               </h4>
             </div>
-            {/* <div className="shopping-cart-btn btn-hover text-center">
-              <Link className="default-btn" to={process.env.PUBLIC_URL + "/cart"}>
-                view cart
-              </Link>
+            <div className="shopping-cart-btn btn-hover text-center">
               <Link
                 className="default-btn"
                 to={process.env.PUBLIC_URL + "/checkout"}
               >
                 checkout
               </Link>
-            </div> */}
+            </div>
           </>
         ) : (
           <p className="text-center">No items added to cart</p>

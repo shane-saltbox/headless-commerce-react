@@ -33,15 +33,17 @@
     margin-right: 15px;
   }
 .shopping-cart-title h4 {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 16px;
     margin: 0;
     margin-right: 20px;
+    text-align: left;
 }
 .shopping-cart-total h4 {
-    font-size: 14px;
+    font-size: 17px;
     margin-bottom: 17px;
     margin-top: 17px;
+    text-align: left;
 }
 .shopping-cart-content .shopping-cart-total h4 span {
     float: right;
@@ -53,6 +55,11 @@
 .shopping-cart-title h6 {
     font-size: 13px;
     margin: 5px 0 8px;
+    text-align: left;
+}
+.shopping-cart-title span {
+    text-align: left;
+    display: block;
 }
 .shopping-cart-delete {
     position: absolute;
@@ -60,7 +67,7 @@
     right: 0;
   }
 .shopping-cart-delete button {
-    color: #a749ff;
+    color: #37945d;
     font-size: 16px;
 }
 .shopping-cart-content ul li {
@@ -104,4 +111,8 @@ a.default-btn {
     line-height: 1;
     padding: 19px 50px 21px;
     text-transform: uppercase;
+}
+.btn-hover a:hover, .btn-hover button:hover {
+    border: 1px solid #37945d;
+    color: #fff;
 }
