@@ -100,7 +100,7 @@
     font-size: 23px;
 }
 
-.count-style span {
+.count-style span.count-style {
     background-color: #000;
     border-radius: 100%;
     color: #fff;
