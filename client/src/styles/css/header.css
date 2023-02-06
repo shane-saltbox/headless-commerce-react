@@ -75,3 +75,33 @@
     height: auto;
     max-width: 100%;
 }
+.shopping-cart-delete button {
+    background: transparent;
+    border: none;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+}
+.count-style button {
+    background: transparent;
+    border: none;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+}
+.shopping-cart-btn a {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding: 16px 40px 17px;
+}
+a.default-btn {
+    border: 1px solid #333;
+    color: #010101;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1;
+    padding: 19px 50px 21px;
+    text-transform: uppercase;
+}
