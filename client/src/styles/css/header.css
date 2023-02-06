@@ -114,6 +114,9 @@
     top: -9px;
     width: 21px;
 }
+.shopping-cart-btn {
+    width: 100%;
+}
 .shopping-cart-btn a {
     display: block;
     font-size: 14px;
@@ -133,6 +136,10 @@ a.default-btn {
 .btn-hover a:hover, .btn-hover button:hover {
     border: 1px solid #37945d;
     color: #fff;
+    background-color: #37945d;
+    isolation: isolate;
+    position: relative;
+    transition: all .5s ease-in-out 0s;
 }
 .active {
     opacity: 1;
