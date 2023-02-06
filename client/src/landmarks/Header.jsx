@@ -35,6 +35,9 @@ class Header extends React.Component {
         value.wsStatus,
       );
     }; */
+    this.handleClick = e => {
+      e.currentTarget.nextSibling.classList.toggle("active");
+    };
   }
 
   /*
@@ -44,10 +47,6 @@ class Header extends React.Component {
   componentDidUpdate(prevProps) {
     
   }
-
-  handleClick = e => {
-    e.currentTarget.nextSibling.classList.toggle("active");
-  };
 
   render() {
     const { value } = this.context;
@@ -67,7 +66,7 @@ class Header extends React.Component {
             <span className="count-style">
               {cartItems ? (
                 <>
-                  <button className="icon-cart" >
+                  <button className="icon-cart" onClick={e => this.handleClick(e)}>
                     <i className="pe-7s-shopbag" />
                     <span className="count-style">
                       {cartItems && cartItems.length ? cartItems.length : 0}
