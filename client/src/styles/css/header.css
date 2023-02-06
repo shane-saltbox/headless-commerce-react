@@ -99,7 +99,8 @@
 .pe-7s-shopbag {
     font-size: 23px;
 }
-span.count-style {
+
+.count-style span {
     background-color: #000;
     border-radius: 100%;
     color: #fff;
@@ -132,4 +133,10 @@ a.default-btn {
 .btn-hover a:hover, .btn-hover button:hover {
     border: 1px solid #37945d;
     color: #fff;
+}
+.active {
+    opacity: 1;
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    visibility: visible;
 }
