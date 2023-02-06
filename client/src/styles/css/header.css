@@ -18,6 +18,16 @@
     border-radius: 5px;
     background: #fff none repeat scroll 0 0;
 }
+.shopping-cart-content ul {
+    margin-right: -15px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 15px;
+    padding-top: 20px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
 .shopping-cart-img {
     flex: 0 0 82px;
     margin-right: 15px;

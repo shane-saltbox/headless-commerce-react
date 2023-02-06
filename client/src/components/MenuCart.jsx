@@ -59,7 +59,7 @@ class MenuCart extends React.Component {
                           to={process.env.PUBLIC_URL + "/product/" + item.cartItem.cartItemId}
                         >
                           {" "}
-                          {item.name}{" "}
+                          {item.cartItem.productDetails.name}{" "}
                         </Link>
                       </h4>
                       <h6>Qty: {item.cartItem.quantity}</h6>
