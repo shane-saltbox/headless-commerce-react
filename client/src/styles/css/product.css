@@ -7,6 +7,15 @@
     position: relative;
     width: 80px;
 }
+.pro-details-quality .cart-plus-minus {
+    border: 1px solid #e8e8e8;
+    display: inline-block;
+    height: 60px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 80px;
+}
 .pro-details-quality .cart-plus-minus .dec.qtybutton {
     height: 60px;
     left: 0;
@@ -43,4 +52,14 @@
     background-color: #343538;
     font-weight: 700;
     text-transform: uppercase;
+}
+.pro-details-quality .cart-plus-minus .inc.qtybutton {
+    height: 60px;
+    right: 0;
+    top: 0;
+}
+.pro-details-quality {
+    display: flex;
+    margin-bottom: 34px;
+    margin-top: 40px;
 }
