@@ -46,7 +46,7 @@ class MenuCart extends React.Component {
                 return (
                   <li className="single-shopping-cart" key={item.cartItem.cartItemId}>
                     <div className="shopping-cart-img">
-                      <Link to={process.env.PUBLIC_URL + "/sku=" + item.artItem.productDetails.sku + '&effectiveAccountId=' + productContext.effectiveAccountId}>
+                      <Link to={process.env.PUBLIC_URL + "/sku=" + item.cartItem.productDetails.sku + '&effectiveAccountId=' + productContext.effectiveAccountId}>
                         <img
                           alt=""
                           src={item.cartItem.productDetails.thumbnailImage.url}
@@ -57,7 +57,7 @@ class MenuCart extends React.Component {
                     <div className="shopping-cart-title">
                       <h4>
                         <Link
-                          to={process.env.PUBLIC_URL + "/sku=" + item.artItem.productDetails.sku + '&effectiveAccountId=' + productContext.effectiveAccountId}
+                          to={process.env.PUBLIC_URL + "/sku=" + item.cartItem.productDetails.sku + '&effectiveAccountId=' + productContext.effectiveAccountId}
                         >
                           {" "}
                           {item.cartItem.productDetails.name}{" "}

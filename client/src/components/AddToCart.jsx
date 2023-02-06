@@ -61,9 +61,29 @@ class AddToCart extends React.Component {
                     placeholder="Quantity"
                     style={{height:52}}
                 />
+                <div className="cart-plus-minus">
+                    <button
+                    
+                    className="dec qtybutton"
+                    >
+                    -
+                    </button>
+                    <input
+                    className="cart-plus-minus-box"
+                    type="text"
+                    
+                    readOnly
+                    />
+                    <button
+                    
+                    className="inc qtybutton"
+                    >
+                    +
+                    </button>
+            </div>
             </div>
             <div className='col-lg-1'>
-                <button className="btn btn-lg btn-primary" onClick={this.addNewItem}> Add Item </button>
+                <button className="btn btn-lg btn-primary add-to-cart" onClick={this.addNewItem}> Add Item </button>
             </div>
       </div>
     );
