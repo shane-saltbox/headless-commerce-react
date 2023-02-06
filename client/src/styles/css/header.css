@@ -96,6 +96,23 @@
     padding: 0;
     position: relative;
 }
+.pe-7s-shopbag {
+    font-size: 23px;
+}
+span.count-style {
+    background-color: #000;
+    border-radius: 100%;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 21px;
+    line-height: 21px;
+    position: absolute;
+    right: -14px;
+    text-align: center;
+    top: -9px;
+    width: 21px;
+}
 .shopping-cart-btn a {
     display: block;
     font-size: 14px;
