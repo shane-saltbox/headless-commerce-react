@@ -10,23 +10,23 @@ module.exports = function(app, debugLogger) {
    * GET (Read)
    */
   app.get('/api/cart', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_SITE_URL, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, WEB_STORE, SF_SITE_URL, ORG_ID, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
         // Make SOAP auth call for accessToken
-        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthUrl = `${SF_SITE_URL}/services/Soap/u/${SF_API_VERSION}`;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
             <SOAP-ENV:Header>
                 <ns1:LoginScopeHeader>
-                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                <ns1:organizationId>${ORG_ID}</ns1:organizationId>
                 </ns1:LoginScopeHeader>
             </SOAP-ENV:Header>
             <SOAP-ENV:Body>
                 <ns1:login>
-                <ns1:username>`+SF_USERNAME+`</ns1:username>
-                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                <ns1:username>${SF_USERNAME}</ns1:username>
+                <ns1:password>${SF_PASSWORD}</ns1:password>
                 </ns1:login>
             </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
@@ -42,7 +42,7 @@ module.exports = function(app, debugLogger) {
         const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
         // Get Cart Id
-        const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+        const url = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/carts/active`;
         const config = {
             headers: {
                 'Content-Type' : 'application/json',
@@ -55,7 +55,7 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG cartRes: '+cartRes);
 
         // Get Cart Items
-        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartRes.data.cartId+'/cart-items';
+        const cartItemUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/carts/${cartRes.data.cartId}/cart-items`;
         const cartItemConfig = {
             headers: {
                 'Content-Type' : 'application/json',
@@ -173,10 +173,11 @@ module.exports = function(app, debugLogger) {
             type: 'Product'
         }
 
+        console.log('##DEBUG cartAddUrl: '+JSON.stringify(cartAddUrl));
         console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
         console.log('##DEBUG cartAddBody: '+JSON.stringify(cartAddBody));
         const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
-        console.log('##DEBUG cartAddRes: '+cartAddRes);
+        console.log('##DEBUG cartAddRes: '+JSON.stringify(cartAddRes));
 
         if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', id, 'Insert new cart items', cartAddRes.data);
 
@@ -211,7 +212,7 @@ module.exports = function(app, debugLogger) {
    * PUT (Update)
    */
   app.patch('/api/cart', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, WEB_STORE, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
@@ -226,18 +227,18 @@ module.exports = function(app, debugLogger) {
         }
 
         // Make SOAP auth call for accessToken
-        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthUrl = `${SF_SITE_URL}/services/Soap/u/${SF_API_VERSION}`;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
             <SOAP-ENV:Header>
                 <ns1:LoginScopeHeader>
-                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                <ns1:organizationId>${ORG_ID}</ns1:organizationId>
                 </ns1:LoginScopeHeader>
             </SOAP-ENV:Header>
             <SOAP-ENV:Body>
                 <ns1:login>
-                <ns1:username>`+SF_USERNAME+`</ns1:username>
-                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                <ns1:username>${SF_USERNAME}</ns1:username>
+                <ns1:password>${SF_PASSWORD}</ns1:password>
                 </ns1:login>
             </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
@@ -254,7 +255,7 @@ module.exports = function(app, debugLogger) {
 
         if (!cartId) {
             // Get CartId
-            const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+            const url = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}'/commerce/webstores/${WEB_STORE}/carts/active`;
           
             let config = {
                 headers: {
@@ -269,7 +270,7 @@ module.exports = function(app, debugLogger) {
         }
 
         // Get Cart Items
-        const cartItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartRes.data.cartId+'/cart-items';
+        const cartItemUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/carts/${cartRes.data.cartId}/cart-items`;
         const cartItemConfig = {
             headers: {
                 'Content-Type' : 'application/json',
@@ -296,7 +297,7 @@ module.exports = function(app, debugLogger) {
         // Check to make sure we have the cart item id before trying to update
         if(cartItemId){
             // Patch Updated Items
-            const cartUpdateItemUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items/'+cartItemId;
+            const cartUpdateItemUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/carts/${cartId}/cart-items/${cartItemId}`;
             
             let cartUpdateItemConfig = {
                 headers: {
