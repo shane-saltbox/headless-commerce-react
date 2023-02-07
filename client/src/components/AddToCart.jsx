@@ -59,7 +59,7 @@ class AddToCart extends React.Component {
     // filter cartItems to the one that matches the sku
     var product = null;
     console.log('cartItems: '+cartItems);
-    if(cartItems){
+    if(cartItems != null){
         var items = cartItems.cartItems;
         product = items.find(e => e.cartItem.productId === productSku);
         console.log('product: '+product);
