@@ -100,11 +100,10 @@ module.exports = function(app, debugLogger) {
    * POST (Insert)
    */
   app.post('/api/cart', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, WEB_STORE, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     //try {
-        console.log(JSON.stringify(req.body));
         const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
@@ -116,18 +115,18 @@ module.exports = function(app, debugLogger) {
         }
 
         // Make SOAP auth call for accessToken
-        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthUrl = `${SF_SITE_URL}/services/Soap/u/${SF_API_VERSION}`;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
             <SOAP-ENV:Header>
                 <ns1:LoginScopeHeader>
-                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                <ns1:organizationId>${ORG_ID}</ns1:organizationId>
                 </ns1:LoginScopeHeader>
             </SOAP-ENV:Header>
             <SOAP-ENV:Body>
                 <ns1:login>
-                <ns1:username>`+SF_USERNAME+`</ns1:username>
-                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                <ns1:username>${SF_USERNAME}</ns1:username>
+                <ns1:password>${SF_PASSWORD}</ns1:password>
                 </ns1:login>
             </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
@@ -144,7 +143,7 @@ module.exports = function(app, debugLogger) {
 
         if (!cartId) {
             // Get CartId
-            const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/active';
+            const url = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}'/commerce/webstores/${WEB_STORE}/carts/active`;
           
             let config = {
                 headers: {
@@ -159,12 +158,12 @@ module.exports = function(app, debugLogger) {
         }
 
         // Post Updated Items
-        const cartAddUrl = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/carts/'+cartId+'/cart-items';
+        const cartAddUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}'/commerce/webstores/${WEB_STORE}/carts/${cartId}/cart-items`;
           
         let cartAddConfig = {
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': 'Bearer '+conn.accessToken
+                'Authorization': 'Bearer '+accessToken
             },
           }
 
@@ -301,7 +300,7 @@ module.exports = function(app, debugLogger) {
             let cartUpdateItemConfig = {
                 headers: {
                     'Content-Type' : 'application/json',
-                    'Authorization': 'Bearer '+conn.accessToken
+                    'Authorization': 'Bearer '+accessToken
                 },
             }
 
