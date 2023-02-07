@@ -60,9 +60,9 @@ class AddToCart extends React.Component {
     var product = null;
     console.log('cartItems: '+cartItems);
     if(cartItems.length > 0){
-        var items = cartItems.cartItems;
-        product = items.find(e => e.cartItem.productId === productSku);
-        console.log('product: '+product);
+        //var items = cartItems.cartItems;
+        //product = items.find(e => e.cartItem.productId === productSku);
+        //console.log('product: '+product);
     }
 
     return (
@@ -74,9 +74,9 @@ class AddToCart extends React.Component {
                 placeholder="Quantity"
                 style={{height:52}}
             /> */}
-            {product && product.length > 0 ? (
+            {cartItems && cartItems.length > 0 ? (
                 <>
-                    {product.map((item) => {
+                    {cartItems.map((item) => {
                         return (
                             <div className='row'>
                                 <div className='col-lg-3'>
