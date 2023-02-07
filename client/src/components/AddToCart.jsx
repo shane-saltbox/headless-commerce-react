@@ -76,7 +76,7 @@ class AddToCart extends React.Component {
             /> */}
             {cartItems && cartItems.length > 0 ? (
                 <>
-                    {cartItems.find(e => e.cartItem.productDetails.sku === productSku).map((item) => {
+                    {cartItems.filter(e => e.cartItem.productDetails.sku === productSku).map((item) => {
                         return (
                             <div className='row'>
                                 <div className='col-lg-3'>
