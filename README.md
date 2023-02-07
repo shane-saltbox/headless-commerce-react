@@ -9,12 +9,12 @@ _:warning: The source code for this repository is provided for reference and edu
 ## Organization
 This package is made up of two primary sections, the Node Server & React engine. 
 Node
-* **[routes](routes/)**: This folder holds all of the available routes that are needed to load the product detail page
+* **[Routes](routes/)**: This folder holds all of the available routes that are needed to load the product detail page
 
 React
-* **[commerce_cart](client/src/comonents)**: Main listing of components that are used to render the product detail page
-* **[commerce_cart](client/src/landmarks)**: Header rendering component
-* **[commerce_cart](client/src/services)**: React functions that are used to fetch and post information from the frontend to the node routes
+* **[Components](client/src/comonents)**: Main listing of components that are used to render the product detail page
+* **[Landmarks](client/src/landmarks)**: Header rendering component
+* **[Services](client/src/services)**: React functions that are used to fetch and post information from the frontend to the node routes
 
 ## Features
 * Load product detail page based on product id in parameter
