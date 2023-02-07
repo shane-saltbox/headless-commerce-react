@@ -18,7 +18,7 @@ class AddToCart extends React.Component {
 
     this.state = {
         cartItems: [],
-        quantityCount,
+        quantityCount: 0,
     };
 
   }
@@ -73,37 +73,39 @@ class AddToCart extends React.Component {
             {product && product.length > 0 ? (
                 <>
                     {product.map((item) => {
-                        <div className='row'>
-                            <div className='col-lg-3'>
-                                <div className="cart-plus-minus">
-                                    <button
-                                    onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount - 1 : 1 })}
-                                    className="dec qtybutton"
-                                    >
-                                    -
-                                    </button>
-                                    <input
-                                    className="cart-plus-minus-box"
-                                    type="text"
-                                    value={quantityCount}
-                                    readOnly
-                                    />
-                                    <button
-                                    onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount + 1 : 1 })}
-                                    className="inc qtybutton"
-                                    >
-                                    +
-                                    </button>
+                        return (
+                            <div className='row'>
+                                <div className='col-lg-3'>
+                                    <div className="cart-plus-minus">
+                                        <button
+                                        onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount - 1 : 1 })}
+                                        className="dec qtybutton"
+                                        >
+                                        -
+                                        </button>
+                                        <input
+                                        className="cart-plus-minus-box"
+                                        type="text"
+                                        value={quantityCount}
+                                        readOnly
+                                        />
+                                        <button
+                                        onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount + 1 : 1 })}
+                                        className="inc qtybutton"
+                                        >
+                                        +
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className='col-lg-1'>
+                                    <button 
+                                        className="btn btn-lg btn-primary add-to-cart" 
+                                        /* onClick={this.addNewItem} */
+                                        
+                                    > Add Item </button>
                                 </div>
                             </div>
-                            <div className='col-lg-1'>
-                                <button 
-                                    className="btn btn-lg btn-primary add-to-cart" 
-                                    /* onClick={this.addNewItem} */
-                                    
-                                > Add Item </button>
-                            </div>
-                        </div>
+                        )
                     })}
                 </>
             ) : (
