@@ -18,7 +18,7 @@ class AddToCart extends React.Component {
 
     this.state = {
         cartItems: [],
-        quantityCount: 0,
+        quantityCount: 1,
     };
 
   }
@@ -56,14 +56,7 @@ class AddToCart extends React.Component {
         quantityCount
     } = this.props;
 
-    // filter cartItems to the one that matches the sku
-    var product = null;
-    console.log('cartItems: '+JSON.stringify(cartItems));
-    if(cartItems.length > 0){
-        //var items = cartItems.cartItems;
-        //product = items.find(e => e.cartItem.productId === productSku);
-        //console.log('product: '+product);
-    }
+    quantityCount = 1;
 
     return (
         <>
@@ -79,7 +72,7 @@ class AddToCart extends React.Component {
                     {cartItems.filter(e => e.cartItem.productDetails.sku === productSku).map((item) => {
                         return (
                             <div className='row'>
-                                <div className='col-lg-3'>
+                                <div className='col-lg-2'>
                                     <div className="cart-plus-minus">
                                         <button
                                         onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount - 1 : 1 })}
@@ -101,7 +94,7 @@ class AddToCart extends React.Component {
                                         </button>
                                     </div>
                                 </div>
-                                <div className='col-lg-1'>
+                                <div className='col-lg-2'>
                                     <button 
                                         className="btn btn-lg btn-primary add-to-cart" 
                                         /* onClick={this.addNewItem} */
