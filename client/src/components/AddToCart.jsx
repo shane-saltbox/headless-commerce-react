@@ -6,12 +6,10 @@ import PropTypes from 'prop-types';
 import AppContext from '../AppContext';
 import { Badge } from '../components';
 import { WS_STATUS } from '../Constants';
-import { addToCart } from "../slices/cart-slice";
+import Skeleton from 'react-loading-skeleton';
 import MyCartService from '../services/cart-service';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
-
-let nextId = 0;
 
 class AddToCart extends React.Component {
     constructor(props) {
@@ -24,8 +22,8 @@ class AddToCart extends React.Component {
 
     this.wsEndpoint = new MyCartService('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '1');
 
-    this.onAddToCart = () => {
-        this.wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '3').then((response) => {
+    this.onAddToCart = (quantity) => {
+        this.wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', quantity).then((response) => {
   
           if (response.success) {
             console.log('add to cart success: '+response);
@@ -73,13 +71,6 @@ class AddToCart extends React.Component {
 
     return (
         <>
-            {/* <input
-                className="form-control"
-                type="text"
-                onChange={this.saveInput}
-                placeholder="Quantity"
-                style={{height:52}}
-            /> */}
             {cartItems && cartItems.length > 0 ? (
                 <>
                     {cartItems.filter(e => e.cartItem.productDetails.sku === productSku).map((item) => {
@@ -110,7 +101,7 @@ class AddToCart extends React.Component {
                                 <div className='col-lg-2'>
                                     <button 
                                         className="btn btn-lg btn-primary add-to-cart" 
-                                        onClick={this.onAddToCart}
+                                        onClick={this.onAddToCart(this.state.quantityCount)}
                                     > Add Item </button>
                                 </div>
                             </div>
@@ -118,7 +109,7 @@ class AddToCart extends React.Component {
                     })}
                 </>
             ) : (
-                <p className="text-center">No items added to cart</p>
+                <Skeleton height={45} />
             )}
         </>
     )

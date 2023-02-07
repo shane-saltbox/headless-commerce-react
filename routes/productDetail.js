@@ -1,4 +1,3 @@
-const db = require('../db');
 const axios = require('axios');
 const parseString = require('xml2js');
 
@@ -10,7 +9,7 @@ module.exports = function(app, debugLogger) {
    * GET (Read)
    */
   app.get('/api/productDetail', async function(req, res, next) {
-    const { DEBUG, SF_CLIENT_ID, SF_CLIENT_SECRET, SF_USERNAME, ORG_ID, SF_SITE_URL, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
+    const { DEBUG, WEB_STORE, SF_USERNAME, ORG_ID, SF_SITE_URL, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
     try {
@@ -24,31 +23,19 @@ module.exports = function(app, debugLogger) {
             throw(error);
         }
 
-        /* var conn = new jsforce.Connection({
-            oauth2 : {
-                clientId : SF_CLIENT_ID,
-                clientSecret : SF_CLIENT_SECRET,
-                redirectUri : 'https://headless-commerce.herokuapp.com/callback'
-            }
-        });
-
-        await conn.login(SF_USERNAME, SF_PASSWORD, function(err, userInfo) {
-            if (err) { return console.error(err); }
-        }); */
-
         // Make SOAP auth call for accessToken
-        const soapAuthUrl = SF_SITE_URL+'/services/Soap/u/'+SF_API_VERSION;
+        const soapAuthUrl = `${SF_SITE_URL}/services/Soap/u/${SF_API_VERSION}`;
         const soapAuthBody = `<?xml version="1.0" encoding="UTF-8"?>
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:partner.soap.sforce.com">
             <SOAP-ENV:Header>
                 <ns1:LoginScopeHeader>
-                <ns1:organizationId>`+ORG_ID+`</ns1:organizationId>
+                <ns1:organizationId>${ORG_ID}</ns1:organizationId>
                 </ns1:LoginScopeHeader>
             </SOAP-ENV:Header>
             <SOAP-ENV:Body>
                 <ns1:login>
-                <ns1:username>`+SF_USERNAME+`</ns1:username>
-                <ns1:password>`+SF_PASSWORD+`</ns1:password>
+                <ns1:username>${SF_USERNAME}</ns1:username>
+                <ns1:password>${SF_PASSWORD}</ns1:password>
                 </ns1:login>
             </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
@@ -63,7 +50,7 @@ module.exports = function(app, debugLogger) {
         const auth = await parseString.parseStringPromise(soapAuth.data, { mergeAttrs: true })
         const accessToken = auth['soapenv:Envelope']['soapenv:Body'][0].loginResponse[0].result[0].sessionId[0];
 
-        const url = SF_LOGIN_URL+'/services/data/v'+SF_API_VERSION+'/commerce/webstores/0ZE5e000000M1ApGAK/products';
+        const url = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/products`;
           
         let config = {
             headers: {

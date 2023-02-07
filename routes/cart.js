@@ -1,4 +1,3 @@
-const db = require('../db');
 const axios = require('axios');
 const parseString = require('xml2js');
 
@@ -103,7 +102,7 @@ module.exports = function(app, debugLogger) {
     const { DEBUG, WEB_STORE, ORG_ID, SF_SITE_URL, SF_USERNAME, SF_PASSWORD, SF_LOGIN_URL, SF_API_VERSION } = process.env;
     const response = {...CONSTANTS.RESPONSE_OBJECT};
 
-    //try {
+    try {
         const { cartId, productId, quantity } = req.body;
 
         if (!productId && !quantity) {
@@ -194,7 +193,7 @@ module.exports = function(app, debugLogger) {
 
         res.status(200).send(response);
 
-    /* } catch (error) {
+    } catch (error) {
       const { cartId, productId, quantity } = req.query;
 
       response.error = {...CONSTANTS.RESPONSE_ERROR_OBJECT};
@@ -205,7 +204,7 @@ module.exports = function(app, debugLogger) {
       if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', cartId, 'Exception', response);
 
       res.status(error.status || 500).send(response);
-    } */
+    }
   });
 
   /*
@@ -313,7 +312,11 @@ module.exports = function(app, debugLogger) {
             console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
             const cartUpdateItemRes = await axios.post(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
             console.log('##DEBUG cartAddRes: '+cartAddRes);
-            cartUpdateRes = true;
+            if(cartUpdateItemRes.data.messageSummary.hasErrors == null){
+                cartUpdateRes = true;
+            }else{
+                cartUpdateRes = false
+            }
         }
 
         if (DEBUG === 'true') debugLogger.info('/api/cart', 'PATCH', id, 'Update new cart items', cartUpdateRes);
