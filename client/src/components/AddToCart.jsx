@@ -22,9 +22,8 @@ class AddToCart extends React.Component {
 
   }
 
-  wsEndpoint = new MyCartService('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '1');
-
     onAddToCart = () => {
+        const wsEndpoint = new MyCartService();
         wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', this.state.quantityCount).then((response) => {
   
           if (response.success) {
