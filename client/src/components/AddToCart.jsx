@@ -20,10 +20,12 @@ class AddToCart extends React.Component {
         quantityCount: 1,
     };
 
-    this.wsEndpoint = new MyCartService('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '1');
+  }
 
-    this.onAddToCart = (quantity) => {
-        this.wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', quantity).then((response) => {
+  wsEndpoint = new MyCartService('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '1');
+
+    onAddToCart = () => {
+        wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', this.state.quantityCount).then((response) => {
   
           if (response.success) {
             console.log('add to cart success: '+response);
@@ -32,22 +34,6 @@ class AddToCart extends React.Component {
             console.log('failed add to cart')
           }
         });
-      };
-
-  }
-
-    /*
-     * EVENT HANDLERS
-     */
-    saveInput = (e) => {
-        this.setState({ input: e.target.value });
-    };
-
-    addNewItem = () => {
-        let { cartItems, input } = this.state;
-        cartItems.push(input);
-        console.log('##DEBUG cartItems: '+cartItems);
-        // this.state.cart.push(this.state.input); // same as above, though bad practice 
     };
 
   /*
@@ -101,7 +87,7 @@ class AddToCart extends React.Component {
                                 <div className='col-lg-2'>
                                     <button 
                                         className="btn btn-lg btn-primary add-to-cart" 
-                                        onClick={this.onAddToCart(this.state.quantityCount)}
+                                        onClick={this.onAddToCart()}
                                     > Add Item </button>
                                 </div>
                             </div>
