@@ -7,6 +7,7 @@ import AppContext from '../AppContext';
 import { Badge } from '../components';
 import { WS_STATUS } from '../Constants';
 import { addToCart } from "../slices/cart-slice";
+import MyCartService from '../services/cart-service';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
@@ -20,6 +21,20 @@ class AddToCart extends React.Component {
         cartItems: [],
         quantityCount: 1,
     };
+
+    this.wsEndpoint = new MyCartService('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '1');
+
+    this.onAddToCart = () => {
+        this.wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', '3').then((response) => {
+  
+          if (response.success) {
+            console.log('add to cart success: '+response);
+            /* this.setState({ fieldGroups: newFieldGroups }); */
+          } else {
+            console.log('failed add to cart')
+          }
+        });
+      };
 
   }
 
@@ -95,8 +110,7 @@ class AddToCart extends React.Component {
                                 <div className='col-lg-2'>
                                     <button 
                                         className="btn btn-lg btn-primary add-to-cart" 
-                                        /* onClick={this.addNewItem} */
-                                        
+                                        onClick={this.onAddToCart}
                                     > Add Item </button>
                                 </div>
                             </div>

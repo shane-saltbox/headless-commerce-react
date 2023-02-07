@@ -1,7 +1,7 @@
 import LoggingService from './logging-service';
 
 class MyCartService {
-  constructor(cartId, productId, quantity, wsBaseUrl, jobid, listid, batchid) {
+  constructor(cartId, productId, quantity) {
     this.cartId = cartId;
     this.productId = productId;
     this.quantity = quantity;
@@ -53,7 +53,7 @@ class MyCartService {
    * }
    */
   async postCart(cartId, productId, quantity) {
-    const wsUri = `${this.wsBaseUrl}/cart`;
+    const wsUri = `https://headless-commerce.herokuapp.com/api/cart`;
 
     const body = {
       "cartId": cartId,
