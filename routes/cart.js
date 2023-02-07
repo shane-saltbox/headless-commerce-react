@@ -177,7 +177,7 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
         console.log('##DEBUG cartAddBody: '+JSON.stringify(cartAddBody));
         const cartAddRes = await axios.post(cartAddUrl, cartAddBody, cartAddConfig);
-        console.log('##DEBUG cartAddRes: '+JSON.stringify(cartAddRes));
+        console.log('##DEBUG cartAddRes: '+cartAddRes);
 
         if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', id, 'Insert new cart items', cartAddRes.data);
 
