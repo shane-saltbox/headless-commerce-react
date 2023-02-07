@@ -58,7 +58,7 @@ class AddToCart extends React.Component {
 
     // filter cartItems to the one that matches the sku
     var product = null;
-    console.log('cartItems: '+cartItems);
+    console.log('cartItems: '+JSON.stringify(cartItems));
     if(cartItems.length > 0){
         //var items = cartItems.cartItems;
         //product = items.find(e => e.cartItem.productId === productSku);
@@ -76,7 +76,7 @@ class AddToCart extends React.Component {
             /> */}
             {cartItems && cartItems.length > 0 ? (
                 <>
-                    {cartItems.cartItems.find(e => e.cartItem.productId === productSku).map((item) => {
+                    {cartItems.find(e => e.cartItem.productDetails.sku === productSku).map((item) => {
                         return (
                             <div className='row'>
                                 <div className='col-lg-3'>
