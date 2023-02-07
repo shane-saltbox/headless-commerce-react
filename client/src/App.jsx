@@ -7,10 +7,7 @@ import AppContext from './AppContext';
 import Skeleton from 'react-loading-skeleton';
 
 import MyProductService from './services/product-service';
-import {
-  Header,
-  Main
-} from './landmarks';
+import { Header } from './landmarks';
 import { ProductFields, ProductImage, AddToCart } from './components';
 
 class App extends React.Component {

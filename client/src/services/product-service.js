@@ -1,10 +1,7 @@
-import LoggingService from './logging-service';
-
 class MyProductService {
   constructor(sku, effectiveAccountId, wsBaseUrl) {
     this.sku = sku;
     this.effectiveAccountId = effectiveAccountId;
-    this.logger = new LoggingService(wsBaseUrl);
     this.wsBaseUrl = wsBaseUrl;
   }
 

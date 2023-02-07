@@ -8,7 +8,7 @@ const ISVALID = {
   YES: 'is-valid',
 };
 
-const SOURCE = 'Preference Center';
+const SOURCE = '';
 
 const WS_STATUS = {
   DURATION: 1000,

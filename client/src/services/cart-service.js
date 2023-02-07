@@ -1,5 +1,3 @@
-import LoggingService from './logging-service';
-
 class MyCartService {
   constructor(cartId, productId, quantity) {
     this.cartId = cartId;
