@@ -176,7 +176,7 @@ module.exports = function(app, debugLogger) {
         console.log('##DEBUG cartAddUrl: '+JSON.stringify(cartAddUrl));
         console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
         console.log('##DEBUG cartAddBody: '+JSON.stringify(cartAddBody));
-        const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
+        const cartAddRes = await axios.post(cartAddUrl, cartAddBody, cartAddConfig);
         console.log('##DEBUG cartAddRes: '+JSON.stringify(cartAddRes));
 
         if (DEBUG === 'true') debugLogger.info('/api/cart', 'POST', id, 'Insert new cart items', cartAddRes.data);
@@ -311,7 +311,7 @@ module.exports = function(app, debugLogger) {
             }
 
             console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
-            const cartUpdateItemRes = await axios.get(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
+            const cartUpdateItemRes = await axios.post(cartUpdateItemUrl, cartUpdateItemBody, cartUpdateItemConfig);
             console.log('##DEBUG cartAddRes: '+cartAddRes);
             cartUpdateRes = true;
         }
