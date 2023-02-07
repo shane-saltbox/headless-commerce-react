@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import AppContext from '../AppContext';
 import { Badge } from '../components';
 import { WS_STATUS } from '../Constants';
+import { addToCart } from "../slices/cart-slice";
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 
@@ -45,48 +46,78 @@ class AddToCart extends React.Component {
 
 
   render() {
-    const { value: contextValue } = this.context;
+    const { value } = this.context;
     const {
-      productSku,
-      productAmount,
+        productSku,
+        productAmount,
+        cartItems,
+        productContext
     } = this.props;
 
+    const [quantityCount, setQuantityCount] = useState(1);
+
+    // filter cartItems to the one that matches the sku
+    var items = cartItems.cartItems;
+    var product = items.find(e => e.cartItem.productId === productSku);
+
     return (
-      <div className='row'>
-            <div className='col-lg-3'>
-                <input
-                    className="form-control"
-                    type="text"
-                    onChange={this.saveInput}
-                    placeholder="Quantity"
-                    style={{height:52}}
-                />
-                <div className="cart-plus-minus">
-                    <button
-                    
-                    className="dec qtybutton"
-                    >
-                    -
-                    </button>
-                    <input
-                    className="cart-plus-minus-box"
-                    type="text"
-                    
-                    readOnly
-                    />
-                    <button
-                    
-                    className="inc qtybutton"
-                    >
-                    +
-                    </button>
-            </div>
-            </div>
-            <div className='col-lg-1'>
-                <button className="btn btn-lg btn-primary add-to-cart" onClick={this.addNewItem}> Add Item </button>
-            </div>
-      </div>
-    );
+        <>
+            {/* <input
+                className="form-control"
+                type="text"
+                onChange={this.saveInput}
+                placeholder="Quantity"
+                style={{height:52}}
+            /> */}
+            {product && product.length > 0 ? (
+                <>
+                    {product.map((item) => {
+                        <div className='row'>
+                            <div className='col-lg-3'>
+                                <div className="cart-plus-minus">
+                                    <button
+                                    onClick={() =>
+                                        setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)
+                                      }
+                                    className="dec qtybutton"
+                                    >
+                                    -
+                                    </button>
+                                    <input
+                                    className="cart-plus-minus-box"
+                                    type="text"
+                                    value={quantityCount}
+                                    readOnly
+                                    />
+                                    <button
+                                    onClick={() =>
+                                        setQuantityCount(
+                                          quantityCount < productStock - productCartQty
+                                            ? quantityCount + 1
+                                            : quantityCount
+                                        )
+                                      }
+                                    className="inc qtybutton"
+                                    >
+                                    +
+                                    </button>
+                                </div>
+                            </div>
+                            <div className='col-lg-1'>
+                                <button 
+                                    className="btn btn-lg btn-primary add-to-cart" 
+                                    /* onClick={this.addNewItem} */
+                                    
+                                > Add Item </button>
+                            </div>
+                        </div>
+                    })}
+                </>
+            ) : (
+                <p className="text-center">No items added to cart</p>
+            )}
+        </>
+    )
   }
 }
 
@@ -96,6 +127,11 @@ AddToCart.contextType = AppContext;
 AddToCart.propTypes = {
   productSku: PropTypes.string.isRequired,
   productAmount: PropTypes.string.isRequired,
+  /* cartItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      sku: PropTypes.string.isRequired,
+      quantity: PropTypes.string,
+    }), */
 };
 
 export default AddToCart;

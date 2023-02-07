@@ -112,7 +112,7 @@ class App extends React.Component {
 
         productAddToCart = itemsArray.map((item) => {
             let productAddToCart = [];
-            productAddToCart = <AddToCart productSku={item.data.products[0].sku} productAmount="100.00" />
+            productAddToCart = <AddToCart productSku={item.data.products[0].sku} cartItems={cartItems} productAmount="100.00" />
 
             return productAddToCart;
         });

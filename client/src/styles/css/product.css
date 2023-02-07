@@ -16,6 +16,9 @@
     position: relative;
     width: 80px;
 }
+.cart-plus-minus:focus {
+    outline: none!important;
+}
 .cart-plus-minus .dec.qtybutton {
     height: 60px;
     left: 0;
@@ -49,9 +52,11 @@
     width: 80px;
 }
 .add-to-cart{
-    background-color: #343538;
+    background-color: #343538!important;
     font-weight: 700;
     text-transform: uppercase;
+    color: white!important;
+    height:60px;
 }
 .cart-plus-minus .inc.qtybutton {
     height: 60px;
