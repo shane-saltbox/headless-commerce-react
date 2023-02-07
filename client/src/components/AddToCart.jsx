@@ -42,7 +42,7 @@ class AddToCart extends React.Component {
    */
 
   componentDidUpdate(prevProps) {
-
+    
   }
 
 
@@ -55,8 +55,6 @@ class AddToCart extends React.Component {
         productContext,
         quantityCount
     } = this.props;
-
-    quantityCount = 1;
 
     return (
         <>
@@ -75,7 +73,7 @@ class AddToCart extends React.Component {
                                 <div className='col-lg-2'>
                                     <div className="cart-plus-minus">
                                         <button
-                                        onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount - 1 : 1 })}
+                                        onClick={() => this.setState({ quantityCount: this.state.quantityCount > 1 ? this.state.quantityCount - 1 : 1 })}
                                         className="dec qtybutton"
                                         >
                                         -
@@ -83,11 +81,11 @@ class AddToCart extends React.Component {
                                         <input
                                         className="cart-plus-minus-box"
                                         type="text"
-                                        value={quantityCount}
+                                        value={this.state.quantityCount}
                                         readOnly
                                         />
                                         <button
-                                        onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount + 1 : 1 })}
+                                        onClick={() => this.setState({ quantityCount: this.state.quantityCount > 1 ? this.state.quantityCount + 1 : 1 })}
                                         className="inc qtybutton"
                                         >
                                         +
