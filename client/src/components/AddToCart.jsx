@@ -1,11 +1,8 @@
 import React from 'react';
 
-import $ from 'jquery';
 import PropTypes from 'prop-types';
 
 import AppContext from '../AppContext';
-import { Badge } from '../components';
-import { WS_STATUS } from '../Constants';
 import Skeleton from 'react-loading-skeleton';
 import MyCartService from '../services/cart-service';
 
@@ -13,25 +10,25 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 
 class AddToCart extends React.Component {
     constructor(props) {
-    super(props);
+        super(props);
 
-    this.state = {
-        cartItems: [],
-        quantityCount: 1,
-    };
+        this.state = {
+            cartItems: [],
+            quantityCount: 1,
+        };
 
-  }
+    }
 
     onAddToCart = () => {
         const wsEndpoint = new MyCartService();
         wsEndpoint.postCart('0a65e000000M3cEAAS', '01t5e000002XjT3AAK', this.state.quantityCount).then((response) => {
-  
-          if (response.success) {
+
+            if (response.success) {
             console.log('add to cart success: '+response);
             /* this.setState({ fieldGroups: newFieldGroups }); */
-          } else {
+            } else {
             console.log('failed add to cart')
-          }
+            }
         });
     };
 
@@ -86,7 +83,7 @@ class AddToCart extends React.Component {
                                 <div className='col-lg-2'>
                                     <button 
                                         className="btn btn-lg btn-primary add-to-cart" 
-                                        onClick={this.onAddToCart()}
+                                        onClick={this.onAddToCart}
                                     > Add Item </button>
                                 </div>
                             </div>
