@@ -158,7 +158,7 @@ module.exports = function(app, debugLogger) {
         }
 
         // Post Updated Items
-        const cartAddUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}'/commerce/webstores/${WEB_STORE}/carts/${cartId}/cart-items`;
+        const cartAddUrl = `${SF_LOGIN_URL}/services/data/v${SF_API_VERSION}/commerce/webstores/${WEB_STORE}/carts/${cartId}/cart-items`;
           
         let cartAddConfig = {
             headers: {
@@ -174,6 +174,7 @@ module.exports = function(app, debugLogger) {
         }
 
         console.log('##DEBUG cartAddConfig: '+JSON.stringify(cartAddConfig));
+        console.log('##DEBUG cartAddBody: '+JSON.stringify(cartAddBody));
         const cartAddRes = await axios.get(cartAddUrl, cartAddBody, cartAddConfig);
         console.log('##DEBUG cartAddRes: '+cartAddRes);
 
