@@ -18,6 +18,7 @@ class AddToCart extends React.Component {
 
     this.state = {
         cartItems: [],
+        quantityCount,
     };
 
   }
@@ -54,11 +55,10 @@ class AddToCart extends React.Component {
         productContext
     } = this.props;
 
-    const [quantityCount, setQuantityCount] = useState(1);
-
     // filter cartItems to the one that matches the sku
     var items = cartItems.cartItems;
     var product = items.find(e => e.cartItem.productId === productSku);
+    console.log('product: '+product);
 
     return (
         <>
@@ -76,9 +76,7 @@ class AddToCart extends React.Component {
                             <div className='col-lg-3'>
                                 <div className="cart-plus-minus">
                                     <button
-                                    onClick={() =>
-                                        setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)
-                                      }
+                                    onClick={() => this.setState({ count: quantityCount > 1 ? quantityCount - 1 : 1 })}
                                     className="dec qtybutton"
                                     >
                                     -
@@ -90,13 +88,7 @@ class AddToCart extends React.Component {
                                     readOnly
                                     />
                                     <button
-                                    onClick={() =>
-                                        setQuantityCount(
-                                          quantityCount < productStock - productCartQty
-                                            ? quantityCount + 1
-                                            : quantityCount
-                                        )
-                                      }
+                                    onClick={() => this.setState({ count: quantityCount > 1 ? quantityCount + 1 : 1 })}
                                     className="inc qtybutton"
                                     >
                                     +
