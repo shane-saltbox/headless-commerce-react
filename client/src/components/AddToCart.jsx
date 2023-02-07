@@ -52,7 +52,8 @@ class AddToCart extends React.Component {
         productSku,
         productAmount,
         cartItems,
-        productContext
+        productContext,
+        quantityCount
     } = this.props;
 
     // filter cartItems to the one that matches the sku
@@ -76,7 +77,7 @@ class AddToCart extends React.Component {
                             <div className='col-lg-3'>
                                 <div className="cart-plus-minus">
                                     <button
-                                    onClick={() => this.setState({ count: quantityCount > 1 ? quantityCount - 1 : 1 })}
+                                    onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount - 1 : 1 })}
                                     className="dec qtybutton"
                                     >
                                     -
@@ -88,7 +89,7 @@ class AddToCart extends React.Component {
                                     readOnly
                                     />
                                     <button
-                                    onClick={() => this.setState({ count: quantityCount > 1 ? quantityCount + 1 : 1 })}
+                                    onClick={() => this.setState({ quantityCount: quantityCount > 1 ? quantityCount + 1 : 1 })}
                                     className="inc qtybutton"
                                     >
                                     +
