@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import AppContext from '../AppContext';
 import { Link } from "react-router-dom";
-import { deleteFromCart } from "../slices/cart-slice"
 
 class MenuCart extends React.Component {
   
